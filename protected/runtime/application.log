@@ -1,0 +1,105 @@
+2015/03/19 08:45:09 [error] [exception.CException] exception 'CException' with message 'The view path "C:\xampp\htdocs\rama-kuisioner\protected\views\front" is not a valid directory.' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:444
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(152): CWebApplication->setViewPath('C:\xampp\htdocs...')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(34): CComponent->__set('viewPath', 'C:\xampp\htdocs...')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(561): WebApplicationEndBehavior->changeModulePaths(Object(CEvent))
+#3 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(23): CComponent->raiseEvent('onModuleCreate', Object(CEvent))
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(16): WebApplicationEndBehavior->onModuleCreate(Object(CEvent))
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/
+---
+2015/03/19 09:10:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/img/logo.png".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/img/logo...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/assets/img/logo.png
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/store
+---
+2015/03/19 09:10:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/img/64-64.jpg".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/img/64-6...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/assets/img/64-64.jpg
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/store
+---
+2015/03/19 09:12:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/img/logo.png".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/img/logo...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/assets/img/logo.png
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/store
+---
+2015/03/19 09:12:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "assets/img/64-64.jpg".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('assets/img/64-6...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/assets/img/64-64.jpg
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/store
+---
+2015/03/19 09:13:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ui.html".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('ui.html')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/ui.html
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/store
+---
+2015/03/19 09:13:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "table.html".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('table.html')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/table.html
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/ui.html
+---
+2015/03/19 09:13:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "index.html".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('index.html')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/index.html
+HTTP_REFERER=http://localhost/rama-kuisioner/backend.php/table.html
+---
