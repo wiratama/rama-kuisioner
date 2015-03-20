@@ -12,10 +12,17 @@ return array(
 	// preloading 'log' component
 	'preload'=>array('log'),
 
+	'aliases' => array(
+		'bootstrap' => 'ext.yii-bootstrap3',
+	),
+
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'bootstrap.behaviors.*',
+	    'bootstrap.helpers.*',
+	    'bootstrap.widgets.*'
 	),
 
 	'modules'=>array(
@@ -26,6 +33,7 @@ return array(
 			'password'=>'@arya',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
+			'generatorPaths' => array('bootstrap.gii'),
 		),
 		
 	),
@@ -43,6 +51,9 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		'bootstrap' => array(
+	        'class' => 'bootstrap.components.BsApi'
+	    ),
 
 		// uncomment the following to enable URLs in path-format
 		/*

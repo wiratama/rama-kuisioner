@@ -9,10 +9,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/assets/css/bootstrap.css" rel="stylesheet" />
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/assets/css/font-awesome.css" rel="stylesheet" />
-    <link href="<?php echo Yii::app()->theme->baseUrl; ?>/assets/css/style.css" rel="stylesheet" />
-     <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <?php
+    $cs        = Yii::app()->clientScript;
+    $themePath = Yii::app()->theme->baseUrl;
+
+    $cs->registerCssFile($themePath . '/assets/css/bootstrap.css');
+    $cs->registerCssFile($themePath . '/assets/css/font-awesome.css');
+    $cs->registerCssFile($themePath . '/assets/css/style.css');
+
+    $cs->registerCoreScript('jquery', CClientScript::POS_END);
+    $cs->registerCoreScript('jquery.ui', CClientScript::POS_END);
+    $cs->registerScriptFile($themePath . '/assets/js/bootstrap.js', CClientScript::POS_END);
+    // $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
+    ?>
+    <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -68,11 +78,8 @@
             </div>
         </div>
     </footer>
-    <!-- FOOTER SECTION END-->
+    <!-- FOOTER SECTION END-->    
     
-    <!-- JAVASCRIPT AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/js/jquery-1.11.1.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/js/bootstrap.js"></script>
     <script type="text/javascript">
 	jQuery(function() {
 	 	jQuery('#menu-top li a').each(function() {
@@ -84,3 +91,4 @@
     </script>
 </body>
 </html>
+<!--  -->

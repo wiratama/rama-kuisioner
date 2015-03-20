@@ -1,18 +1,18 @@
-<?php
-/* @var $this QuestionController */
-/* @var $model Question */
-
-$this->breadcrumbs=array(
-	'Questions'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List Question', 'url'=>array('index')),
-	array('label'=>'Manage Question', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create Question</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<div class="dashboard-div-wrapper bk-clr-three">
+			<i class="fa fa-cogs dashboard-div-icon"></i>
+			<h5>Manage </h5>
+		</div>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">Create Question</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+		<?php $this->renderPartial('_form', array('model'=>$model,'model2'=>$model2)); ?>
+	</div>
+</div>

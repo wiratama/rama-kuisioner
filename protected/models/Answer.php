@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'answer':
  * @property integer $id_answer
  * @property integer $id_question
- * @property string $type
+ * @property string $reasonable
  * @property string $answer
  * @property integer $skor
  */
@@ -28,11 +28,11 @@ class Answer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_question, skor', 'numerical', 'integerOnly'=>true),
-			array('type, answer', 'safe'),
+			array('id_question, skor, reasonable', 'numerical', 'integerOnly'=>true),
+			array('answer', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_answer, id_question, type, answer, skor', 'safe', 'on'=>'search'),
+			array('id_answer, id_question, reasonable, answer, skor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,7 +55,7 @@ class Answer extends CActiveRecord
 		return array(
 			'id_answer' => 'Id Answer',
 			'id_question' => 'Id Question',
-			'type' => 'Type',
+			'reasonable' => 'Reasonable',
 			'answer' => 'Answer',
 			'skor' => 'Skor',
 		);
@@ -81,7 +81,7 @@ class Answer extends CActiveRecord
 
 		$criteria->compare('id_answer',$this->id_answer);
 		$criteria->compare('id_question',$this->id_question);
-		$criteria->compare('type',$this->type,true);
+		$criteria->compare('reasonable',$this->reasonable,true);
 		$criteria->compare('answer',$this->answer,true);
 		$criteria->compare('skor',$this->skor);
 
