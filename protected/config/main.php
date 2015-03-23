@@ -51,6 +51,12 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
+		'backendUser'=>array(             
+			// Webuser for the admin area (admin)
+			'class'=>'application.components.EWebUser',
+			// 'loginUrl'=>array('backend/security/login'),
+			// 'stateKeyPrefix'=>'_backend',
+		),
 		'bootstrap' => array(
 	        'class' => 'bootstrap.components.BsApi'
 	    ),
