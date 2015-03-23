@@ -300,3 +300,45 @@ REQUEST_URI=/rama-kuisioner/backend.php/backend/question/create
 in C:\xampp\htdocs\rama-kuisioner\themes\rama-backend\views\back\question\_form.php (23)
 in C:\xampp\htdocs\rama-kuisioner\themes\rama-backend\views\back\question\create.php (16)
 in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\QuestionController.php (74)
+2015/03/23 03:02:50 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:02:58 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:03:13 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:03:18 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:03:24 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:03:33 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 03:04:15 [warning] [application] Failed to set unsafe attribute "repeat_password" of "Admin".
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\AdminController.php (64)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
+2015/03/23 04:53:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "admin'".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('admin'')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('admin'')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('question/admin'')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/backend.php/backend/question/admin'
+---

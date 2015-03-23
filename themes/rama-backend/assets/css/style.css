@@ -312,3 +312,12 @@ footer {
 .btn-google {
     background-color: #c32f10;
 }
+
+/*arya update*/
+header a, header a:hover {
+    color: #fff;
+}
+header a:hover {
+    font-weight: bold;
+}
+/*end arya update*/

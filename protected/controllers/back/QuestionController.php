@@ -29,7 +29,8 @@ class QuestionController extends Controller
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','index','view','admin','delete'),
-				'users'=>array('@'),
+				// 'users'=>array('@'),
+				'expression'=>'!Yii::app()->backendUser->isGuest',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -62,6 +63,7 @@ class QuestionController extends Controller
 
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
+			var_dump($_POST['Answer']); die();
 			$model->attributes=$_POST['Question'];
 			$model2->attributes=$_POST['Answer'];
 			if($model->save())

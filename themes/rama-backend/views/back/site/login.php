@@ -25,10 +25,6 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 			<?php echo $form->labelEx($model,'password'); ?>
 			<?php echo $form->passwordField($model,'password',array('class'=>'form-control')); ?>
 			<?php echo $form->error($model,'password'); ?>
-
-			<?php echo $form->checkBox($model,'rememberMe'); ?>
-			<?php echo $form->label($model,'rememberMe'); ?>
-			<?php echo $form->error($model,'rememberMe'); ?>
 			<hr/>
 			<?php echo CHtml::submitButton('Login',array('class'=>'btn btn-info')); ?>
 

@@ -34,7 +34,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    login / logout
+                <?php if (!Yii::app()->backendUser->isGuest) { ?>
+                    <?php echo Yii::app()->backendUser->name; ?> ( <a href="<?php echo Yii::app()->createUrl('site/logout');?>"><i class="fa fa-fw fa-power-off"></i> Log out</a> )
+                <?php }  else { ?>
+                    <a href="<?php echo Yii::app()->createUrl('site/logout');?>"><i class="fa fa-sign-in"></i> Log in</a>
+                <?php } ?>
                 </div>
 
             </div>
