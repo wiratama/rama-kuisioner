@@ -44,8 +44,11 @@ class QuestionController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model=$this->loadModel($id);
+		$model2=$this->loadAnswer($id);
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'model2'=>$model2,
 		));
 	}
 
@@ -63,11 +66,20 @@ class QuestionController extends Controller
 
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
-			var_dump($_POST['Answer']); die();
 			$model->attributes=$_POST['Question'];
-			$model2->attributes=$_POST['Answer'];
-			if($model->save())
+			$counter = count($_POST['Answer']['answer']);
+		    for ($i = 0; $i < $counter; $i++)
+		    {
+		    	$answer = new Answer;
+	        	$answer->answer = $_POST['Answer']['answer'][$i];
+	        	$answer->id_question = $model->id_question;
+	        	$answer->skor = $_POST['Answer']['skor'][$i];
+	        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+	         	$answer->save();
+		    }	
+			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_question));
+			}
 		}
 
 		$this->render('create',array(
@@ -84,6 +96,7 @@ class QuestionController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$model2=$this->loadAnswer($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -97,6 +110,7 @@ class QuestionController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'model2'=>$model2,
 		));
 	}
 
@@ -108,6 +122,7 @@ class QuestionController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
+		$this->deleteAllAnswer($id);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -150,6 +165,22 @@ class QuestionController extends Controller
 	public function loadModel($id)
 	{
 		$model=Question::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function loadAnswer($id)
+	{
+		$model=Answer::model()->findAllByAttributes(array('id_question'=>$id));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function deleteAllAnswer($id)
+	{
+		$model=Answer::model()->deleteAllByAttributes(array('id_question'=>$id));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

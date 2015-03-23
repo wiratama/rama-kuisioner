@@ -33,12 +33,14 @@ $('.search-form form').submit(function(){
 			<h5>Manage </h5>
 		</div>
 	</div>
+	<?php /*
 	<div class="col-md-3 col-sm-3 col-xs-6">
 		<div class="dashboard-div-wrapper bk-clr-four">
 			<i class="fa fa-remove dashboard-div-icon"></i>
 			<h5>Remove </h5>
 		</div>
 	</div>
+	*/ ?>
 </div>
 <div class="row">
     <div class="col-md-12">

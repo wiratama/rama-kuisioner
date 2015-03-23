@@ -62,7 +62,7 @@
 		</div>
 		<div class="col-md-8 multi-field-wrapper">
 			<div class="multi-field-content">
-				<?php if ($model2->answer == null) { ?>
+				<?php if (!isset($model2)) { ?>
 					<div class="form-inline multi-field">
 						<div class="form-group">
 							<?php echo $form->labelEx($model2,'answer'); ?>
@@ -76,50 +76,37 @@
 						</div>
 						<div class="form-group">
 							<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-							<?php echo $form->checkBox($model2,'reasonable'); ?>
+							<?php echo $form->checkBox($model2,'reasonable[]',array('value' => 1, 'uncheckValue'=>0)); ?>
 							<?php echo $form->error($model2,'reasonable[]'); ?>
 						</div>
 						<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
 					</div>
 				<?php } else { ?>
-					<?php for($i = 0; $i < sizeof($model->answer); ++$i) { ?>
+					<?php 
+					for($i = 0; $i < sizeof($model2); ++$i) {
+						// var_dump($model2[$i]['answer']);
+						// var_dump($model2[$i]['skor']);
+						// var_dump($model2[$i]['reasonable']);
+					?>
 					<div class="form-inline multi-field">
 						<div class="form-group">
 							<?php echo $form->labelEx($model2,'answer'); ?>
-							<?php echo $form->textField($model2,'answer['.$i.']',array('class'=>'form-control')); ?>
-							<?php echo $form->error($model2,'answer['.$i.']'); ?>
+							<?php echo $form->textField($model2[$i]['answer'],'answer[]',array('class'=>'form-control')); ?>
+							<?php echo $form->error($model2[$i]['answer'],'answer[]'); ?>
 						</div>
 						<div class="form-group">
 							<?php echo $form->labelEx($model2,'skor'); ?>
-							<?php echo $form->textField($model2,'skor['.$i.']',array('class'=>'form-control')); ?>
-							<?php echo $form->error($model2,'skor['.$i.']'); ?>
+							<?php echo $form->textField($model2[$i]['skor'],'skor[]',array('class'=>'form-control')); ?>
+							<?php echo $form->error($model2[$i]['skor'],'skor[]'); ?>
 						</div>
 						<div class="form-group">
 							<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-							<?php echo $form->checkBox($model2,'reasonable['.$i.']'); ?>
-							<?php echo $form->error($model2,'reasonable['.$i.']'); ?>
+							<?php echo $form->checkBox($model2[$i]['reasonable'],'reasonable[]',array('value' => 1, 'uncheckValue'=>0)); ?>
+							<?php echo $form->error($model2[$i]['reasonable'],'reasonable[]'); ?>
 						</div>
 						<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
 					</div>
 					<?php } ?>
-					<div class="form-inline multi-field">
-						<div class="form-group">
-							<?php echo $form->labelEx($model2,'answer'); ?>
-							<?php echo $form->textField($model2,'answer[]',array('class'=>'form-control')); ?>
-							<?php echo $form->error($model2,'answer[]'); ?>
-						</div>
-						<div class="form-group">
-							<?php echo $form->labelEx($model2,'skor'); ?>
-							<?php echo $form->textField($model2,'skor[]',array('class'=>'form-control')); ?>
-							<?php echo $form->error($model2,'skor[]'); ?>
-						</div>
-						<div class="form-group">
-							<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-							<?php echo $form->checkBox($model2,'reasonable[]'); ?>
-							<?php echo $form->error($model2,'reasonable[]'); ?>
-						</div>
-						<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
-					</div>
 				<?php } ?>
 			</div>			
 			<hr>
@@ -158,7 +145,7 @@ $('.multi-field-wrapper').each(function() {
     var $wrapper = $('.multi-field-content', this);
     
     $(".add-field", $(this)).click(function(e) {
-    	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).focus();
+    	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text').val('').focus();
     });
     
     $('.multi-field .remove-field', $wrapper).click(function() {
