@@ -17,19 +17,7 @@
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_question'); ?>
-		<?php echo $form->textField($model,'id_question'); ?>
-		<?php echo $form->error($model,'id_question'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textArea($model,'type',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'type'); ?>
-	</div>
+	<?php echo $form->errorSummary($model); ?>	
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'answer'); ?>
@@ -41,6 +29,13 @@
 		<?php echo $form->labelEx($model,'skor'); ?>
 		<?php echo $form->textField($model,'skor'); ?>
 		<?php echo $form->error($model,'skor'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'reasonable'); ?>
+		<?php //echo $form->textArea($model,'reasonable',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->checkBox($model,'reasonable',array('value'=>'1', 'uncheckValue'=>'0')); ?>
+		<?php echo $form->error($model,'reasonable'); ?>
 	</div>
 
 	<div class="row buttons">

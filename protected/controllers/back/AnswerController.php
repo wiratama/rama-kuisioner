@@ -85,7 +85,7 @@ class AnswerController extends Controller
 
 		if(isset($_POST['Answer']))
 		{
-			$model->attributes=$_POST['Answer'];
+			$model->attributes=$_POST['Answer'];			
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_answer));
 		}

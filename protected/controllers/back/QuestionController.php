@@ -28,7 +28,7 @@ class QuestionController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','index','view','admin','delete'),
+				'actions'=>array('create','update','index','view','admin','delete','deleteanswer'),
 				// 'users'=>array('@'),
 				'expression'=>'!Yii::app()->backendUser->isGuest',
 			),
@@ -67,19 +67,28 @@ class QuestionController extends Controller
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
 			$model->attributes=$_POST['Question'];
-			$counter = count($_POST['Answer']['answer']);
-		    for ($i = 0; $i < $counter; $i++)
-		    {
-		    	$answer = new Answer;
-	        	$answer->answer = $_POST['Answer']['answer'][$i];
-	        	$answer->id_question = $model->id_question;
-	        	$answer->skor = $_POST['Answer']['skor'][$i];
-	        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
-	         	$answer->save();
-		    }	
-			if($model->save()){
-				$this->redirect(array('view','id'=>$model->id_question));
-			}
+			$model2->attributes=$_POST['Answer'];
+			// if($model->save()){
+				// for ($i = 0; $i < $counter; $i++)
+			    // {
+			    	/*$answer = new Answer;
+		        	$answer->answer = $_POST['Answer']['answer'][$i];
+		        	$answer->id_question = $model->id_question;
+		        	$answer->skor = $_POST['Answer']['skor'][$i];
+		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+		         	$answer->save();*/
+		         	// var_dump($_POST['Answer']['answer'][$i]);
+		         	// var_dump($_POST['Answer']['skor'][$i]);
+		         	// var_dump($_POST['Answer']['reasonable'][$i]);
+		         	// echo "<br/>================================<br/>";
+			    // }
+			    // $model2->attributes=$_POST['Answer'];
+			    // $model2->save();
+		        $model2->attributes=$_POST['Answer'];
+		        var_dump($model2->attributes);
+			    die();
+				// $this->redirect(array('view','id'=>$model->id_question));
+			// }
 		}
 
 		$this->render('create',array(
@@ -101,11 +110,34 @@ class QuestionController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Question']))
+		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
+			var_dump($_POST['Answer']);
+			die();
 			$model->attributes=$_POST['Question'];
-			if($model->save())
+			$counter = count($_POST['Answer']['answer']);
+		    for ($i = 0; $i < $counter; $i++)
+		    {
+		    	if (isset($_POST['Answer']['id_answer'][$i])) {
+			    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
+		        	$answer->answer = $_POST['Answer']['answer'][$i];
+		        	$answer->id_question = $model->id_question;
+		        	$answer->skor = $_POST['Answer']['skor'][$i];
+		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i+1];
+		         	$answer->save();
+		        } else {
+		        	$answer = new Answer;
+		        	$answer->answer = $_POST['Answer']['answer'][$i];
+		        	$answer->id_question = $model->id_question;
+		        	$answer->skor = $_POST['Answer']['skor'][$i];
+		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+		         	$answer->save();
+		        }
+		    }
+
+			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id_question));
+			}
 		}
 
 		$this->render('update',array(
@@ -184,6 +216,20 @@ class QuestionController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+
+	public function actionDeleteanswer()
+	{
+		$id_answer=(int)$_POST['id_answer'];
+		$model=Answer::model()->findByPk($id_answer);
+		if($model->delete()) {
+			$delete['response']='0000';
+		} else {
+			$delete['response']='0011';
+		}
+		header('Content-type: application/json');
+		echo CJSON::encode($delete);
+		Yii::app()->end();
 	}
 
 	/**

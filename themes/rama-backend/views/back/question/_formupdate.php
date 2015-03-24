@@ -62,24 +62,24 @@
 		</div>
 		<div class="col-md-8 multi-field-wrapper">
 			<div class="multi-field-content">
+				<?php foreach($model2 as $key=>$answer) { ?>
 				<div class="form-inline multi-field">
-					<div class="form-group">
-						<?php echo $form->labelEx($model2,'answer'); ?>
-						<?php echo $form->textField($model2,'answer[]',array('class'=>'form-control')); ?>
-						<?php echo $form->error($model2,'answer[]'); ?>
+					<div class="form-group">	
+						<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
+						<?php echo CHtml::hiddenField('Answer[id_answer][]',$answer->id_answer,array('class'=>'form-control')); ?>
+						<?php echo CHtml::textField('Answer[answer][]',$answer->answer,array('class'=>'form-control')); ?>
 					</div>
 					<div class="form-group">
-						<?php echo $form->labelEx($model2,'skor'); ?>
-						<?php echo $form->textField($model2,'skor[]',array('class'=>'form-control')); ?>
-						<?php echo $form->error($model2,'skor[]'); ?>
+						<?php echo CHtml::label($answer->getAttributeLabel('skor'),''); ?>
+						<?php echo CHtml::textField('Answer[skor][]',$answer->skor,array('class'=>'form-control')); ?>
 					</div>
 					<div class="form-group">
-						<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-						<?php echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
-						<?php echo $form->error($model2,'reasonable[]'); ?>
+						<?php echo CHtml::label($answer->getAttributeLabel('reasonable'),''); ?>
+						<?php echo CHtml::checkBox('Answer[reasonable]['.$answer->id_answer.']',$answer->reasonable,array('uncheckValue'=>0)); ?>
 					</div>
-					<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
+					<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
 				</div>
+				<?php } ?>
 			</div>			
 			<hr>
 			<button type="button" class="btn btn-sm btn-info add-field">Add more answer</button>
@@ -117,12 +117,28 @@ $('.multi-field-wrapper').each(function() {
     var $wrapper = $('.multi-field-content', this);
     
     $(".add-field", $(this)).click(function(e) {
-    	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text').val('').focus();
+    	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text,input:hidden').val('').focus();
     });
     
     $('.multi-field .remove-field', $wrapper).click(function() {
-        if ($('.multi-field', $wrapper).length > 1)
-            $(this).parent('.multi-field').remove();
+    	if ($('.multi-field', $wrapper).length > 1) {
+            var $del=$(this).parent('.multi-field');
+    	}
+    	if (confirm("Are you sure you want to delete this item?")) {
+        	$.ajax({
+				url: "<?php echo Yii::app()->createAbsoluteUrl('question/deleteanswer');?>",
+				type: 'post',
+				data: 'id_answer=' + $(this).attr("data-answerid"),
+				dataType: 'json',
+				success: function(json) {
+					if (json['response']=='0000') {
+						$($del).remove();
+					} else if (json['response']=='0011') {
+						alert('delete error !');
+					}
+				}
+			});
+		}
     });
 });
 

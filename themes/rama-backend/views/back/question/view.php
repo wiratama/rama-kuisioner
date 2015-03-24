@@ -16,7 +16,7 @@
 		</a>
 	</div>
 	<div class="col-md-3 col-sm-3 col-xs-6">
-		<a href="<?php echo Yii::app()->createUrl('#',array('submit'=>array('delete','id'=>$model->id_question),'confirm'=>'Are you sure you want to delete this item?'));?>">
+		<a href="<?php echo Yii::app()->createUrl('question/admin');?>">
 			<div class="dashboard-div-wrapper bk-clr-three">
 				<i class="fa fa-cogs dashboard-div-icon"></i>
 				<h5>Manage </h5>
