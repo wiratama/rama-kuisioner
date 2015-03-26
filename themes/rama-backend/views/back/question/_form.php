@@ -65,6 +65,7 @@
 				<div class="form-inline multi-field">
 					<div class="form-group">
 						<?php echo $form->labelEx($model2,'answer'); ?>
+						<?php echo $form->hiddenField($model2,'counter[]',array('class'=>'form-control')); ?>
 						<?php echo $form->textField($model2,'answer[]',array('class'=>'form-control')); ?>
 						<?php echo $form->error($model2,'answer[]'); ?>
 					</div>
@@ -75,7 +76,8 @@
 					</div>
 					<div class="form-group">
 						<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-						<?php echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
+						<?php //echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
+						<?php echo $form->dropDownList($model2, 'reasonable[]', array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control')); ?>
 						<?php echo $form->error($model2,'reasonable[]'); ?>
 					</div>
 					<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>

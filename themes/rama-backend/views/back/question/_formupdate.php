@@ -66,6 +66,7 @@
 				<div class="form-inline multi-field">
 					<div class="form-group">	
 						<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
+						<?php echo CHtml::hiddenField('Answer[counter][]',$answer->counter,array('class'=>'form-control')); ?>
 						<?php echo CHtml::hiddenField('Answer[id_answer][]',$answer->id_answer,array('class'=>'form-control')); ?>
 						<?php echo CHtml::textField('Answer[answer][]',$answer->answer,array('class'=>'form-control')); ?>
 					</div>
@@ -75,7 +76,8 @@
 					</div>
 					<div class="form-group">
 						<?php echo CHtml::label($answer->getAttributeLabel('reasonable'),''); ?>
-						<?php echo CHtml::checkBox('Answer[reasonable]['.$answer->id_answer.']',$answer->reasonable,array('uncheckValue'=>0)); ?>
+						<?php //echo CHtml::checkBox('Answer[reasonable][]',$answer->reasonable,array('uncheckValue'=>0)); ?>
+						<?php echo CHtml::dropDownList('Answer[reasonable][]', $answer->reasonable, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control')); ?>
 					</div>
 					<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
 				</div>
@@ -117,6 +119,7 @@ $('.multi-field-wrapper').each(function() {
     var $wrapper = $('.multi-field-content', this);
     
     $(".add-field", $(this)).click(function(e) {
+    	// $('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text,input:hidden').val('').focus();
     	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text,input:hidden').val('').focus();
     });
     

@@ -71,7 +71,7 @@ $('.search-form form').submit(function(){
 		        'header'=>'',
 			),
 			'columns'=>array(
-				'id_question',
+				// 'id_question',
 				'question',
 				'type',
 				array(

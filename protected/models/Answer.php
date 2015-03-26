@@ -12,6 +12,7 @@
  */
 class Answer extends CActiveRecord
 {
+	public $counter;
 	/**
 	 * @return string the associated database table name
 	 */

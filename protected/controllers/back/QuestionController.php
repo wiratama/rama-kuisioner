@@ -67,28 +67,19 @@ class QuestionController extends Controller
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
 			$model->attributes=$_POST['Question'];
-			$model2->attributes=$_POST['Answer'];
-			// if($model->save()){
-				// for ($i = 0; $i < $counter; $i++)
-			    // {
-			    	/*$answer = new Answer;
+			if($model->save()){
+				$counter=count($_POST['Answer']['counter']);
+				for ($i = 0; $i < $counter; $i++)
+				{
+			    	$answer = new Answer;
 		        	$answer->answer = $_POST['Answer']['answer'][$i];
 		        	$answer->id_question = $model->id_question;
 		        	$answer->skor = $_POST['Answer']['skor'][$i];
 		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
-		         	$answer->save();*/
-		         	// var_dump($_POST['Answer']['answer'][$i]);
-		         	// var_dump($_POST['Answer']['skor'][$i]);
-		         	// var_dump($_POST['Answer']['reasonable'][$i]);
-		         	// echo "<br/>================================<br/>";
-			    // }
-			    // $model2->attributes=$_POST['Answer'];
-			    // $model2->save();
-		        $model2->attributes=$_POST['Answer'];
-		        var_dump($model2->attributes);
-			    die();
-				// $this->redirect(array('view','id'=>$model->id_question));
-			// }
+		         	$answer->save();
+			    }
+				$this->redirect(array('view','id'=>$model->id_question));
+			}
 		}
 
 		$this->render('create',array(
@@ -112,31 +103,28 @@ class QuestionController extends Controller
 
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
-			var_dump($_POST['Answer']);
-			die();
 			$model->attributes=$_POST['Question'];
-			$counter = count($_POST['Answer']['answer']);
-		    for ($i = 0; $i < $counter; $i++)
-		    {
-		    	if (isset($_POST['Answer']['id_answer'][$i])) {
-			    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
-		        	$answer->answer = $_POST['Answer']['answer'][$i];
-		        	$answer->id_question = $model->id_question;
-		        	$answer->skor = $_POST['Answer']['skor'][$i];
-		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i+1];
-		         	$answer->save();
-		        } else {
-		        	$answer = new Answer;
-		        	$answer->answer = $_POST['Answer']['answer'][$i];
-		        	$answer->id_question = $model->id_question;
-		        	$answer->skor = $_POST['Answer']['skor'][$i];
-		        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
-		         	$answer->save();
-		        }
-		    }
-
+			$counter = count($_POST['Answer']['counter']);
 			if($model->save()) {
-				$this->redirect(array('view','id'=>$model->id_question));
+			    for ($i = 0; $i < $counter; $i++)
+			    {
+			    	if (isset($_POST['Answer']['id_answer'][$i])) {
+				    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
+			        	$answer->answer = $_POST['Answer']['answer'][$i];
+			        	$answer->id_question = $model->id_question;
+			        	$answer->skor = $_POST['Answer']['skor'][$i];
+			        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+			         	$answer->save();
+			        } else {
+			        	$answer = new Answer;
+			        	$answer->answer = $_POST['Answer']['answer'][$i];
+			        	$answer->id_question = $model->id_question;
+			        	$answer->skor = $_POST['Answer']['skor'][$i];
+			        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+			         	$answer->save();
+			        }
+			    }
+			    $this->redirect(array('view','id'=>$model->id_question));
 			}
 		}
 
