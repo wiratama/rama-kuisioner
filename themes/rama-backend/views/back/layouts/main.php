@@ -50,13 +50,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="navbar-collapse collapse ">
+                        <?php if (!Yii::app()->backendUser->isGuest) { ?>
                         <ul id="menu-top" class="nav navbar-nav navbar-right">
                             <li><a href="<?php echo Yii::app()->createUrl('site/index');?>">Dashboard</a></li>
                             <li><a href="<?php echo Yii::app()->createUrl('question/admin');?>">Question</a></li>
-                            <li><a href="<?php echo Yii::app()->createUrl('answer/admin');?>">Answer</a></li>
                             <li><a href="<?php echo Yii::app()->createUrl('store/admin');?>">Store</a></li>
                             <li><a href="<?php echo Yii::app()->createUrl('customer/admin');?>">Customer</a></li>
+                            <li><a href="<?php echo Yii::app()->createUrl('survey/admin');?>">Survey</a></li>
                         </ul>
+                        <?php }  else { ?>
+                        <ul id="menu-top" class="nav navbar-nav navbar-right">
+                            <li>                                
+                                <a href="<?php echo Yii::app()->createUrl('site/login');?>">Log in</a>
+                            </li>
+                        </ul>
+                        <?php } ?>
                     </div>
                 </div>
 

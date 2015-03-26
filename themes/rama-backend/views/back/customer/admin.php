@@ -25,13 +25,21 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Manage Customers</h1>
-
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+	<a href="<?php echo Yii::app()->createUrl('customer/create');?>">
+		<div class="dashboard-div-wrapper bk-clr-one">
+			<i class="fa fa-plus dashboard-div-icon"></i>
+			<h5>Create </h5>
+		</div>
+	</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">Manage Customers</h4>
+    </div>
+</div>
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -39,23 +47,52 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
-
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'customer-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id_customer',
-		'name',
-		'address',
-		'contact',
-		'nationality',
-		'email',
-		/*
-		'validation_number',
-		*/
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+<div class="row">
+    <div class="col-md-12">
+		<?php 
+		// $this->widget('zii.widgets.grid.CGridView', array(
+		$this->widget('bootstrap.widgets.BsGridView', array(
+			'id'=>'customer-grid',
+			'dataProvider'=>$model->search(),
+			'filter'=>$model,
+			'type' => BsHtml::GRID_TYPE_STRIPED,
+			'pager'=>array(
+				'htmlOptions' => array(
+		            'class' => 'pagination',
+		            'id' => '',
+		        ),
+		        'header'=>'',
+			),
+			'columns'=>array(
+				// 'id_customer',
+				'name',
+				'address',
+				'contact',
+				'nationality',
+				'email',
+				'validation_number',
+				array(
+					'header' => 'Actions',
+					'class' => 'CButtonColumn',
+					'buttons'=>array(
+						'update' => array(
+							'imageUrl' =>false,
+							'label' => '',
+							'options' => array( 'title'=>'Edit', 'class' => 'glyphicon glyphicon-pencil'),
+						),
+						'view' => array(
+							'imageUrl' =>false,
+							'label' => '',
+							'options' => array( 'title'=>'View', 'class' => 'glyphicon glyphicon-eye-open'),                        
+						),
+						'delete' => array(
+							'imageUrl' =>false,
+							'label' => '',
+							'options' => array( 'title'=>'Delete', 'class' => 'glyphicon glyphicon-remove-circle'),                        
+						),
+					),
+				),
+			),
+		)); ?>
+	</div>
+</div>

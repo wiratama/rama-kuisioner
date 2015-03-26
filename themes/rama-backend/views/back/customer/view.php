@@ -1,27 +1,40 @@
-<?php
-/* @var $this CustomerController */
-/* @var $model Customer */
-
-$this->breadcrumbs=array(
-	'Customers'=>array('index'),
-	$model->name,
-);
-
-$this->menu=array(
-	array('label'=>'List Customer', 'url'=>array('index')),
-	array('label'=>'Create Customer', 'url'=>array('create')),
-	array('label'=>'Update Customer', 'url'=>array('update', 'id'=>$model->id_customer)),
-	array('label'=>'Delete Customer', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_customer),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Customer', 'url'=>array('admin')),
-);
-?>
-
-<h1>View Customer #<?php echo $model->id_customer; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('customer/create');?>">
+			<div class="dashboard-div-wrapper bk-clr-one">
+				<i class="fa fa-plus dashboard-div-icon"></i>
+				<h5>Create </h5>
+			</div>
+		</a>
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('customer/update', array('id'=>$model->id_customer));?>">
+			<div class="dashboard-div-wrapper bk-clr-two">
+				<i class="fa fa-edit dashboard-div-icon"></i>
+				<h5>Edit </h5>
+			</div>
+		</a>
+	</div>
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('customer/admin');?>">
+			<div class="dashboard-div-wrapper bk-clr-three">
+				<i class="fa fa-cogs dashboard-div-icon"></i>
+				<h5>Manage </h5>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h4 class="page-head-line">View Customer #<?php echo $model->id_customer; ?></h4>
+	</div>
+</div>
+<?php 
+// $this->widget('zii.widgets.CDetailView', array(
+$this->widget('bootstrap.widgets.BsDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_customer',
+		// 'id_customer',
 		'name',
 		'address',
 		'contact',

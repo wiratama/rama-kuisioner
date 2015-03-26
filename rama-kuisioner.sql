@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2015 at 05:50 AM
+-- Generation Time: Mar 26, 2015 at 04:41 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -56,7 +56,23 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `answer` text,
   `skor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_answer`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+--
+-- Dumping data for table `answer`
+--
+
+INSERT INTO `answer` (`id_answer`, `id_question`, `reasonable`, `answer`, `skor`) VALUES
+(1, 1, 0, 'Magazine', NULL),
+(2, 1, 0, 'Agent', NULL),
+(10, 3, 0, 'Family', NULL),
+(11, 3, 0, 'Friends', NULL),
+(12, 3, 1, 'Couple', NULL),
+(13, 3, 0, 'Alone', NULL),
+(14, 4, 1, 'Food', NULL),
+(15, 4, 1, 'Service', NULL),
+(16, 4, 1, 'Atmosphere', NULL),
+(17, 4, 0, 'Entertainment', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,7 +116,16 @@ CREATE TABLE IF NOT EXISTS `question` (
   `question` text,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `question`
+--
+
+INSERT INTO `question` (`id_question`, `question`, `type`) VALUES
+(1, 'How did you know about us?', 'radio'),
+(3, 'Who were you here with?', 'radio'),
+(4, 'What do you like most about us?', 'radio');
 
 -- --------------------------------------------------------
 
@@ -113,6 +138,21 @@ CREATE TABLE IF NOT EXISTS `store` (
   `address` text,
   PRIMARY KEY (`store_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey`
+--
+
+CREATE TABLE IF NOT EXISTS `survey` (
+  `id_survey` int(11) NOT NULL AUTO_INCREMENT,
+  `store_number` varchar(255) NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `id_question` int(11) NOT NULL,
+  `id_answer` text NOT NULL,
+  PRIMARY KEY (`id_survey`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

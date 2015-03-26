@@ -1,21 +1,20 @@
-<?php
-/* @var $this CustomerController */
-/* @var $model Customer */
-
-$this->breadcrumbs=array(
-	'Customers'=>array('index'),
-	$model->name=>array('view','id'=>$model->id_customer),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List Customer', 'url'=>array('index')),
-	array('label'=>'Create Customer', 'url'=>array('create')),
-	array('label'=>'View Customer', 'url'=>array('view', 'id'=>$model->id_customer)),
-	array('label'=>'Manage Customer', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update Customer <?php echo $model->id_customer; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('customer/admin');?>">
+			<div class="dashboard-div-wrapper bk-clr-three">
+				<i class="fa fa-cogs dashboard-div-icon"></i>
+				<h5>Manage </h5>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">Update Customer <?php echo $model->id_customer; ?></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>
