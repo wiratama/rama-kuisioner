@@ -1,21 +1,20 @@
-<?php
-/* @var $this StoreController */
-/* @var $model Store */
-
-$this->breadcrumbs=array(
-	'Stores'=>array('index'),
-	$model->store_number=>array('view','id'=>$model->store_number),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'List Store', 'url'=>array('index')),
-	array('label'=>'Create Store', 'url'=>array('create')),
-	array('label'=>'View Store', 'url'=>array('view', 'id'=>$model->store_number)),
-	array('label'=>'Manage Store', 'url'=>array('admin')),
-);
-?>
-
-<h1>Update Store <?php echo $model->store_number; ?></h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('store/admin');?>">
+			<div class="dashboard-div-wrapper bk-clr-three">
+				<i class="fa fa-cogs dashboard-div-icon"></i>
+				<h5>Manage </h5>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">Update Store <?php echo $model->store_number; ?></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

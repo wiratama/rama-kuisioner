@@ -1,18 +1,20 @@
-<?php
-/* @var $this StoreController */
-/* @var $model Store */
-
-$this->breadcrumbs=array(
-	'Stores'=>array('index'),
-	'Create',
-);
-
-$this->menu=array(
-	array('label'=>'List Store', 'url'=>array('index')),
-	array('label'=>'Manage Store', 'url'=>array('admin')),
-);
-?>
-
-<h1>Create Store</h1>
-
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<div class="row">
+	<div class="col-md-3 col-sm-3 col-xs-6">
+		<a href="<?php echo Yii::app()->createUrl('store/admin');?>">
+			<div class="dashboard-div-wrapper bk-clr-three">
+				<i class="fa fa-cogs dashboard-div-icon"></i>
+				<h5>Manage </h5>
+			</div>
+		</a>
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="page-head-line">Create Store</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+		<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+	</div>
+</div>

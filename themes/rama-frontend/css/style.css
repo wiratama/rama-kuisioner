@@ -1,0 +1,193 @@
+body {
+	background-image: url(../images/bg-body.jpg);
+	color: #FFF;
+	font-family: 'PT Sans', sans-serif;
+}
+.container {
+	max-width: 900px;
+}
+header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 60px;
+	background-color: #2d1a05;
+	border-bottom: 1px solid #deae78;
+}
+.logo {
+	max-height: 40px;
+}
+.img-holder {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.content-holder {
+	background: rgba(0,0,0,0.5);
+	padding: 5px 20px 10px 20px;
+	width: 100%;
+	margin: 0px auto;
+}
+.quest-holder {
+	background: rgba(0,0,0,0.5);
+	padding: 25px 0px 10px 0px;
+	width: 100%;
+}
+.mylang {
+	float: right;
+	text-align: right;
+	width: 100%;
+	padding-right: 10px;
+}
+.completion {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 25px;
+}
+footer {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	height: 60px;
+	background-color: #2d1a05;
+	border-top: 1px solid #deae78;
+	text-align: center;
+}
+
+/* Form setup
+=================================================== */
+.format-style {
+	padding-bottom: 20px;
+
+}
+.radiox {
+	margin-left: 20px;
+	font-weight: normal;
+	margin-top: -4px;
+}
+.control-label {
+	padding-top: 10px;
+	font-weight: normal;
+}
+.chose-title {
+	text-align: center;
+	margin-top: 20px;
+}
+.bg-on {
+	background: url(../images/img-questbg.png);
+	padding-top: 5px;
+}
+.bg-off {
+	padding-top: 5px;
+}
+.rowset {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+/* boxes, accessories and other small feature layout 
+=================================================== */
+.box-info {
+	background-color: #a16e37;
+	border: 1px solid #ada092;
+	width: 100%;
+	font-size: 18px;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.quest-bgon {
+	background: url(../images/img-questbg.png);
+	width: 100%;
+	margin-left: 0px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.quest-bgoff {
+	width: 100%;
+	margin-left: 0px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+/* button setup 
+=================================================== */
+.button-holder {
+	margin: 0px auto;
+	width: 60%;
+	margin-top: 40px;
+}
+.button-holder-inside {
+	margin: 0px auto;
+	width: 60%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.btn-start.active {
+  color: rgba(255, 255, 255, 0.75);
+}
+.btn-start {
+  color: #ffffff;
+  font-size: 30px;
+  width: 100%;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #956c3e;
+  background-image: -moz-linear-gradient(top, #a37644, #7f5c35);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#a37644), to(#7f5c35));
+  background-image: -webkit-linear-gradient(top, #a37644, #7f5c35);
+  background-image: -o-linear-gradient(top, #a37644, #7f5c35);
+  background-image: linear-gradient(to bottom, #a37644, #7f5c35);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffa37644', endColorstr='#ff7f5c35', GradientType=0);
+  border-color: #7f5c35 #7f5c35 #49351e;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  *background-color: #7f5c35;
+  /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.btn-start:hover,
+.btn-start:focus,
+.btn-start:active,
+.btn-start.active,
+.btn-start.disabled,
+.btn-start[disabled] {
+  color: #ffffff;
+  background-color: #7f5c35;
+  *background-color: #6d4f2d;
+}
+.btn-start:active,
+.btn-start.active {
+  background-color: #5b4226 ;
+}
+
+/* responsive query */
+@media only screen and (min-width : 0px) and (max-width : 349px) {
+.desc-chose { max-width: 30%;}  
+}
+@media only screen and (min-width : 350px) and (max-width : 550px) {
+
+}
+@media only screen and (min-width: 560px) and (max-width : 749px) {
+.content-holder {width: 80%;}     
+}
+@media only screen and (min-width: 750px) and (max-width : 800px) {
+.content-holder {width: 70%;} 
+}
+@media only screen and (min-width: 801px) and (max-width : 824px) {
+   
+}
+@media only screen and (max-width: 1004px) and (min-width: 825px) {
+   
+}
+@media only screen and (max-width: 1280px) and (min-width: 1100px) {
+}
+
+ /* centering navigation */
+@media (min-width: 768px){
+
+}
+
+label.standart-label {
+	font-weight: normal !important;
+}
+.errorMessage {
+	color: red !important;
+	font-size: 0.9em !important;
+}

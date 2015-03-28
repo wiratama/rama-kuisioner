@@ -32,6 +32,8 @@ class Customer extends CActiveRecord
 		return array(
 			array('name, address, nationality, validation_number', 'length', 'max'=>300),
 			array('contact, email', 'length', 'max'=>50),
+			array('email', 'email'),
+			array('email', 'unique','message'=>'Email already exists!'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_customer, name, address, contact, nationality, email, validation_number', 'safe', 'on'=>'search'),

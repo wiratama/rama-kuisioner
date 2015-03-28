@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2015 at 04:41 AM
+-- Generation Time: Mar 28, 2015 at 06:06 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -139,19 +139,41 @@ CREATE TABLE IF NOT EXISTS `store` (
   PRIMARY KEY (`store_number`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `store`
+--
+
+INSERT INTO `store` (`store_number`, `address`) VALUES
+('rama-123-xx', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\r\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\r\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\r\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `survey`
+-- Table structure for table `survey_question_answer`
 --
 
-CREATE TABLE IF NOT EXISTS `survey` (
+CREATE TABLE IF NOT EXISTS `survey_question_answer` (
   `id_survey` int(11) NOT NULL AUTO_INCREMENT,
   `store_number` varchar(255) NOT NULL,
   `id_customer` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
   `id_answer` text NOT NULL,
+  `reason` text NOT NULL,
   PRIMARY KEY (`id_survey`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_store`
+--
+
+CREATE TABLE IF NOT EXISTS `survey_store` (
+  `id_survey_store` int(11) NOT NULL AUTO_INCREMENT,
+  `store_number` varchar(255) NOT NULL,
+  `date_survey` date NOT NULL,
+  `struk_number` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_survey_store`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

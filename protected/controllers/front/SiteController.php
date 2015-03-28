@@ -2,9 +2,6 @@
 
 class SiteController extends Controller
 {
-	/**
-	 * Declares class-based actions.
-	 */
 	public function actions()
 	{
 		return array(
@@ -21,20 +18,38 @@ class SiteController extends Controller
 		);
 	}
 
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$model=new SurveyStore;
+		if(isset($_POST['SurveyStore']))
+		{
+			$model->attributes=$_POST['SurveyStore'];
+			$model->validate();
+		}
+		$this->render('index',array(
+			'model'=>$model,
+		));
 	}
 
-	/**
-	 * This is the action to handle external exceptions.
-	 */
+	public function actionPersonaldata()
+	{
+		$model=new Customer;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Customer']))
+		{
+			$model->attributes=$_POST['Customer'];
+			$model->validate();
+
+		}
+
+		$this->render('personaldata',array(
+			'model'=>$model,
+		));
+	}
+
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
@@ -46,9 +61,6 @@ class SiteController extends Controller
 		}
 	}
 
-	/**
-	 * Displays the contact page
-	 */
 	public function actionContact()
 	{
 		$model=new ContactForm;
@@ -72,9 +84,6 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
-	/**
-	 * Displays the login page
-	 */
 	public function actionLogin()
 	{
 		$model=new LoginForm;
@@ -98,9 +107,6 @@ class SiteController extends Controller
 		$this->render('login',array('model'=>$model));
 	}
 
-	/**
-	 * Logs out the current user and redirect to homepage.
-	 */
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
