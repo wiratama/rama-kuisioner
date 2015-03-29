@@ -89,7 +89,14 @@ class SiteController extends Controller
 
 		if (isset($_POST['questioner']))
 		{
-			var_dump($_POST['questioner']);
+			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
+				var_dump($questioner['answer']);
+				if (isset($questioner['reason'][$questioner['answer']])) {
+					var_dump($questioner['reason'][$questioner['answer']]);
+				} else {
+					var_dump('null');
+				}				
+			}
 			die();
 		}
 

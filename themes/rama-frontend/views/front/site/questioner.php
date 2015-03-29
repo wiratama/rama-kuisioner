@@ -21,10 +21,10 @@
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="questioner[<?php echo $answer->id_answer;?>]['answer']" value="<?php echo $answer->id_answer;?>">
+                                    <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>">
                                     <?php echo $answer->answer;?><br/>
                                     <?php if ($answer->reasonable==1) { ?>
-                                    <input type="text" name="questioner[<?php echo $answer->id_answer;?>]['reason']" class="form-control" placeholder="please specify">
+                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control" placeholder="please specify">
                                     <?php } ?>
                                 </label>
                             </div>
@@ -74,3 +74,10 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+/*$( document ).ready(function() {
+    $("input:radio[class=answer]").click(function() {
+        console.log($(this).attr('name'));
+    });
+});*/
+</script>
