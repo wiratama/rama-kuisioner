@@ -3432,3 +3432,37 @@ REQUEST_URI=/rama-kuisioner/index.php/questioner
 in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (116)
 in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
 in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/03/29 12:06:30 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:336
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner')
+#5 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#7 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#10 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#11 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/questioner?page=2
+---
+2015/03/29 12:06:46 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:336
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner')
+#5 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#7 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#10 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#11 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/questioner?page=2
+---

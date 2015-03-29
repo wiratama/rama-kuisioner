@@ -5,7 +5,11 @@
             English
         </div>
         <div class="quest-holder">
+            <?php if (isset($_GET['page'])) { ?>
+            <form role="form" method="post" action="<?php echo Yii::app()->createAbsoluteUrl('site/questioner',array('page'=>$_GET['page'])); ?>">
+            <?php } else { ?>
             <form role="form" method="post" action="<?php echo Yii::app()->createAbsoluteUrl('site/questioner'); ?>">
+            <?php } ?>
                 <!-- the quest -->
                 <?php
                 foreach ($model as $questionkey => $question) {

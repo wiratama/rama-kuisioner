@@ -78,9 +78,9 @@ class SiteController extends Controller
 
 	public function actionQuestioner()
 	{
-		var_dump(Yii::app()->session[Yii::app()->session['init']]);
+		// var_dump(Yii::app()->session[Yii::app()->session['init']]);
 		// var_dump($_GET['page']);
-		die();
+		// die();
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
 		$limit = 5;
 		$offset = ($page-1)*$limit;
@@ -92,6 +92,8 @@ class SiteController extends Controller
 
 		if (isset($_POST['questioner']))
 		{
+			// var_dump($page);
+			// die();
 			$answer=array();
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
 				if (isset($questioner['reason'][$questioner['answer']])) {
