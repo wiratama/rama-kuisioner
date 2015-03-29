@@ -78,6 +78,9 @@ class SiteController extends Controller
 
 	public function actionQuestioner()
 	{
+		var_dump(Yii::app()->session[Yii::app()->session['init']]);
+		// var_dump($_GET['page']);
+		die();
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
 		$limit = 5;
 		$offset = ($page-1)*$limit;
@@ -107,9 +110,11 @@ class SiteController extends Controller
 			$data['survey']=$answer;
 			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
 			// array_merge($_SESSION[Yii::app()->session['init']],$data['survey']);
-			var_dump(Yii::app()->session[Yii::app()->session['init']]);
-			$this->redirect('site/questioner',array(
-				'page'=>$page+1,
+			Yii::app()->request->redirect(
+				Yii::app()->createUrl('site/questioner',
+					array(
+						'page'=>$page+1,
+					)
 			));
 		}
 
