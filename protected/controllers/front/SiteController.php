@@ -21,6 +21,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		
+		// Yii::app()->session->destroy();
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
@@ -29,7 +30,7 @@ class SiteController extends Controller
 			$date=date('d-m-Y-H-i-s');
 			$unique=$model->struk_number.'_'.$date;
 			Yii::app()->session['init']=$unique;
-			Yii::app()->session[$unique]=array(
+			Yii::app()->session[Yii::app()->session['init']]=array(
 				'store'=>array(
 					'store_number'=>$model->store_number,
 					'date_survey'=>$model->date_survey,
@@ -65,8 +66,7 @@ class SiteController extends Controller
 					'nationality'=>$model->nationality,
 					'email'=>$model->email,
 				),
-				'survey'=>array(
-				),
+				'survey'=>array(),
 			);
 			$this->redirect(array('questioner'));
 		}
@@ -89,15 +89,28 @@ class SiteController extends Controller
 
 		if (isset($_POST['questioner']))
 		{
+			$answer=array();
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
-				var_dump($questioner['answer']);
 				if (isset($questioner['reason'][$questioner['answer']])) {
-					var_dump($questioner['reason'][$questioner['answer']]);
+					$reason=$questioner['reason'][$questioner['answer']];
 				} else {
-					var_dump('null');
-				}				
+					$reason=null;
+				}
+
+				$answer[$keyquestioner]=array(
+					'id_question'=>$keyquestioner,
+					'id_answer'=>$questioner['answer'],
+					'reason'=>$reason,
+				);
+								
 			}
-			die();
+			$data['survey']=$answer;
+			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
+			// array_merge($_SESSION[Yii::app()->session['init']],$data['survey']);
+			var_dump(Yii::app()->session[Yii::app()->session['init']]);
+			$this->redirect('site/questioner',array(
+				'page'=>$page+1,
+			));
 		}
 
 		$this->render('questioner',array(
