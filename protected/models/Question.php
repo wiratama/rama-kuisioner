@@ -42,6 +42,7 @@ class Question extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'answer' => array(self::HAS_MANY, 'Answer', 'id_question'),
 		);
 	}
 
@@ -81,6 +82,7 @@ class Question extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'pagination' => array('pageSize' => 5),
 		));
 	}
 

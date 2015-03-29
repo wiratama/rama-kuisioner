@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2015 at 06:06 AM
+-- Generation Time: Mar 29, 2015 at 05:16 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `answer` text,
   `skor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_answer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
 
 --
 -- Dumping data for table `answer`
@@ -72,7 +72,39 @@ INSERT INTO `answer` (`id_answer`, `id_question`, `reasonable`, `answer`, `skor`
 (14, 4, 1, 'Food', NULL),
 (15, 4, 1, 'Service', NULL),
 (16, 4, 1, 'Atmosphere', NULL),
-(17, 4, 0, 'Entertainment', NULL);
+(17, 4, 0, 'Entertainment', NULL),
+(18, 5, 0, 'First time', NULL),
+(19, 5, 0, 'Second time', NULL),
+(20, 5, 0, 'More than Two Times', NULL),
+(21, 6, 0, 'Asian', NULL),
+(22, 6, 0, 'Balinese', NULL),
+(23, 6, 0, 'Western', NULL),
+(24, 6, 1, 'Others,', NULL),
+(25, 7, 0, 'Below averages', NULL),
+(26, 7, 0, 'Reasonable', NULL),
+(27, 7, 0, 'Unacceptable', NULL),
+(28, 8, 0, 'Below averages', NULL),
+(29, 8, 0, 'Reasonable', NULL),
+(30, 8, 0, 'Unacceptable', NULL),
+(31, 9, 0, '20 minutes', NULL),
+(32, 9, 0, '25 minutes', NULL),
+(33, 9, 0, '30 minutes', NULL),
+(34, 9, 0, 'Does Not Matter', NULL),
+(35, 10, 0, 'Traditional music', NULL),
+(36, 10, 0, 'Modern music', NULL),
+(37, 10, 1, 'Others,', NULL),
+(38, 11, 0, 'Very likely', NULL),
+(39, 11, 0, 'Likely', NULL),
+(40, 11, 1, 'Unlikely,', NULL),
+(41, 12, 0, 'POOR', NULL),
+(42, 12, 0, 'AVERANGE', NULL),
+(43, 12, 0, 'GOOD', NULL),
+(44, 12, 0, 'VERY GOOD', NULL),
+(45, 13, 0, 'POOR', NULL),
+(46, 13, 0, 'AVERANGE', NULL),
+(47, 13, 0, 'GOOD', NULL),
+(48, 13, 0, 'VERY GOOD', NULL),
+(49, 13, 0, 'EXCELENT', NULL);
 
 -- --------------------------------------------------------
 
@@ -116,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `question` text,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `question`
@@ -125,7 +157,16 @@ CREATE TABLE IF NOT EXISTS `question` (
 INSERT INTO `question` (`id_question`, `question`, `type`) VALUES
 (1, 'How did you know about us?', 'radio'),
 (3, 'Who were you here with?', 'radio'),
-(4, 'What do you like most about us?', 'radio');
+(4, 'What do you like most about us?', 'radio'),
+(5, 'How many times have you been to our Restaurant?', 'radio'),
+(6, 'What is your favorite Food?', 'radio'),
+(7, 'Please rate our Food Prices?', 'radio'),
+(8, 'Please rate our Beverage Prices?', 'radio'),
+(9, 'What is your expected food delivery time (from ordering time)', 'radio'),
+(10, 'What kind of entertainment would you prefer in our Restaurant?', 'radio'),
+(11, 'What is your likelihood to return?', 'radio'),
+(12, 'Food Taste', 'checkbox'),
+(13, 'Presentation', 'checkbox');
 
 -- --------------------------------------------------------
 

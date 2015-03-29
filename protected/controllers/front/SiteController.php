@@ -50,6 +50,34 @@ class SiteController extends Controller
 		));
 	}
 
+	public function actionQuestioner()
+	{
+		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
+		$limit = 5;
+		$offset = ($page-1)*$limit;
+        
+
+        /*$listdata = Yii::app()->db->createCommand()
+        ->select('*')
+        ->from(array('question q', 'answer a'))
+        ->order('a.id_question ASC')
+        ->limit(5, $page-1)
+        ->queryAll();*/
+
+		$model=Question::model()->with('answer')->findAll(array(
+		    'limit' => $limit,
+		    'offset' => $offset,
+		));
+		foreach ($model as $key => $survey) {
+			echo $survey->question."<br/>";
+		}
+		die();
+
+		$this->render('personaldata',array(
+			'model'=>$model,
+		));
+	}
+
 	public function actionError()
 	{
 		if($error=Yii::app()->errorHandler->error)
