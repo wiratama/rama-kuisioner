@@ -5,7 +5,7 @@
             English
         </div>
         <div class="quest-holder">
-            <form role="form">
+            <form role="form" method="post" action="<?php echo Yii::app()->createAbsoluteUrl('site/questioner'); ?>">
                 <!-- the quest -->
                 <?php
                 foreach ($model as $questionkey => $question) {
@@ -21,8 +21,11 @@
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="questioner[<?php echo $question->id_question;?>][]" value="<?php echo $answer->id_answer;?>">
-                                    <?php echo $answer->answer;?>
+                                    <input type="radio" name="questioner[<?php echo $answer->id_answer;?>]['answer']" value="<?php echo $answer->id_answer;?>">
+                                    <?php echo $answer->answer;?><br/>
+                                    <?php if ($answer->reasonable==1) { ?>
+                                    <input type="text" name="questioner[<?php echo $answer->id_answer;?>]['reason']" class="form-control" placeholder="please specify">
+                                    <?php } ?>
                                 </label>
                             </div>
                             <?php } ?>
@@ -40,7 +43,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <input type="checkbox" name="questioner[<?php echo $question->id_question;?>][]" value="<?php echo $answer->id_answer;?>">
+                                <input type="checkbox" name="questioner['answer'][<?php echo $question->id_question;?>][]" value="<?php echo $answer->id_answer;?>">
                                 <?php echo $answer->answer;?>
                             </div>
                             <?php } ?>
@@ -63,7 +66,7 @@
                 <!-- button next -->
                 <div class="row">
                     <div class="button-holder-inside">
-                        <a href="4rd-page.php" class="btn btn-start">NEXT</a>
+                        <input class="btn btn-start" type="submit" name="submit" value="Next">
                     </div>
                 </div>
                 <!-- button next -->                

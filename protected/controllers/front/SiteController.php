@@ -20,12 +20,25 @@ class SiteController extends Controller
 
 	public function actionIndex()
 	{
+		
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
 			$model->attributes=$_POST['SurveyStore'];
 			$model->validate();
+			$date=date('d-m-Y-H-i-s');
+			$unique=$model->struk_number.'_'.$date;
+			Yii::app()->session['init']=$unique;
+			Yii::app()->session[$unique]=array(
+				'store'=>array(
+					'store_number'=>$model->store_number,
+					'date_survey'=>$model->date_survey,
+					'struk_number'=>$model->struk_number,
+				),
+			);
+			$this->redirect(array('personaldata'));
 		}
+
 		$this->render('index',array(
 			'model'=>$model,
 		));
@@ -35,14 +48,27 @@ class SiteController extends Controller
 	{
 		$model=new Customer;
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Customer']))
 		{
 			$model->attributes=$_POST['Customer'];
 			$model->validate();
-
+			Yii::app()->session[Yii::app()->session['init']]=array(
+				'store'=>array(
+					'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
+					'date_survey'=>Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'],
+					'struk_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'],
+				),
+				'personaldata'=>array(
+					'name'=>$model->name,
+					'address'=>$model->address,
+					'contact'=>$model->contact,
+					'nationality'=>$model->nationality,
+					'email'=>$model->email,
+				),
+				'survey'=>array(
+				),
+			);
+			$this->redirect(array('questioner'));
 		}
 
 		$this->render('personaldata',array(
@@ -60,13 +86,12 @@ class SiteController extends Controller
 		    'limit' => $limit,
 		    'offset' => $offset,
 		));
-		/*foreach ($model as $questionkey => $question) {
-			echo $question->question."<br/>";
-			foreach ($question->answer as $answerkey => $answer) {
-				echo $answer->answer."<br/>";
-			}
+
+		if (isset($_POST['questioner']))
+		{
+			var_dump($_POST['questioner']);
+			die();
 		}
-		die();*/
 
 		$this->render('questioner',array(
 			'model'=>$model,
