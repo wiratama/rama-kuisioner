@@ -3031,3 +3031,71 @@ Stack trace:
 REQUEST_URI=/rama-kuisioner/index.php/personaldata
 HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
 ---
+2015/03/29 05:11:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "questioner&page=1".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('questioner&page...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner&page=1
+---
+2015/03/29 05:12:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "questioner".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('questioner')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner
+---
+2015/03/29 05:12:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "questioner&page=1".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('questioner&page...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner&page...')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/questioner&page=1
+---
+2015/03/29 05:12:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "questioner&page=1".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('questioner&page...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner&page...')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/questioner&page=1
+---
+2015/03/29 05:22:07 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:66)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#6 unknown(0): WebApplicationEndBehavior->runEnd()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/site/questioner/page/1
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (66)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)

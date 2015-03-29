@@ -56,24 +56,19 @@ class SiteController extends Controller
 		$limit = 5;
 		$offset = ($page-1)*$limit;
         
-
-        /*$listdata = Yii::app()->db->createCommand()
-        ->select('*')
-        ->from(array('question q', 'answer a'))
-        ->order('a.id_question ASC')
-        ->limit(5, $page-1)
-        ->queryAll();*/
-
-		$model=Question::model()->with('answer')->findAll(array(
+        $model=Question::model()->with('answer')->findAll(array(
 		    'limit' => $limit,
 		    'offset' => $offset,
 		));
-		foreach ($model as $key => $survey) {
-			echo $survey->question."<br/>";
+		/*foreach ($model as $questionkey => $question) {
+			echo $question->question."<br/>";
+			foreach ($question->answer as $answerkey => $answer) {
+				echo $answer->answer."<br/>";
+			}
 		}
-		die();
+		die();*/
 
-		$this->render('personaldata',array(
+		$this->render('questioner',array(
 			'model'=>$model,
 		));
 	}
