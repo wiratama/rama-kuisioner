@@ -2,6 +2,13 @@
 	'id'=>'question-form',
 	'enableAjaxValidation'=>false,
 )); ?>
+<?php if (Yii::app()->user->hasFlash('question-form')) {
+	echo BsHtml::alert(
+		BsHtml::ALERT_COLOR_SUCCESS, 
+		BsHtml::bold('Oops ! ') . Yii::app()->user->getFlash('question-form')
+	);
+}
+?>
 	<div class="row">		
 		<div class="col-md-4">
 			<?php echo $form->errorSummary($model); ?>

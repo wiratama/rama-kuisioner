@@ -2,6 +2,13 @@
 	'id'=>'question-form',
 	'enableAjaxValidation'=>false,
 )); ?>
+<?php if (Yii::app()->user->hasFlash('question-form')) {
+	echo BsHtml::alert(
+		BsHtml::ALERT_COLOR_SUCCESS, 
+		BsHtml::bold('Oops ! ') . Yii::app()->user->getFlash('question-form')
+	);
+}
+?>
 	<div class="row">		
 		<div class="col-md-4">
 			<?php echo $form->errorSummary($model); ?>
@@ -77,7 +84,7 @@
 					<div class="form-group">
 						<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
 						<?php //echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
-						<?php echo $form->dropDownList($model2, 'reasonable[]', array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control')); ?>
+						<?php echo $form->dropDownList($model2, 'reasonable[]', array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
 						<?php echo $form->error($model2,'reasonable[]'); ?>
 					</div>
 					<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>

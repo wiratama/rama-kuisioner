@@ -3491,3 +3491,24 @@ Stack trace:
 #7 {main}
 REQUEST_URI=/rama-kuisioner/index.php/questioner/
 ---
+2015/03/30 09:31:31 [error] [php] Undefined variable: counts (C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\QuestionController.php:70)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\filters\CFilterChain.php(133): QuestionController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\filters\CInlineFilter.php(58): QuestionController->filterAccessControl()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): QuestionController->runActionWithFilters()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): QuestionController->run()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#10 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#11 unknown(0): WebApplicationEndBehavior->runEnd()
+#12 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#13 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->__call()
+#14 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/backend.php/backend/question/create
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\QuestionController.php (70)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\backend.php (10)
