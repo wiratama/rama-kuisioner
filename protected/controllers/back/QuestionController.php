@@ -72,7 +72,7 @@ class QuestionController extends Controller
 			$reason=array_count_values($_POST['Answer']['reasonable']);
 			
 			// jika reasonnya 1
-			if (1==$reason[1]) {				
+			if (1>=$reason[1]) {				
 				// save dulu untuk mendapatkan id_question
 				if($model->save()){
 					$counter=count($_POST['Answer']['counter']);
@@ -121,7 +121,7 @@ class QuestionController extends Controller
 			$reason=array_count_values($_POST['Answer']['reasonable']);
 
 			// jika reasonnya 1
-			if (1==$reason[1]) {
+			if (1>=$reason[1]) {
 				if($model->save()) {
 				    for ($i = 0; $i < $counter; $i++)
 				    {
