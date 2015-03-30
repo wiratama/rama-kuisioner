@@ -94,11 +94,10 @@ class SiteController extends Controller
 		));
 		$rowData=Question::model()->with('answer')->findAll();
 		$maxPage=ceil(count($rowData)/5);
+		$progress=($page/($maxPage+2))*100;
 
 		if (isset($_POST['questioner']))
 		{
-			// var_dump($page);
-			// die();
 			$answer=array();
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
 				if (isset($questioner['reason'][$questioner['answer']])) {
@@ -116,7 +115,6 @@ class SiteController extends Controller
 			}
 			$data['survey']=$answer;
 			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
-			// array_merge($_SESSION[Yii::app()->session['init']],$data['survey']);
 			if ($page <= $maxPage) {
 				Yii::app()->request->redirect(
 					Yii::app()->createAbsoluteUrl('site/questioner',
@@ -125,12 +123,13 @@ class SiteController extends Controller
 						)
 				));
 			} else {
-				
+
 			}
 		}
 
 		$this->render('questioner',array(
 			'model'=>$model,
+			'progress'=>$progress,
 		));
 	}
 

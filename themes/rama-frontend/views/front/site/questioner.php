@@ -62,7 +62,7 @@
                 <!-- complete bar -->
                 <div class="row">
                     <div class="col-md-12 completion">
-                        40% COMPLETE
+                        <?php echo $progress;?>% COMPLETE
                     </div>
                 </div>
                 <!-- complete bar -->
