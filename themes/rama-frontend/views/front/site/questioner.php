@@ -25,10 +25,10 @@
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="radio">
                                 <label>
-                                    <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>">
+                                    <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>" required="required">
                                     <?php echo $answer->answer;?><br/>
                                     <?php if ($answer->reasonable==1) { ?>
-                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control" placeholder="please specify">
+                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control" placeholder="please specify" required="required">
                                     <?php } ?>
                                 </label>
                             </div>
@@ -47,7 +47,7 @@
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <input type="checkbox" name="questioner['answer'][<?php echo $question->id_question;?>][]" value="<?php echo $answer->id_answer;?>">
+                                <input type="checkbox" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
                                 <?php echo $answer->answer;?>
                             </div>
                             <?php } ?>
