@@ -68,7 +68,13 @@ class SiteController extends Controller
 				),
 				'survey'=>array(),
 			);
-			$this->redirect(array('questioner'));
+			// $this->redirect(array('questioner'));
+			Yii::app()->request->redirect(
+				Yii::app()->createAbsoluteUrl('site/questioner',
+					array(
+						'page'=>1,
+					)
+			));
 		}
 
 		$this->render('personaldata',array(
@@ -78,9 +84,6 @@ class SiteController extends Controller
 
 	public function actionQuestioner()
 	{
-		// var_dump(Yii::app()->session[Yii::app()->session['init']]);
-		// var_dump($_GET['page']);
-		// die();
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
 		$limit = 5;
 		$offset = ($page-1)*$limit;
@@ -89,6 +92,8 @@ class SiteController extends Controller
 		    'limit' => $limit,
 		    'offset' => $offset,
 		));
+		$rowData=Question::model()->with('answer')->findAll();
+		$maxPage=ceil(count($rowData)/5);
 
 		if (isset($_POST['questioner']))
 		{
@@ -112,12 +117,16 @@ class SiteController extends Controller
 			$data['survey']=$answer;
 			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
 			// array_merge($_SESSION[Yii::app()->session['init']],$data['survey']);
-			Yii::app()->request->redirect(
-				Yii::app()->createUrl('site/questioner',
-					array(
-						'page'=>$page+1,
-					)
-			));
+			if ($page <= $maxPage) {
+				Yii::app()->request->redirect(
+					Yii::app()->createAbsoluteUrl('site/questioner',
+						array(
+							'page'=>$page+1,
+						)
+				));
+			} else {
+				
+			}
 		}
 
 		$this->render('questioner',array(
