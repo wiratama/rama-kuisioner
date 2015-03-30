@@ -28,7 +28,7 @@
                                     <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>" required="required">
                                     <?php echo $answer->answer;?><br/>
                                     <?php if ($answer->reasonable==1) { ?>
-                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control" placeholder="please specify" required="required">
+                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control reason" placeholder="please specify" >
                                     <?php } ?>
                                 </label>
                             </div>
@@ -57,7 +57,7 @@
                     }
                 }
                 ?>
-                <?php if ($comment) { ?>
+                <?php if ($comment==true) { ?>
                 <div class="row rowset">
                     <div class="col-md-12">COMMENT
                         <textarea class="form-control" rows="8" name="questioner[comment]"></textarea>
@@ -86,9 +86,14 @@
     </div>
 </div>
 <script type="text/javascript">
-/*$( document ).ready(function() {
+$( document ).ready(function() {
     $("input:radio[class=answer]").click(function() {
-        console.log($(this).attr('name'));
+        // console.log($(this).next().next());
+        $("input.reason").removeAttr("required")
+        var $nextel=$(this).next().next();
+        if($nextel.is('input.reason')) {
+            $nextel.attr("required", "required");
+        }
     });
-});*/
+});
 </script>

@@ -113,10 +113,9 @@ class SiteController extends Controller
 		$maxPage=ceil(count($rowData)/5);
 		
 		// last questioner ? load comment
+		$comment=false;
 		if ($page==$maxPage-1) {
 			$comment=true;
-		} else {
-			$comment=false;
 		}
 		
 		// progress percentage
@@ -160,6 +159,7 @@ class SiteController extends Controller
 		$this->render('questioner',array(
 			'model'=>$model,
 			'progress'=>$progress,
+			'comment'=>$comment,
 		));
 	}
 
