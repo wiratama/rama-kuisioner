@@ -77,7 +77,7 @@
 					<div class="form-group">
 						<?php echo CHtml::label($answer->getAttributeLabel('reasonable'),''); ?>
 						<?php //echo CHtml::checkBox('Answer[reasonable][]',$answer->reasonable,array('uncheckValue'=>0)); ?>
-						<?php echo CHtml::dropDownList('Answer[reasonable][]', $answer->reasonable, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control')); ?>
+						<?php echo CHtml::dropDownList('Answer[reasonable][]', $answer->reasonable, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
 					</div>
 					<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
 				</div>
@@ -113,6 +113,10 @@ $( document ).ready(function() {
     $('#info-question').hide();
     $('#info-checkbox').hide();
     $('#info-radio').hide();
+    $.each($('select.reason option:selected'), function(index, value) { 
+	    // console.log($('select.reason option:selected').text());
+	    console.log($(value).text());
+	});
 });
 
 $('.multi-field-wrapper').each(function() {

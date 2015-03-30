@@ -27,9 +27,13 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['SurveyStore'];
 			$model->validate();
+
+			// unique session id untuk init
 			$date=date('d-m-Y-H-i-s');
 			$unique=$model->struk_number.'_'.$date;
 			Yii::app()->session['init']=$unique;
+			
+			// define data ke session
 			Yii::app()->session[Yii::app()->session['init']]=array(
 				'store'=>array(
 					'store_number'=>$model->store_number,
@@ -37,6 +41,8 @@ class SiteController extends Controller
 					'struk_number'=>$model->struk_number,
 				),
 			);
+
+			// redirect ke page berikutnya
 			$this->redirect(array('personaldata'));
 		}
 
@@ -53,6 +59,8 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['Customer'];
 			$model->validate();
+			
+			// push data ke session
 			Yii::app()->session[Yii::app()->session['init']]=array(
 				'store'=>array(
 					'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
@@ -68,7 +76,8 @@ class SiteController extends Controller
 				),
 				'survey'=>array(),
 			);
-			// $this->redirect(array('questioner'));
+
+			// redirect ke page berikutnya
 			Yii::app()->request->redirect(
 				Yii::app()->createAbsoluteUrl('site/questioner',
 					array(
@@ -84,20 +93,38 @@ class SiteController extends Controller
 
 	public function actionQuestioner()
 	{
+		// get page param dari url
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
+		
+		// set limit & offset
 		$limit = 5;
 		$offset = ($page-1)*$limit;
         
+        // load questioner per page
         $model=Question::model()->with('answer')->findAll(array(
 		    'limit' => $limit,
 		    'offset' => $offset,
 		));
+
+        // count data quistioner
 		$rowData=Question::model()->with('answer')->findAll();
+
+        // data max page
 		$maxPage=ceil(count($rowData)/5);
+		
+		// last questioner ? load comment
+		if ($page==$maxPage-1) {
+			$comment=true;
+		} else {
+			$comment=false;
+		}
+		
+		// progress percentage
 		$progress=($page/($maxPage+2))*100;
 
 		if (isset($_POST['questioner']))
 		{
+			// pilih data answer+reason berdasarkan question
 			$answer=array();
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
 				if (isset($questioner['reason'][$questioner['answer']])) {
@@ -110,11 +137,14 @@ class SiteController extends Controller
 					'id_question'=>$keyquestioner,
 					'id_answer'=>$questioner['answer'],
 					'reason'=>$reason,
-				);
-								
+				);								
 			}
+
+			// push data ke session yg sudah ada
 			$data['survey']=$answer;
 			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
+			
+			// redirect ke page berikutnya
 			if ($page <= $maxPage) {
 				Yii::app()->request->redirect(
 					Yii::app()->createAbsoluteUrl('site/questioner',

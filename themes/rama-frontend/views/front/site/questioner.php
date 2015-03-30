@@ -57,6 +57,13 @@
                     }
                 }
                 ?>
+                <?php if ($comment) { ?>
+                <div class="row rowset">
+                    <div class="col-md-12">COMMENT
+                        <textarea class="form-control" rows="8" name="questioner[comment]"></textarea>
+                    </div>
+                </div>
+                <?php } ?>
                 <!-- the quest -->        
                 
                 <!-- complete bar -->
