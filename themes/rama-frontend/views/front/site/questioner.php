@@ -45,31 +45,12 @@
                 ?>
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
-                            <?php 
-                            // $maxkey=count($question->answer)-1; 
-                            foreach ($question->answer as $answerkey => $answer) { 
-                            ?>
+                            <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <input type="checkbox" class="<?php echo 'checkbox-question-'.$question->id_question;?>" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
                                 <?php echo $answer->answer;?>
                             </div>                            
-                            <?php 
-                            /*if ($maxkey==$answerkey) {
-                            ?>
-                                <script type="text/javascript">
-                                var countChecked = function() {
-                                    var n = $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>:checked" ).length;
-                                    if (n>=1) {
-                                        // console.log(n)
-                                        $('.submit-form').attr('disabled', 'disabled');
-                                    }
-                                };
-                                countChecked(); 
-                                $( "input[type=checkbox].<?php echo 'checkbox-question-'.$question->id_question;?>" ).on( "click", countChecked );
-                                </script>
-                            <?php
-                                }*/
-                            } ?>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php
