@@ -126,18 +126,23 @@ class SiteController extends Controller
 			// pilih data answer+reason berdasarkan question
 			$answer=array();
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
-				if (isset($questioner['reason'][$questioner['answer']])) {
-					$reason=$questioner['reason'][$questioner['answer']];
-				} else {
-					$reason=null;
-				}
+				if (isset($questioner['jenis_input']) and $questioner['jenis_input']=='radio') {
+					if (isset($questioner['reason'][$questioner['answer']])) {
+						$reason=$questioner['reason'][$questioner['answer']];
+					} else {
+						$reason=null;
+					}
 
-				$answer[$keyquestioner]=array(
-					'id_question'=>$keyquestioner,
-					'id_answer'=>$questioner['answer'],
-					'reason'=>$reason,
-				);								
+					$answer[$keyquestioner]=array(
+						'id_question'=>$keyquestioner,
+						'id_answer'=>$questioner['answer'],
+						'reason'=>$reason,
+					);
+				} else {
+					var_dump($questioner);
+				}
 			}
+			die();
 
 			// push data ke session yg sudah ada
 			$data['survey']=$answer;

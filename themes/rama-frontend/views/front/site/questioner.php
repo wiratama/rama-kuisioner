@@ -22,7 +22,10 @@
                 ?>
                         <div class="col-md-12">
                         <p><?php echo $question->question; ?></p>
-                            <?php foreach ($question->answer as $answerkey => $answer) { ?>
+                            <?php 
+                            $maxkey=count($question->answer)-1;
+                            foreach ($question->answer as $answerkey => $answer) { 
+                            ?>
                             <div class="radio">
                                 <label>
                                     <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>" required="required">
@@ -30,6 +33,13 @@
                                     <?php if ($answer->reasonable==1) { ?>
                                     <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control reason" placeholder="please specify" >
                                     <?php } ?>
+                                    <?php
+                                        if ($maxkey==$answerkey) {
+                                    ?>
+                                        <input type="hidden" name="questioner[<?php echo $question->id_question;?>][jenis_input]" value="<?php echo $question->type; ?>" >
+                                    <?php
+                                        }
+                                    ?>
                                 </label>
                             </div>
                             <?php } ?>
@@ -45,12 +55,22 @@
                 ?>
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
-                            <?php foreach ($question->answer as $answerkey => $answer) { ?>
+                            <?php 
+                            $maxkey=count($question->answer)-1;
+                            foreach ($question->answer as $answerkey => $answer) { 
+                            ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <input type="checkbox" class="<?php echo 'checkbox-question-'.$question->id_question;?>" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
                                 <?php echo $answer->answer;?>
                             </div>                            
-                            <?php } ?>
+                            <?php 
+                                /*if ($maxkey==$answerkey) {
+                            ?>
+                                <input type="hidden" name="questioner[<?php echo $question->id_question;?>][jenis_input]" value="<?php echo $question->type; ?>" >
+                            <?php
+                                }*/
+                            } 
+                            ?>
                         </div>
                     </div>
                 <?php
