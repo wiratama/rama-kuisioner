@@ -29,10 +29,7 @@
                             <div class="radio">
                                 <label>
                                     <input class="answer" type="radio" name="questioner[<?php echo $question->id_question;?>][answer]" value="<?php echo $answer->id_answer;?>" required="required">
-                                    <?php echo $answer->answer;?><br/>
-                                    <?php if ($answer->reasonable==1) { ?>
-                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control reason" placeholder="please specify" >
-                                    <?php } ?>
+                                    <?php echo $answer->answer;?>                                    
                                     <?php
                                         if ($maxkey==$answerkey) {
                                     ?>
@@ -41,6 +38,10 @@
                                         }
                                     ?>
                                 </label>
+                                <?php if ($answer->reasonable==1) { ?>
+                                    <br/>
+                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control reason" placeholder="please specify" >
+                                <?php } ?>
                             </div>
                             <?php } ?>
                         </div>
@@ -60,17 +61,17 @@
                             foreach ($question->answer as $answerkey => $answer) { 
                             ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
+                            <?php /*
+                                <input type="checkbox" class="<?php echo 'checkbox-question-'.$question->id_question;?>" name="questioner[<?php echo $question->id_question;?>][]" value="<?php echo $answer->id_answer;?>" required="required">
+                            */ ?>
                                 <input type="checkbox" class="<?php echo 'checkbox-question-'.$question->id_question;?>" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
                                 <?php echo $answer->answer;?>
+                                <?php if ($answer->reasonable==1) { ?>
+                                    <br/>
+                                    <input type="text" name="questioner[<?php echo $question->id_question;?>][reason][<?php echo $answer->id_answer;?>]" class="form-control reason" placeholder="please specify" >
+                                <?php } ?>
                             </div>                            
-                            <?php 
-                                /*if ($maxkey==$answerkey) {
-                            ?>
-                                <input type="hidden" name="questioner[<?php echo $question->id_question;?>][jenis_input]" value="<?php echo $question->type; ?>" >
-                            <?php
-                                }*/
-                            } 
-                            ?>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php
@@ -83,7 +84,7 @@
                 </div>
                 <div class="rowset">
                     <div class="col-md-12">COMMENT
-                        <textarea class="form-control" rows="8" name="questioner[comment]"></textarea>
+                        <!-- <textarea class="form-control" rows="8" name="questioner[comment]"></textarea> -->
                     </div>
                 </div>
                 <?php } ?>

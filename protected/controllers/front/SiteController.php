@@ -139,17 +139,28 @@ class SiteController extends Controller
 						'reason'=>$reason,
 					);
 				} else {
-					var_dump($questioner);
+					foreach($questioner['answer'] as $keycheckanswer=>$itemcheckanswer) {
+						if(isset($questioner['reason'][$itemcheckanswer])) {
+							$reason=$questioner['reason'][$itemcheckanswer];
+						} else {
+							$reason=null;
+						}
+
+						$answer[$keyquestioner][]=array(
+							'id_question'=>$keyquestioner,
+							'id_answer'=>$itemcheckanswer,
+							'reason'=>$reason,
+						);
+					}
 				}
 			}
-			die();
 
 			// push data ke session yg sudah ada
 			$data['survey']=$answer;
 			array_push($_SESSION[Yii::app()->session['init']]['survey'],$answer);
 			
 			// redirect ke page berikutnya
-			if ($page <= $maxPage) {
+			if ($page < $maxPage) {
 				Yii::app()->request->redirect(
 					Yii::app()->createAbsoluteUrl('site/questioner',
 						array(
@@ -157,7 +168,10 @@ class SiteController extends Controller
 						)
 				));
 			} else {
+				echo "<pre>";
 				var_dump(Yii::app()->session[Yii::app()->session['init']]);
+				echo "<pre>";
+				die();
 			}
 		}
 
