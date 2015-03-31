@@ -119,7 +119,7 @@ class SiteController extends Controller
 		}
 		
 		// progress percentage
-		$progress=($page/($maxPage+2))*100;
+		$progress=(($page+2)/($maxPage+2))*100;
 
 		if (isset($_POST['questioner']))
 		{

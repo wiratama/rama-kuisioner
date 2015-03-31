@@ -46,7 +46,7 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
                             <?php 
-                            $maxkey=count($question->answer)-1; 
+                            // $maxkey=count($question->answer)-1; 
                             foreach ($question->answer as $answerkey => $answer) { 
                             ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -54,18 +54,21 @@
                                 <?php echo $answer->answer;?>
                             </div>                            
                             <?php 
-                            if ($maxkey==$answerkey) {
+                            /*if ($maxkey==$answerkey) {
                             ?>
                                 <script type="text/javascript">
                                 var countChecked = function() {
                                     var n = $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>:checked" ).length;
-                                    console.log(n)
+                                    if (n>=1) {
+                                        // console.log(n)
+                                        $('.submit-form').attr('disabled', 'disabled');
+                                    }
                                 };
                                 countChecked(); 
                                 $( "input[type=checkbox].<?php echo 'checkbox-question-'.$question->id_question;?>" ).on( "click", countChecked );
                                 </script>
                             <?php
-                                }
+                                }*/
                             } ?>
                         </div>
                     </div>
@@ -96,7 +99,7 @@
                 <!-- button next -->
                 <div class="row">
                     <div class="button-holder-inside">
-                        <input class="btn btn-start" type="submit" name="submit" value="Next">
+                        <input class="btn btn-start submit-form" type="submit" name="submit" value="Next">
                     </div>
                 </div>
                 <!-- button next -->                
@@ -116,12 +119,29 @@ $( document ).ready(function() {
     });
 });
 </script>
-<script type="text/javascript">
-/*var countChecked = function() {
-  var n = $( "input.checkbox-question-12:checked" ).length;
-  // $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
-  console.log(n)
-};
-countChecked(); 
-$( "input[type=checkbox].checkbox-question-12" ).on( "click", countChecked );*/
-</script>
+<?php
+foreach ($model as $questionkey => $question) {
+    if ($question->type=='checkbox') {
+        $maxkey=count($question->answer)-1; 
+        foreach ($question->answer as $answerkey => $answer) { 
+            if ($maxkey==$answerkey) {
+?>
+                <script type="text/javascript">
+                var countChecked = function() {
+                    var n = $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>:checked" ).length;
+                    if (n<1) {                        
+                        $('input[name=submit]').attr('disabled', 'disabled');
+                    } else if (n>=1) {
+                        console.log(n);
+                        $('input[name=submit]').attr('disabled', false);
+                    }
+                };
+                countChecked(); 
+                $( "input[type=checkbox].<?php echo 'checkbox-question-'.$question->id_question;?>" ).on( "click", countChecked );
+                </script>
+<?php
+            }
+        }
+    }
+}
+?>
