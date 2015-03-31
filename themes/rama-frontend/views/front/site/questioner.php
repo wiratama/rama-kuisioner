@@ -110,11 +110,13 @@ foreach ($model as $questionkey => $question) {
                 <script type="text/javascript">
                 var countChecked = function() {
                     var n = $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>:checked" ).length;
-                    if (n<1) {                        
-                        $('input[name=submit]').attr('disabled', 'disabled');
+                    if (n<1) {
+                        $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).attr('required', 'required');
+                        // $('input[name=submit]').attr('disabled', 'disabled');
                     } else if (n>=1) {
                         console.log(n);
-                        $('input[name=submit]').attr('disabled', false);
+                        $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).removeAttr('required');
+                        // $('input[name=submit]').attr('disabled', false);
                     }
                 };
                 countChecked(); 
