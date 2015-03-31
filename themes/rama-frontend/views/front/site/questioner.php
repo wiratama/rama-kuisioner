@@ -47,9 +47,9 @@
                             <div class="col-xs-6 col-sm-6 col-md-7 desc-chose"><?php echo $question->question; ?></div>
                             <?php foreach ($question->answer as $answerkey => $answer) { ?>
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <input type="checkbox" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
+                                <input type="checkbox" class="<?php echo 'checkbox-question-'.$question->id_question;?>" name="questioner[<?php echo $question->id_question;?>][answer][]" value="<?php echo $answer->id_answer;?>" required="required">
                                 <?php echo $answer->answer;?>
-                            </div>
+                            </div>                            
                             <?php } ?>
                         </div>
                     </div>
@@ -58,7 +58,10 @@
                 }
                 ?>
                 <?php if ($comment==true) { ?>
-                <div class="row rowset">
+                <div class="col-md-12">
+                    <hr>
+                </div>
+                <div class="rowset">
                     <div class="col-md-12">COMMENT
                         <textarea class="form-control" rows="8" name="questioner[comment]"></textarea>
                     </div>
@@ -96,4 +99,13 @@ $( document ).ready(function() {
         }
     });
 });
+</script>
+<script type="text/javascript">
+var countChecked = function() {
+  var n = $( "input.checkbox-question-12:checked" ).length;
+  // $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
+  console.log(n)
+};
+countChecked(); 
+$( "input[type=checkbox].checkbox-question-12" ).on( "click", countChecked );
 </script>

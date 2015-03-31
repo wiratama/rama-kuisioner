@@ -114,7 +114,7 @@ class SiteController extends Controller
 		
 		// last questioner ? load comment
 		$comment=false;
-		if ($page==$maxPage-1) {
+		if ($page==$maxPage) {
 			$comment=true;
 		}
 		
@@ -152,7 +152,7 @@ class SiteController extends Controller
 						)
 				));
 			} else {
-
+				var_dump(Yii::app()->session[Yii::app()->session['init']]);
 			}
 		}
 
