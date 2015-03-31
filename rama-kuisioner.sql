@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2015 at 07:02 AM
+-- Generation Time: Mar 31, 2015 at 06:19 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -69,8 +69,8 @@ INSERT INTO `answer` (`id_answer`, `id_question`, `reasonable`, `answer`, `skor`
 (11, 3, 0, 'Friends', NULL),
 (12, 3, 1, 'Couple', NULL),
 (13, 3, 0, 'Alone', NULL),
-(14, 4, 1, 'Food', NULL),
-(15, 4, 1, 'Service', NULL),
+(14, 4, 0, 'Food', NULL),
+(15, 4, 0, 'Service', NULL),
 (16, 4, 1, 'Atmosphere', NULL),
 (17, 4, 0, 'Entertainment', NULL),
 (18, 5, 0, 'First time', NULL),
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `question` (
 INSERT INTO `question` (`id_question`, `question`, `type`) VALUES
 (1, 'How did you know about us?', 'radio'),
 (3, 'Who were you here with?', 'radio'),
-(4, 'What do you like most about us?', 'radio'),
+(4, 'What do you like most about us??', 'radio'),
 (5, 'How many times have you been to our Restaurant?', 'radio'),
 (6, 'What is your favorite Food?', 'radio'),
 (7, 'Please rate our Food Prices?', 'radio'),
