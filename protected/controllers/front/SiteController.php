@@ -169,7 +169,42 @@ class SiteController extends Controller
 				));
 			} else {
 				echo "<pre>";
-				var_dump(Yii::app()->session[Yii::app()->session['init']]);
+				foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
+					foreach ($surveyarray as $keydata => $surveydata) {
+						// var_dump($surveydata);
+						// var_dump($this->is_multi($surveydata));
+						if ($this->is_multi($surveydata)) {
+							
+						}
+						/*foreach ($surveydata as $keyitem => $surveyitem) {
+							if (!is_array($surveyitem)) {
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['store_number']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['date_survey']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['struk_number']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['name']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['address']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality']);
+								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['email']);
+								var_dump($keyitem);
+								var_dump($surveyitem);
+							} else {
+								foreach ($surveyitem as $keysubitem => $surveysubitem) {
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['store_number']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['date_survey']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['struk_number']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['name']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['address']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality']);
+									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['email']);
+									var_dump($keysubitem);
+									var_dump($surveysubitem);
+								}
+							}
+						}*/
+					}
+				}
 				echo "<pre>";
 				die();
 			}
@@ -243,5 +278,27 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	// helper
+	function is_multi($array) {
+	    $rv = array_filter($array,'is_array');
+	    if(count($rv)>0) return true;
+	    return false;
+	}
+
+	function is_multi2($array) {
+	    foreach ($array as $v) {
+	        if (is_array($v)) return true;
+	    }
+	    return false;
+	}
+
+	function is_multi3($array) {
+	    $c = count($array);
+	    for ($i=0;$i<$c;$i++) {
+	        if (is_array($a[$i])) return true;
+	    }
+	    return false;
 	}
 }
