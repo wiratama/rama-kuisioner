@@ -21,7 +21,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		
-		// Yii::app()->session->destroy();
+		Yii::app()->session->destroy();
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
@@ -171,38 +171,19 @@ class SiteController extends Controller
 				echo "<pre>";
 				foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
 					foreach ($surveyarray as $keydata => $surveydata) {
-						// var_dump($surveydata);
-						// var_dump($this->is_multi($surveydata));
 						if ($this->is_multi($surveydata)) {
-							
-						}
-						/*foreach ($surveydata as $keyitem => $surveyitem) {
-							if (!is_array($surveyitem)) {
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['store_number']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['date_survey']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['struk_number']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['name']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['address']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality']);
-								var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['email']);
-								var_dump($keyitem);
-								var_dump($surveyitem);
-							} else {
-								foreach ($surveyitem as $keysubitem => $surveysubitem) {
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['store_number']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['date_survey']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['store']['struk_number']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['name']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['address']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality']);
-									var_dump(Yii::app()->session[Yii::app()->session['init']]['personaldata']['email']);
-									var_dump($keysubitem);
-									var_dump($surveysubitem);
-								}
+							foreach($surveydata as $keyitem=>$surveyitem) {
+								var_dump($surveyitem['id_question']);
+								var_dump($surveyitem['id_answer']);
+								var_dump($surveyitem['reason']);
+								echo "<br>";
 							}
-						}*/
+						} else {
+							var_dump($surveydata['id_question']);
+							var_dump($surveydata['id_answer']);
+							var_dump($surveydata['reason']);
+							echo "<br>";
+						}
 					}
 				}
 				echo "<pre>";
@@ -297,7 +278,7 @@ class SiteController extends Controller
 	function is_multi3($array) {
 	    $c = count($array);
 	    for ($i=0;$i<$c;$i++) {
-	        if (is_array($a[$i])) return true;
+	        if (is_array($array[$i])) return true;
 	    }
 	    return false;
 	}
