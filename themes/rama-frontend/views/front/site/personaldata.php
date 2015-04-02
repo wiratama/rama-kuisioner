@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>300,'class'=>'form-control')); ?>
+                        <?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>300,'class'=>'form-control','required'=>'required')); ?>
                         <?php echo $form->error($model,'name'); ?>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>300,'class'=>'form-control')); ?>
+                        <?php echo $form->textField($model,'address',array('size'=>60,'maxlength'=>300,'class'=>'form-control','required'=>'required')); ?>
                         <?php echo $form->error($model,'address'); ?>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'contact',array('size'=>50,'maxlength'=>50,'class'=>'form-control')); ?>
+                        <?php echo $form->textField($model,'contact',array('size'=>50,'maxlength'=>50,'class'=>'form-control','required'=>'required')); ?>
                         <?php echo $form->error($model,'contact'); ?>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'nationality',array('size'=>60,'maxlength'=>300,'class'=>'form-control')); ?>
+                        <?php echo $form->textField($model,'nationality',array('size'=>60,'maxlength'=>300,'class'=>'form-control','required'=>'required')); ?>
                         <?php echo $form->error($model,'nationality'); ?>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'email',array('size'=>50,'maxlength'=>50,'class'=>'form-control')); ?>
+                        <?php echo $form->textField($model,'email',array('size'=>50,'maxlength'=>50,'class'=>'form-control','required'=>'required')); ?>
                         <?php echo $form->error($model,'email'); ?>
                     </div>
                 </div>

@@ -26,7 +26,7 @@
             <div class="col-xs-8 col-sm-8 col-md-8">
                 <div class="form-group">
                     <?php //echo $form->textField($model,'store_number',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
-                    <?php echo $form->dropDownList($model,'store_number',CHtml::listData(Store::model()->findAll(), 'store_number', 'store_number'),array('empty'=>'Please Choose One','id'=>'category','class'=>'form-control'));?>
+                    <?php echo $form->dropDownList($model,'store_number',CHtml::listData(Store::model()->findAll(), 'store_number', 'store_number'),array('empty'=>'Please Choose One','id'=>'category','class'=>'form-control','required'=>'required'));?>
                     <?php echo $form->error($model,'store_number'); ?>
                 </div>
             </div>
@@ -49,7 +49,8 @@
                             'altFormat' => 'yy-dd-mm', // show to user format
                         ),
                         'htmlOptions' => array(
-                            'class' => 'form-control'
+                            'class' => 'form-control',
+                            'required'=>'required',
                             ),
                         ));  
                     ?>
@@ -64,7 +65,7 @@
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8">
                 <div class="form-group">
-                    <?php echo $form->textField($model,'struk_number',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
+                    <?php echo $form->textField($model,'struk_number',array('size'=>60,'maxlength'=>255,'class'=>'form-control','required'=>'required')); ?>
                     <?php echo $form->error($model,'struk_number'); ?>
                 </div>
             </div>

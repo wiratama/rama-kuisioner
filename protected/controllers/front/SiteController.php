@@ -168,25 +168,46 @@ class SiteController extends Controller
 						)
 				));
 			} else {
-				echo "<pre>";
-				foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
-					foreach ($surveyarray as $keydata => $surveydata) {
-						if ($this->is_multi($surveydata)) {
-							foreach($surveydata as $keyitem=>$surveyitem) {
-								var_dump($surveyitem['id_question']);
-								var_dump($surveyitem['id_answer']);
-								var_dump($surveyitem['reason']);
-								echo "<br>";
+				$customer=new Customer;
+				$customer->name=Yii::app()->session[Yii::app()->session['init']]['personaldata']['name'];
+				$customer->address=Yii::app()->session[Yii::app()->session['init']]['personaldata']['address'];
+				$customer->contact=Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact'];
+				$customer->nationality=Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality'];
+				$customer->email=Yii::app()->session[Yii::app()->session['init']]['personaldata']['email'];
+				
+				if($customer->save()) {
+					$surveystore=new SurveyStore;
+					$surveystore->store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
+					$surveystore->date_survey=Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'];
+					$surveystore->struk_number=Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'];
+
+					if ($surveystore->save()) {
+						foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
+							foreach ($surveyarray as $keydata => $surveydata) {
+								if ($this->is_multi($surveydata)) {
+									foreach($surveydata as $keyitem=>$surveyitem) {
+										$model=new SurveyQuestionAnswer;
+										$model->store_number=$surveystore->store_number;
+										$model->id_customer=$customer->id_customer;
+										$model->id_question=$surveyitem['id_question'];
+										$model->id_answer=$surveyitem['id_answer'];
+										$model->reason=$surveyitem['reason'];
+										$model->save();
+									}
+								} else {
+									$model=new SurveyQuestionAnswer;
+									$model->store_number=$surveystore->store_number;
+									$model->id_customer=$customer->id_customer;
+									$model->id_question=$surveydata['id_question'];
+									$model->id_answer=$surveydata['id_answer'];
+									$model->reason=$surveydata['reason'];
+									$model->save();
+								}
 							}
-						} else {
-							var_dump($surveydata['id_question']);
-							var_dump($surveydata['id_answer']);
-							var_dump($surveydata['reason']);
-							echo "<br>";
 						}
 					}
 				}
-				echo "<pre>";
+
 				die();
 			}
 		}
