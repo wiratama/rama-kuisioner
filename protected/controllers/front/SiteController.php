@@ -198,16 +198,10 @@ class SiteController extends Controller
 					$surveystore->date_survey=Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'];
 					$surveystore->struk_number=Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'];
 
-					if (isset($_POST['comment'])) {
-						$comment=new Comment;
-						$comment->id_customer=$customer->id_customer;
-						$comment->store_number=$surveystore->store_number;
-						$comment->comment=htmlspecialchars($_POST['comment']);
-					}
-
-					$id_customer=$customer->id_customer;
-
-					if ($surveystore->save()) {
+					var_dump($surveystore->validate());
+					die();
+					if ($surveystore->validate()) {
+						$surveystore->save();
 						foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
 							foreach ($surveyarray as $keydata => $surveydata) {
 								if ($this->is_multi($surveydata)) {
@@ -233,13 +227,22 @@ class SiteController extends Controller
 						}
 					}
 
+					$id_customer=$customer->id_customer;
+
+					if (isset($_POST['comment'])) {
+						$comment=new Comment;
+						$comment->id_customer=$customer->id_customer;
+						$comment->store_number=$surveystore->store_number;
+						$comment->comment=htmlspecialchars($_POST['comment']);
+					}
+
 					$member=Customer::model()->findByPk($id_customer);
 					$valCode=implode("",$this->getNumbers(1,99,5,1));
 					$member->validation_number=$valCode;
 					Yii::app()->session['codevalidasi']=$valCode;
 					$member->save();
 
-					$mail = new YiiMailer();
+					/*$mail = new YiiMailer();
 					$mail->IsSMTP();
 					$mail->Host = Yii::app()->params['host'];
 					$mail->Port = Yii::app()->params['port'];
@@ -250,7 +253,7 @@ class SiteController extends Controller
 					$mail->setFrom(Yii::app()->params['noReply']);
 					$mail->setSubject(Yii::app()->name.' Validation Code');
 					$mail->setTo($customer->email);
-					$mail->setView('mail/kodevalidasi');
+					$mail->setView('kodevalidasimail');
 					$mail->setData(array(
 						'validation_number' => $member->validation_number,
 						'name' => $customer->name,
@@ -263,7 +266,7 @@ class SiteController extends Controller
 						'struk_number' => $surveystore->struk_number,
 					));
 					$mail->setLayout('noneLayout');
-					$mail->send();
+					$mail->send();*/
 				}
 				
 				$this->redirect(array('codevalidasi'));
@@ -282,9 +285,11 @@ class SiteController extends Controller
 	{
 		// progress percentage
 		$progress=100;
+		$codval=Yii::app()->session['codevalidasi'];
+		Yii::app()->session->destroy();
 		$this->render('kodevalidasi',array(
 			'progress'=>$progress,
-			'codevalidasi'=>Yii::app()->session['codevalidasi'],
+			'codevalidasi'=>$codval,
 		));
 	}
 
