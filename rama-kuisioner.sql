@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2015 at 06:19 AM
+-- Generation Time: Apr 02, 2015 at 05:58 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -98,7 +98,7 @@ INSERT INTO `answer` (`id_answer`, `id_question`, `reasonable`, `answer`, `skor`
 (40, 11, 1, 'Unlikely,', NULL),
 (41, 12, 0, 'POOR', NULL),
 (42, 12, 0, 'AVERANGE', NULL),
-(43, 12, 0, 'GOOD', NULL),
+(43, 12, 1, 'GOOD', NULL),
 (44, 12, 0, 'VERY GOOD', NULL),
 (45, 13, 0, 'POOR', NULL),
 (46, 13, 0, 'AVERANGE', NULL),
@@ -199,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `survey_question_answer` (
   `id_customer` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
   `id_answer` text NOT NULL,
-  `reason` text NOT NULL,
+  `reason` text,
   PRIMARY KEY (`id_survey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

@@ -29,9 +29,10 @@ class SurveyQuestionAnswer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('store_number, id_customer, id_question, id_answer, reason', 'required'),
+			array('store_number, id_customer, id_question, id_answer', 'required'),
 			array('id_customer, id_question', 'numerical', 'integerOnly'=>true),
 			array('store_number', 'length', 'max'=>255),
+			array('reason', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_survey, store_number, id_customer, id_question, id_answer, reason', 'safe', 'on'=>'search'),
