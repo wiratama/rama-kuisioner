@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Rama Restaurants Bali',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -22,7 +22,8 @@ return array(
 		'application.components.*',
 		'bootstrap.behaviors.*',
 	    'bootstrap.helpers.*',
-	    'bootstrap.widgets.*'
+	    'bootstrap.widgets.*',
+	    'ext.YiiMailer.YiiMailer',
 	),
 
 	'modules'=>array(
@@ -104,5 +105,10 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'host'=>'smtp.mandrillapp.com',
+		'port'=>'587',
+		'apiUser'=>'support@alamaya.com',
+		'apiKey'=>'xWwIPfRMNIdrj6qiTk5GCQ',
+		'noReply'=>'noreply@ramaquest.com',
 	),
 );

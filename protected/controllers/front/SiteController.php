@@ -21,7 +21,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		
-		// Yii::app()->session->destroy();
+		Yii::app()->session->destroy();
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
@@ -61,16 +61,15 @@ class SiteController extends Controller
 			$model->validate();
 			
 			$customer=Customer::model()->findByAttributes(array('email'=>$model->email));
-			$surveyquestionanswer=SurveyQuestionAnswer::model()->findAllByAttributes(array('store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],'id_customer'=>$customer->id_customer));
-			
-			/*if(0 >= count($surveyquestionanswer)) {
-				echo "null";
+			if ($customer!=null) {
+				$surveyquestionanswerdata=SurveyQuestionAnswer::model()->findAllByAttributes(array('store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],'id_customer'=>$customer->id_customer));
+				$surveyquestionanswer=count($surveyquestionanswerdata);
 			} else {
-				var_dump(count($surveyquestionanswer));
+				$surveyquestionanswer=0;
 			}
-			die();*/
+
 			//  check apakah sudah pernah melakukan survey atau belum
-			if(0 >= count($surveyquestionanswer)) {
+			if(0 >= $surveyquestionanswer) {
 			// push data ke session
 				Yii::app()->session[Yii::app()->session['init']]=array(
 					'store'=>array(
@@ -86,6 +85,7 @@ class SiteController extends Controller
 						'email'=>$model->email,
 					),
 					'survey'=>array(),
+					// 'comment'=>array(),
 				);
 			} else {
 				Yii::app()->user->setFlash("frontend-form","Oops ! You've filled out a questionnaire for this store");
@@ -134,7 +134,7 @@ class SiteController extends Controller
 		}
 		
 		// progress percentage
-		$progress=(($page+2)/($maxPage+2))*100;
+		$progress=(($page+2)/($maxPage+3))*100;
 
 		if (isset($_POST['questioner']))
 		{
@@ -154,21 +154,23 @@ class SiteController extends Controller
 						'reason'=>$reason,
 					);
 				} else {
-					foreach($questioner['answer'] as $keycheckanswer=>$itemcheckanswer) {
-						if(isset($questioner['reason'][$itemcheckanswer])) {
-							$reason=$questioner['reason'][$itemcheckanswer];
-						} else {
-							$reason=null;
-						}
+					if(is_array($questioner)) {
+						foreach($questioner['answer'] as $keycheckanswer=>$itemcheckanswer) {
+							if(isset($questioner['reason'][$itemcheckanswer])) {
+								$reason=$questioner['reason'][$itemcheckanswer];
+							} else {
+								$reason=null;
+							}
 
-						$answer[$keyquestioner][]=array(
-							'id_question'=>$keyquestioner,
-							'id_answer'=>$itemcheckanswer,
-							'reason'=>$reason,
-						);
+							$answer[$keyquestioner][]=array(
+								'id_question'=>$keyquestioner,
+								'id_answer'=>$itemcheckanswer,
+								'reason'=>$reason,
+							);
+						}
 					}
 				}
-			}
+			}			
 
 			// push data ke session yg sudah ada
 			$data['survey']=$answer;
@@ -196,6 +198,15 @@ class SiteController extends Controller
 					$surveystore->date_survey=Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'];
 					$surveystore->struk_number=Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'];
 
+					if (isset($_POST['comment'])) {
+						$comment=new Comment;
+						$comment->id_customer=$customer->id_customer;
+						$comment->store_number=$surveystore->store_number;
+						$comment->comment=htmlspecialchars($_POST['comment']);
+					}
+
+					$id_customer=$customer->id_customer;
+
 					if ($surveystore->save()) {
 						foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
 							foreach ($surveyarray as $keydata => $surveydata) {
@@ -221,9 +232,42 @@ class SiteController extends Controller
 							}
 						}
 					}
-				}
 
-				die();
+					$member=Customer::model()->findByPk($id_customer);
+					$valCode=implode("",$this->getNumbers(1,99,5,1));
+					$member->validation_number=$valCode;
+					Yii::app()->session['codevalidasi']=$valCode;
+					$member->save();
+
+					$mail = new YiiMailer();
+					$mail->IsSMTP();
+					$mail->Host = Yii::app()->params['host'];
+					$mail->Port = Yii::app()->params['port'];
+					$mail->SMTPAuth = true;
+					$mail->Username = Yii::app()->params['apiUser'];
+					$mail->Password = Yii::app()->params['apiKey'];
+					$mail->IsHTML(true);
+					$mail->setFrom(Yii::app()->params['noReply']);
+					$mail->setSubject(Yii::app()->name.' Validation Code');
+					$mail->setTo($customer->email);
+					$mail->setView('mail/kodevalidasi');
+					$mail->setData(array(
+						'validation_number' => $member->validation_number,
+						'name' => $customer->name,
+						'address' => $customer->address,
+						'contact' => $customer->contact,
+						'nationality' => $customer->nationality,
+						'email' => $customer->email,
+						'store_number' => $surveystore->store_number,
+						'date_survey' => $surveystore->date_survey,
+						'struk_number' => $surveystore->struk_number,
+					));
+					$mail->setLayout('noneLayout');
+					$mail->send();
+				}
+				
+				$this->redirect(array('codevalidasi'));
+				// die();
 			}
 		}
 
@@ -231,6 +275,16 @@ class SiteController extends Controller
 			'model'=>$model,
 			'progress'=>$progress,
 			'comment'=>$comment,
+		));
+	}
+
+	public function actionCodevalidasi($value='')
+	{
+		// progress percentage
+		$progress=100;
+		$this->render('kodevalidasi',array(
+			'progress'=>$progress,
+			'codevalidasi'=>Yii::app()->session['codevalidasi'],
 		));
 	}
 
@@ -317,5 +371,20 @@ class SiteController extends Controller
 	        if (is_array($array[$i])) return true;
 	    }
 	    return false;
+	}
+
+	function getNumbers($min=1,$max=10,$count=1,$margin=0) {
+	    $range = range(0,$max-$min);
+	    $return = array();
+	    for( $i=0; $i<$count; $i++) {
+	        if( !$range) {
+	            trigger_error("Not enough numbers to pick from!",E_USER_WARNING);
+	            return $return;
+	        }
+	        $next = rand(0,count($range)-1);
+	        $return[] = $range[$next]+$min;
+	        array_splice($range,max(0,$next-$margin),$margin*2+1);
+	    }
+	    return $return;
 	}
 }

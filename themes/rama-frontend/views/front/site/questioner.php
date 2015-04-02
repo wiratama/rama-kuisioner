@@ -84,7 +84,7 @@
                 </div>
                 <div class="rowset">
                     <div class="col-md-12">COMMENT
-                        <!-- <textarea class="form-control" rows="8" name="questioner[comment]"></textarea> -->
+                        <textarea class="form-control" rows="8" name="comment" required="required"></textarea>
                     </div>
                 </div>
                 <?php } ?>
