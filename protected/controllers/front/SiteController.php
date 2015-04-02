@@ -21,7 +21,7 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		
-		Yii::app()->session->destroy();
+		// Yii::app()->session->destroy();
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
@@ -60,22 +60,37 @@ class SiteController extends Controller
 			$model->attributes=$_POST['Customer'];
 			$model->validate();
 			
+			$customer=Customer::model()->findByAttributes(array('email'=>$model->email));
+			$surveyquestionanswer=SurveyQuestionAnswer::model()->findAllByAttributes(array('store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],'id_customer'=>$customer->id_customer));
+			
+			/*if(0 >= count($surveyquestionanswer)) {
+				echo "null";
+			} else {
+				var_dump(count($surveyquestionanswer));
+			}
+			die();*/
+			//  check apakah sudah pernah melakukan survey atau belum
+			if(0 >= count($surveyquestionanswer)) {
 			// push data ke session
-			Yii::app()->session[Yii::app()->session['init']]=array(
-				'store'=>array(
-					'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
-					'date_survey'=>Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'],
-					'struk_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'],
-				),
-				'personaldata'=>array(
-					'name'=>$model->name,
-					'address'=>$model->address,
-					'contact'=>$model->contact,
-					'nationality'=>$model->nationality,
-					'email'=>$model->email,
-				),
-				'survey'=>array(),
-			);
+				Yii::app()->session[Yii::app()->session['init']]=array(
+					'store'=>array(
+						'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
+						'date_survey'=>Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'],
+						'struk_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'],
+					),
+					'personaldata'=>array(
+						'name'=>$model->name,
+						'address'=>$model->address,
+						'contact'=>$model->contact,
+						'nationality'=>$model->nationality,
+						'email'=>$model->email,
+					),
+					'survey'=>array(),
+				);
+			} else {
+				Yii::app()->user->setFlash("frontend-form","Oops ! You've filled out a questionnaire for this store");
+				$this->refresh();
+			}
 
 			// redirect ke page berikutnya
 			Yii::app()->request->redirect(

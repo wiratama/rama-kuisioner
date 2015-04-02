@@ -26,6 +26,12 @@
             // See class documentation of CActiveForm for details on this.
             'enableAjaxValidation'=>false,
         )); ?>
+        <?php if(Yii::app()->user->hasFlash('frontend-form')):?>
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <?php echo Yii::app()->user->getFlash('frontend-form'); ?>
+            </div>
+        <?php endif; ?>
 
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4">
