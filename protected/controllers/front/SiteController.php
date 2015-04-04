@@ -61,8 +61,14 @@ class SiteController extends Controller
 			
 			$customer=Customer::model()->findByAttributes(array('email'=>$model->email));
 			if ($customer!=null) {
-				$surveyquestionanswerdata=SurveyQuestionAnswer::model()->findAllByAttributes(array('store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],'id_customer'=>$customer->id_customer));
+				$surveyquestionanswerdata=SurveyQuestionAnswer::model()->with(array('survey_store'=>array("condition"=>"survey_store.store_number='".Yii::app()->session[Yii::app()->session['init']]['store']['store_number']."'")))->findAllByAttributes(
+					array(
+						'id_customer'=>$customer->id_customer
+						)
+				);
 				$surveyquestionanswer=count($surveyquestionanswerdata);
+				var_dump($surveyquestionanswer);
+				die();
 			} else {
 				$surveyquestionanswer=0;
 			}
@@ -139,6 +145,11 @@ class SiteController extends Controller
 		{
 			// pilih data answer+reason berdasarkan question
 			$answer=array();
+			if (isset($_POST['comment'])) {
+				$datacomment=$_POST['comment'];
+			} else {
+				$datacomment=null;
+			}
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
 				if (isset($questioner['jenis_input']) and $questioner['jenis_input']=='radio') {
 					if (isset($questioner['reason'][$questioner['answer']])) {
@@ -208,7 +219,7 @@ class SiteController extends Controller
 									if ($this->is_multi($surveydata)) {
 										foreach($surveydata as $keyitem=>$surveyitem) {
 											$model=new SurveyQuestionAnswer;
-											$model->store_number=$surveystore->store_number;
+											$model->id_survey_store=$surveystore->id_survey_store;
 											$model->id_customer=$customer->id_customer;
 											$model->id_question=$surveyitem['id_question'];
 											$model->id_answer=$surveyitem['id_answer'];
@@ -217,7 +228,7 @@ class SiteController extends Controller
 										}
 									} else {
 										$model=new SurveyQuestionAnswer;
-										$model->store_number=$surveystore->store_number;
+										$model->id_survey_store=$surveystore->id_survey_store;
 										$model->id_customer=$customer->id_customer;
 										$model->id_question=$surveydata['id_question'];
 										$model->id_answer=$surveydata['id_answer'];
@@ -230,11 +241,11 @@ class SiteController extends Controller
 
 						$id_customer=$customer->id_customer;
 
-						if (isset($_POST['comment'])) {
+						if ($comment!=null) {
 							$comment=new Comment;
 							$comment->id_customer=$customer->id_customer;
 							$comment->store_number=$surveystore->store_number;
-							$comment->comment=htmlspecialchars($_POST['comment']);
+							$comment->comment=htmlspecialchars($comment);
 						}
 
 						$member=Customer::model()->findByPk($id_customer);
@@ -282,7 +293,7 @@ class SiteController extends Controller
 								if ($this->is_multi($surveydata)) {
 									foreach($surveydata as $keyitem=>$surveyitem) {
 										$model=new SurveyQuestionAnswer;
-										$model->store_number=$surveystore->store_number;
+										$model->id_survey_store=$surveystore->id_survey_store;
 										$model->id_customer=$member['id_customer'];
 										$model->id_question=$surveyitem['id_question'];
 										$model->id_answer=$surveyitem['id_answer'];
@@ -291,7 +302,7 @@ class SiteController extends Controller
 									}
 								} else {
 									$model=new SurveyQuestionAnswer;
-									$model->store_number=$surveystore->store_number;
+									$model->id_survey_store=$surveystore->id_survey_store;
 									$model->id_customer=$member['id_customer'];
 									$model->id_question=$surveydata['id_question'];
 									$model->id_answer=$surveydata['id_answer'];
@@ -304,13 +315,11 @@ class SiteController extends Controller
 
 					$id_customer=$member['id_customer'];
 
-					if (isset($_POST['comment'])) {
-						var_dump($_POST['comment']);
-						die();
+					if ($datacomment!=null) {
 						$comment=new Comment;
 						$comment->id_customer=$member['id_customer'];
 						$comment->store_number=$surveystore->store_number;
-						$comment->comment=htmlspecialchars($_POST['comment']);
+						$comment->comment=htmlspecialchars($datacomment);
 					}
 
 					$member=Customer::model()->findByPk($id_customer);

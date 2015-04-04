@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'survey_question_answer':
  * @property integer $id_survey
- * @property string $store_number
+ * @property integer $id_survey_store
  * @property integer $id_customer
  * @property integer $id_question
  * @property string $id_answer
@@ -29,13 +29,12 @@ class SurveyQuestionAnswer extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('store_number, id_customer, id_question, id_answer', 'required'),
-			array('id_customer, id_question', 'numerical', 'integerOnly'=>true),
-			array('store_number', 'length', 'max'=>255),
+			array('id_survey_store, id_customer, id_question, id_answer', 'required'),
+			array('id_survey_store, id_customer, id_question', 'numerical', 'integerOnly'=>true),
 			array('reason', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_survey, store_number, id_customer, id_question, id_answer, reason', 'safe', 'on'=>'search'),
+			array('id_survey, id_survey_store, id_customer, id_question, id_answer, reason', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,6 +46,7 @@ class SurveyQuestionAnswer extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'survey_store'=>array(self::BELONGS_TO, 'SurveyStore', 'id_survey_store'),  
 		);
 	}
 
@@ -57,7 +57,7 @@ class SurveyQuestionAnswer extends CActiveRecord
 	{
 		return array(
 			'id_survey' => 'Id Survey',
-			'store_number' => 'Store Number',
+			'id_survey_store' => 'Id Survey Store',
 			'id_customer' => 'Id Customer',
 			'id_question' => 'Id Question',
 			'id_answer' => 'Id Answer',
@@ -84,7 +84,7 @@ class SurveyQuestionAnswer extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_survey',$this->id_survey);
-		$criteria->compare('store_number',$this->store_number,true);
+		$criteria->compare('id_survey_store',$this->id_survey_store);
 		$criteria->compare('id_customer',$this->id_customer);
 		$criteria->compare('id_question',$this->id_question);
 		$criteria->compare('id_answer',$this->id_answer,true);
