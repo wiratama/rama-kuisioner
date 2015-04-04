@@ -21,12 +21,11 @@ class SiteController extends Controller
 	public function actionIndex()
 	{
 		
-		Yii::app()->session->destroy();
+		// Yii::app()->session->destroy();
 		$model=new SurveyStore;
 		if(isset($_POST['SurveyStore']))
 		{
 			$model->attributes=$_POST['SurveyStore'];
-			$model->validate();
 
 			// unique session id untuk init
 			$date=date('d-m-Y-H-i-s');
@@ -185,30 +184,106 @@ class SiteController extends Controller
 						)
 				));
 			} else {
-				$customer=new Customer;
-				$customer->name=Yii::app()->session[Yii::app()->session['init']]['personaldata']['name'];
-				$customer->address=Yii::app()->session[Yii::app()->session['init']]['personaldata']['address'];
-				$customer->contact=Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact'];
-				$customer->nationality=Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality'];
-				$customer->email=Yii::app()->session[Yii::app()->session['init']]['personaldata']['email'];
-				
-				if($customer->save()) {
+				// var_dump(Yii::app()->session[Yii::app()->session['init']]);
+				// die();
+
+				$member=Customer::model()->findByAttributes(array('email'=>Yii::app()->session[Yii::app()->session['init']]['personaldata']['email']));
+				if ($member==null) {
+					$customer=new Customer;
+					$customer->name=Yii::app()->session[Yii::app()->session['init']]['personaldata']['name'];
+					$customer->address=Yii::app()->session[Yii::app()->session['init']]['personaldata']['address'];
+					$customer->contact=Yii::app()->session[Yii::app()->session['init']]['personaldata']['contact'];
+					$customer->nationality=Yii::app()->session[Yii::app()->session['init']]['personaldata']['nationality'];
+					$customer->email=Yii::app()->session[Yii::app()->session['init']]['personaldata']['email'];
+					
+					if($customer->save()) {
+						$surveystore=new SurveyStore;
+						$surveystore->store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
+						$surveystore->date_survey=Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'];
+						$surveystore->struk_number=Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'];
+
+						if ($surveystore->save()) {
+							foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
+								foreach ($surveyarray as $keydata => $surveydata) {
+									if ($this->is_multi($surveydata)) {
+										foreach($surveydata as $keyitem=>$surveyitem) {
+											$model=new SurveyQuestionAnswer;
+											$model->store_number=$surveystore->store_number;
+											$model->id_customer=$customer->id_customer;
+											$model->id_question=$surveyitem['id_question'];
+											$model->id_answer=$surveyitem['id_answer'];
+											$model->reason=$surveyitem['reason'];
+											$model->save();
+										}
+									} else {
+										$model=new SurveyQuestionAnswer;
+										$model->store_number=$surveystore->store_number;
+										$model->id_customer=$customer->id_customer;
+										$model->id_question=$surveydata['id_question'];
+										$model->id_answer=$surveydata['id_answer'];
+										$model->reason=$surveydata['reason'];
+										$model->save();
+									}
+								}
+							}
+						}
+
+						$id_customer=$customer->id_customer;
+
+						if (isset($_POST['comment'])) {
+							$comment=new Comment;
+							$comment->id_customer=$customer->id_customer;
+							$comment->store_number=$surveystore->store_number;
+							$comment->comment=htmlspecialchars($_POST['comment']);
+						}
+
+						$member=Customer::model()->findByPk($id_customer);
+						$valCode=implode("",$this->getNumbers(1,99,5,1));
+						$member->validation_number=$valCode;
+						Yii::app()->session['codevalidasi']=$valCode;
+						$member->save();
+
+						/*$mail = new YiiMailer();
+						$mail->IsSMTP();
+						$mail->Host = Yii::app()->params['host'];
+						$mail->Port = Yii::app()->params['port'];
+						$mail->SMTPAuth = true;
+						$mail->Username = Yii::app()->params['apiUser'];
+						$mail->Password = Yii::app()->params['apiKey'];
+						$mail->IsHTML(true);
+						$mail->setFrom(Yii::app()->params['noReply']);
+						$mail->setSubject(Yii::app()->name.' Validation Code');
+						$mail->setTo($customer->email);
+						$mail->setView('kodevalidasimail');
+						$mail->setData(array(
+							'validation_number' => $member->validation_number,
+							'name' => $customer->name,
+							'address' => $customer->address,
+							'contact' => $customer->contact,
+							'nationality' => $customer->nationality,
+							'email' => $customer->email,
+							'store_number' => $surveystore->store_number,
+							'date_survey' => $surveystore->date_survey,
+							'struk_number' => $surveystore->struk_number,
+						));
+						$mail->setLayout('noneLayout');
+						$mail->send();*/
+					}
+				} else {
 					$surveystore=new SurveyStore;
 					$surveystore->store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
 					$surveystore->date_survey=Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'];
 					$surveystore->struk_number=Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'];
+					$surveystore->save();
 
-					var_dump($surveystore->validate());
-					die();
-					if ($surveystore->validate()) {
-						$surveystore->save();
+					if ($surveystore->save()) {
 						foreach(Yii::app()->session[Yii::app()->session['init']]['survey'] as $keyarray=>$surveyarray) {
 							foreach ($surveyarray as $keydata => $surveydata) {
 								if ($this->is_multi($surveydata)) {
 									foreach($surveydata as $keyitem=>$surveyitem) {
 										$model=new SurveyQuestionAnswer;
 										$model->store_number=$surveystore->store_number;
-										$model->id_customer=$customer->id_customer;
+										$model->id_customer=$member['id_customer'];
 										$model->id_question=$surveyitem['id_question'];
 										$model->id_answer=$surveyitem['id_answer'];
 										$model->reason=$surveyitem['reason'];
@@ -217,7 +292,7 @@ class SiteController extends Controller
 								} else {
 									$model=new SurveyQuestionAnswer;
 									$model->store_number=$surveystore->store_number;
-									$model->id_customer=$customer->id_customer;
+									$model->id_customer=$member['id_customer'];
 									$model->id_question=$surveydata['id_question'];
 									$model->id_answer=$surveydata['id_answer'];
 									$model->reason=$surveydata['reason'];
@@ -227,11 +302,13 @@ class SiteController extends Controller
 						}
 					}
 
-					$id_customer=$customer->id_customer;
+					$id_customer=$member['id_customer'];
 
 					if (isset($_POST['comment'])) {
+						var_dump($_POST['comment']);
+						die();
 						$comment=new Comment;
-						$comment->id_customer=$customer->id_customer;
+						$comment->id_customer=$member['id_customer'];
 						$comment->store_number=$surveystore->store_number;
 						$comment->comment=htmlspecialchars($_POST['comment']);
 					}
