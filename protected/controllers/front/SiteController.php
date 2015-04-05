@@ -67,8 +67,6 @@ class SiteController extends Controller
 						)
 				);
 				$surveyquestionanswer=count($surveyquestionanswerdata);
-				var_dump($surveyquestionanswer);
-				die();
 			} else {
 				$surveyquestionanswer=0;
 			}
@@ -245,7 +243,7 @@ class SiteController extends Controller
 							$comment=new Comment;
 							$comment->id_customer=$customer->id_customer;
 							$comment->store_number=$surveystore->store_number;
-							$comment->comment=htmlspecialchars($comment);
+							$comment->comment=$comment;
 						}
 
 						$member=Customer::model()->findByPk($id_customer);
@@ -264,7 +262,7 @@ class SiteController extends Controller
 						$mail->IsHTML(true);
 						$mail->setFrom(Yii::app()->params['noReply']);
 						$mail->setSubject(Yii::app()->name.' Validation Code');
-						$mail->setTo($customer->email);
+						$mail->setTo($member->email);
 						$mail->setView('kodevalidasimail');
 						$mail->setData(array(
 							'validation_number' => $member->validation_number,
@@ -328,7 +326,7 @@ class SiteController extends Controller
 					Yii::app()->session['codevalidasi']=$valCode;
 					$member->save();
 
-					/*$mail = new YiiMailer();
+					$mail = new YiiMailer();
 					$mail->IsSMTP();
 					$mail->Host = Yii::app()->params['host'];
 					$mail->Port = Yii::app()->params['port'];
@@ -338,21 +336,21 @@ class SiteController extends Controller
 					$mail->IsHTML(true);
 					$mail->setFrom(Yii::app()->params['noReply']);
 					$mail->setSubject(Yii::app()->name.' Validation Code');
-					$mail->setTo($customer->email);
+					$mail->setTo($member->email);
 					$mail->setView('kodevalidasimail');
 					$mail->setData(array(
 						'validation_number' => $member->validation_number,
-						'name' => $customer->name,
-						'address' => $customer->address,
-						'contact' => $customer->contact,
-						'nationality' => $customer->nationality,
-						'email' => $customer->email,
+						'name' => $member->name,
+						'address' => $member->address,
+						'contact' => $member->contact,
+						'nationality' => $member->nationality,
+						'email' => $member->email,
 						'store_number' => $surveystore->store_number,
 						'date_survey' => $surveystore->date_survey,
 						'struk_number' => $surveystore->struk_number,
 					));
 					$mail->setLayout('noneLayout');
-					$mail->send();*/
+					$mail->send();
 				}
 				
 				$this->redirect(array('codevalidasi'));

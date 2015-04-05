@@ -9,8 +9,8 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_survey), array('view', 'id'=>$data->id_survey)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('store_number')); ?>:</b>
-	<?php echo CHtml::encode($data->store_number); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id_survey_store')); ?>:</b>
+	<?php echo CHtml::encode($data->id_survey_store); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_customer')); ?>:</b>

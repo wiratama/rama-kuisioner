@@ -5211,3 +5211,486 @@ Stack trace:
 REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
 HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
 ---
+2015/04/04 16:39:08 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "C:\xampp\htdocs\rama-kuisioner\assets" is invalid. Please make sure the directory exists and is writable by the Web server process.' in C:\xampp\htdocs\rama-kuisioner\framework\web\CAssetManager.php:138
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CAssetManager.php(123): CAssetManager->setBasePath('C:\xampp\htdocs...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CAssetManager.php(217): CAssetManager->getBasePath()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CClientScript.php(511): CAssetManager->publish('C:\xampp\htdocs...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CClientScript.php(548): CClientScript->getCoreScriptUrl()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CClientScript.php(349): CClientScript->getPackageBaseUrl('jquery')
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CClientScript.php(208): CClientScript->renderCoreScripts()
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(351): CClientScript->render('<!DOCTYPE html>...')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(788): CController->processOutput('<!DOCTYPE html>...')
+#8 C:\xampp\htdocs\rama-kuisioner\protected\controllers\back\SiteController.php(102): CController->render('login', Array)
+#9 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#10 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#11 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#12 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('login')
+#14 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/login')
+#15 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#17 [internal function]: WebApplicationEndBehavior->runEnd('back')
+#18 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#19 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CComponent->__call('runEnd', Array)
+#20 C:\xampp\htdocs\rama-kuisioner\backend.php(10): CWebApplication->runEnd('back')
+#21 {main}
+REQUEST_URI=/rama-kuisioner/backend.php
+---
+2015/04/04 16:48:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---
+2015/04/04 16:55:34 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:188)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#6 unknown(0): WebApplicationEndBehavior->runEnd()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (188)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 16:56:05 [error] [php] Trying to get property of non-object (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:188)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#6 unknown(0): WebApplicationEndBehavior->runEnd()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (188)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 17:00:06 [error] [php] Undefined variable: customer (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:306)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#6 unknown(0): WebApplicationEndBehavior->runEnd()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (306)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 17:00:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---
+2015/04/04 17:19:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---
+2015/04/04 17:23:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---
+2015/04/04 17:27:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---
+2015/04/04 17:53:25 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:242)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#7 unknown(0): WebApplicationEndBehavior->runEnd()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#10 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (242)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 17:56:33 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:00:40 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:11:41 [error] [exception.CDbException] exception 'CDbException' with message 'Relation "survey_store" is not defined in active record class "SurveyQuestionAnswer".' in C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php:226
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(299): CActiveFinder->buildJoinTree(Object(CJoinElement), 'survey_store')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(48): CActiveFinder->buildJoinTree(Object(CJoinElement), Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(912): CActiveFinder->__construct(Object(SurveyQuestionAnswer), Array)
+#3 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1360): CActiveRecord->getActiveFinder(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1541): CActiveRecord->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#8 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#9 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#12 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#14 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#15 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#16 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#17 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#18 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:13:29 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:19:47 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "survey_store.store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:22:54 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "SurveyStore.store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:23:10 [error] [exception.CDbException] exception 'CDbException' with message 'Table "survey_question_answer" does not have a column named "t.store_number".' in C:\xampp\htdocs\rama-kuisioner\framework\db\schema\CDbCommandBuilder.php:697
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1540): CDbCommandBuilder->createColumnCriteria(Object(CMysqlTableSchema), Array, '', Array, '`t`.')
+#1 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(64): CActiveRecord->findAllByAttributes(Array)
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#9 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#10 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#11 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#13 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#14 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:44:19 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '::app()->session[Yii::app()->session['init']]['store']['store_number'])' at line 1. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number']).
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (69)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 18:44:19 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '::app()->session[Yii::app()->session['init']]['store']['store_number'])' at line 1. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'])' in C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(808): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(440): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1361): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1541): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(69): CActiveRecord->findAllByAttributes(Array)
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#12 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#13 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#15 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#16 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#17 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#18 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#19 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:45:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'rama' in 'where clause'. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number=rama-123-xx).
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (69)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 18:45:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'rama' in 'where clause'. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number=rama-123-xx)' in C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(808): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(440): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1361): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1541): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(69): CActiveRecord->findAllByAttributes(Array)
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#12 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#13 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#15 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#16 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#17 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#18 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#19 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/04 18:46:54 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'init']]['store']['store_number']')' at line 1. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number='Yii::app()->session[Yii::app()->session['init']]['store']['store_number']').
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (69)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/04 18:46:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'init']]['store']['store_number']')' at line 1. The SQL statement executed was: SELECT `t`.`id_survey` AS `t0_c0`, `t`.`id_survey_store` AS `t0_c1`, `t`.`id_customer` AS `t0_c2`, `t`.`id_question` AS `t0_c3`, `t`.`id_answer` AS `t0_c4`, `t`.`reason` AS `t0_c5`, `survey_store`.`id_survey_store` AS `t1_c0`, `survey_store`.`store_number` AS `t1_c1`, `survey_store`.`date_survey` AS `t1_c2`, `survey_store`.`struk_number` AS `t1_c3` FROM `survey_question_answer` `t`  LEFT OUTER JOIN `survey_store` `survey_store` ON (`t`.`id_survey_store`=`survey_store`.`id_survey_store`) WHERE (`t`.`id_customer`=:yp0) AND (survey_store.store_number='Yii::app()->session[Yii::app()->session['init']]['store']['store_number']')' in C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php:543
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\db\CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(808): CDbCommand->queryAll()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(440): CJoinElement->runQuery(Object(CJoinQuery))
+#3 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1361): CActiveFinder->query(Object(CDbCriteria), true)
+#5 C:\xampp\htdocs\rama-kuisioner\framework\db\ar\CActiveRecord.php(1541): CActiveRecord->query(Object(CDbCriteria), true)
+#6 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(69): CActiveRecord->findAllByAttributes(Array)
+#7 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionPersonaldata()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#9 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#10 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('personaldata')
+#12 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/personalda...')
+#13 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#14 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#15 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#16 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#17 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#18 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#19 {main}
+REQUEST_URI=/rama-kuisioner/index.php/personaldata
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/personaldata
+---
+2015/04/05 06:29:43 [error] [php] htmlspecialchars() expects parameter 1 to be string, object given (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:246)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#7 unknown(0): WebApplicationEndBehavior->runEnd()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#10 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (246)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/05 06:30:26 [error] [php] Undefined variable: customer (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:339)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#5 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#6 unknown(0): WebApplicationEndBehavior->runEnd()
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (339)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)
+2015/04/05 06:31:27 [error] [exception.CException] exception 'CException' with message 'View "kodevalidasimail" not found' in C:\xampp\htdocs\rama-kuisioner\protected\extensions\YiiMailer\YiiMailer.php:126
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(340): YiiMailer->setView('kodevalidasimai...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionQuestioner()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#9 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#10 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#11 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#13 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/questioner/3
+---
+2015/04/05 06:32:18 [error] [exception.CException] exception 'CException' with message 'View "kodevalidasimail" not found' in C:\xampp\htdocs\rama-kuisioner\protected\extensions\YiiMailer\YiiMailer.php:126
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php(340): YiiMailer->setView('kodevalidasimai...')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\actions\CInlineAction.php(49): SiteController->actionQuestioner()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#5 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('questioner')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/questioner')
+#7 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#8 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#9 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#10 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#11 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#12 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#13 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner/3
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/questioner/3
+---
+2015/04/05 06:34:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(270): CController->missingAction('images')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): CController->run('images')
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('site/images/img...')
+#3 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#5 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#6 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#7 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#8 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#9 {main}
+REQUEST_URI=/rama-kuisioner/index.php/site/images/img-lang.png
+HTTP_REFERER=http://localhost/rama-kuisioner/index.php/site/codevalidasi
+---

@@ -17,8 +17,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'store_number'); ?>
-		<?php echo $form->textField($model,'store_number',array('size'=>60,'maxlength'=>255)); ?>
+		<?php echo $form->label($model,'id_survey_store'); ?>
+		<?php echo $form->textField($model,'id_survey_store'); ?>
 	</div>
 
 	<div class="row">
