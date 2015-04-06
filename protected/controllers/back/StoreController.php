@@ -54,25 +54,7 @@ class StoreController extends Controller
 			}
 		}
 
-		$comment=Comment::model()->with('member')->findAllByAttributes(array('store_number'=>$model->store_number));
-		/*$page = (isset($_GET['page']) ? $_GET['page'] : 1);
-
-        $query = Yii::app()->db->createCommand() //this query contains all the data
-        ->select(array('*'))
-        ->from(array('comment t1', 'customer t2'))
-        ->where("t1.store_number = '".$model->store_number."' AND t2.id_customer = t1.id_customer")
-        ->limit(1, $page-1)
-        ->queryAll();
-        
-        $item_count = Yii::app()->db->createCommand()
-        ->select('count(*) as count')
-        ->from(array('comment t1', 'customer t2')) 
-        ->where("t1.store_number = '".$model->store_number."' AND t2.id_customer = t1.id_customer")
-        ->queryAll();
-
-		// the pagination itself
-        $pages = new CPagination($item_count);
-        $pages->setPageSize(1);*/
+		// $comment=Comment::model()->with('member')->findAllByAttributes(array('store_number'=>$model->store_number));
 
 		$this->render('view',array(
 			'model'=>$model,
@@ -81,7 +63,7 @@ class StoreController extends Controller
             'item_count'=>$item_count,
             'page_size'=>1,
             'pages'=>$pages,*/
-            'comment'=>$comment,
+            // 'comment'=>$comment,
 		));
 	}
 

@@ -98,9 +98,12 @@ class Store extends CActiveRecord
 	    $dataProvider=new CActiveDataProvider('Comment', array(
 	        'criteria'=>array(
 	            "condition"=>"store_number='".$store_number."'",
+	            'with'=>array(
+                    'member' => array('alias' => 'm')
+                ),
 	        ),
 	        'pagination'=>array(
-	            'pageSize'=>1,
+	            'pageSize'=>10,
 	        ),
 	    ));
 

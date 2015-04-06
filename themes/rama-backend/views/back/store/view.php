@@ -63,6 +63,7 @@
 			),
 			'columns'=>array(
 				'comment',			
+				'member.name',			
 			),
 		)); ?>
 	</div>
