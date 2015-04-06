@@ -48,14 +48,17 @@ $('.search-form form').submit(function(){
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-		<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+    <div class="col-md-6">
+		<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn btn-success')); ?>
 		<div class="search-form" style="display:none">
 		<?php $this->renderPartial('_search',array(
 			'model'=>$model,
 		)); ?>
 		</div><!-- search-form -->
-
+	</div>
+</div>
+<div class="row">
+    <div class="col-md-12">
 		<?php 
 		// $this->widget('zii.widgets.grid.CGridView', array(
 		$this->widget('bootstrap.widgets.BsGridView', array(

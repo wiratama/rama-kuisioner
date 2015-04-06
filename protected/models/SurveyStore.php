@@ -52,10 +52,10 @@ class SurveyStore extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_survey_store' => 'Id Survey Store',
-			'store_number' => 'Store Number',
-			'date_survey' => 'Date Survey',
-			'struk_number' => 'Struk Number',
+			'id_survey_store' => Yii::t('SurveyStore','Id Survey Store'),
+			'store_number' => Yii::t('SurveyStore','Store Number'),
+			'date_survey' => Yii::t('SurveyStore','Date Survey'),
+			'struk_number' => Yii::t('SurveyStore','Struk Number'),
 		);
 	}
 

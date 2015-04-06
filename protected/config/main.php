@@ -8,6 +8,9 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Rama Restaurants Bali',
+	
+	// set default lang
+	'language' => 'id',
 
 	// preloading 'log' component
 	'preload'=>array('log'),

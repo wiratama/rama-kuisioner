@@ -4,27 +4,17 @@
 /* @var $form CActiveForm */
 ?>
 
-<div class="wide form">
-
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'store_number'); ?>
-		<?php echo $form->textField($model,'store_number',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
+	<?php echo $form->label($model,'store_number'); ?>
+	<?php echo $form->textField($model,'store_number',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'address'); ?>
-		<?php echo $form->textArea($model,'address',array('rows'=>6, 'cols'=>50)); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
-	</div>
+	<?php echo $form->label($model,'address'); ?>
+	<?php echo $form->textArea($model,'address',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
+	<hr>
+	<?php echo CHtml::submitButton('Search',array('class'=>'btn btn-info')); ?>
 
 <?php $this->endWidget(); ?>
-
-</div><!-- search-form -->

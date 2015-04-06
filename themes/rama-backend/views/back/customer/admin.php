@@ -40,13 +40,16 @@ $('.search-form form').submit(function(){
         <h4 class="page-head-line">Manage Customers</h4>
     </div>
 </div>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<div class="row">
+    <div class="col-md-6">
+		<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn btn-success')); ?>
+		<div class="search-form" style="display:none">
+		<?php $this->renderPartial('_search',array(
+			'model'=>$model,
+		)); ?>
+		</div>
+	</div>
+</div>
 <div class="row">
     <div class="col-md-12">
 		<?php 
