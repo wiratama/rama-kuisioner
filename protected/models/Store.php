@@ -91,4 +91,20 @@ class Store extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function comment($store_number)
+	{
+
+	    $dataProvider=new CActiveDataProvider('Comment', array(
+	        'criteria'=>array(
+	            "condition"=>"store_number='".$store_number."'",
+	        ),
+	        'pagination'=>array(
+	            'pageSize'=>1,
+	        ),
+	    ));
+
+	    return $dataProvider;
+
+	}
 }

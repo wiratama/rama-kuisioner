@@ -121,11 +121,37 @@ class QuestionController extends Controller
 			$reason=array_count_values($_POST['Answer']['reasonable']);
 
 			// jika reasonnya 1
-			if (1>=$reason[1]) {
+			if (isset($reason[1])) {
+				if (1>=$reason[1]) {
+					if($model->save()) {
+					    for ($i = 0; $i < $counter; $i++)
+					    {
+					    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
+						    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
+					        	$answer->answer = $_POST['Answer']['answer'][$i];
+					        	$answer->id_question = $model->id_question;
+					        	$answer->skor = $_POST['Answer']['skor'][$i];
+					        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+					         	$answer->save();
+					        } else {
+					        	$answer = new Answer;
+					        	$answer->answer = $_POST['Answer']['answer'][$i];
+					        	$answer->id_question = $model->id_question;
+					        	$answer->skor = $_POST['Answer']['skor'][$i];
+					        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+					         	$answer->save();
+					        }
+					    }
+					    $this->redirect(array('view','id'=>$model->id_question));
+					}
+				} else {
+					Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
+				}
+			} else {
 				if($model->save()) {
 				    for ($i = 0; $i < $counter; $i++)
 				    {
-				    	if (isset($_POST['Answer']['id_answer'][$i])) {
+				    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
 					    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
 				        	$answer->answer = $_POST['Answer']['answer'][$i];
 				        	$answer->id_question = $model->id_question;
@@ -143,8 +169,6 @@ class QuestionController extends Controller
 				    }
 				    $this->redirect(array('view','id'=>$model->id_question));
 				}
-			} else {
-				Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
 			}
 		}
 

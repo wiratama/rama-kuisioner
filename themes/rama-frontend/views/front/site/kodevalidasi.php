@@ -2,7 +2,7 @@
     <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
     <div class="content-holder">
     <!-- language -->
-    <div class="mylang"><img src="images/img-lang.png">English</div>
+    <div class="mylang"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/img-lang.png">English</div>
     <!-- content -->
     <div class="row">
         <div class="col-md-12">

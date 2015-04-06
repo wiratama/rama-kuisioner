@@ -239,11 +239,12 @@ class SiteController extends Controller
 
 						$id_customer=$customer->id_customer;
 
-						if ($comment!=null) {
+						if ($datacomment!=null) {
 							$comment=new Comment;
-							$comment->id_customer=$customer->id_customer;
-							$comment->store_number=$surveystore->store_number;
-							$comment->comment=$comment;
+							$comment->id_customer=$id_customer;
+							$comment->store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
+							$comment->comment=$datacomment;
+							$comment->save();
 						}
 
 						$member=Customer::model()->findByPk($id_customer);
@@ -252,7 +253,7 @@ class SiteController extends Controller
 						Yii::app()->session['codevalidasi']=$valCode;
 						$member->save();
 
-						/*$mail = new YiiMailer();
+						$mail = new YiiMailer();
 						$mail->IsSMTP();
 						$mail->Host = Yii::app()->params['host'];
 						$mail->Port = Yii::app()->params['port'];
@@ -266,17 +267,17 @@ class SiteController extends Controller
 						$mail->setView('kodevalidasimail');
 						$mail->setData(array(
 							'validation_number' => $member->validation_number,
-							'name' => $customer->name,
-							'address' => $customer->address,
-							'contact' => $customer->contact,
-							'nationality' => $customer->nationality,
-							'email' => $customer->email,
+							'name' => $member->name,
+							'address' => $member->address,
+							'contact' => $member->contact,
+							'nationality' => $member->nationality,
+							'email' => $member->email,
 							'store_number' => $surveystore->store_number,
 							'date_survey' => $surveystore->date_survey,
 							'struk_number' => $surveystore->struk_number,
 						));
 						$mail->setLayout('noneLayout');
-						$mail->send();*/
+						$mail->send();
 					}
 				} else {
 					$surveystore=new SurveyStore;
@@ -315,9 +316,10 @@ class SiteController extends Controller
 
 					if ($datacomment!=null) {
 						$comment=new Comment;
-						$comment->id_customer=$member['id_customer'];
-						$comment->store_number=$surveystore->store_number;
-						$comment->comment=htmlspecialchars($datacomment);
+						$comment->id_customer=$id_customer;
+						$comment->store_number=Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
+						$comment->comment=$datacomment;
+						$comment->save();
 					}
 
 					$member=Customer::model()->findByPk($id_customer);

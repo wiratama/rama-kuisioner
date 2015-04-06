@@ -43,8 +43,45 @@ class StoreController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$skor=0;
+		$model=$this->loadModel($id);
+		$surveystore=SurveyStore::model()->findAllByAttributes(array('store_number'=>$model->store_number));
+		foreach ($surveystore as $keysurveystore => $surveystoreitem) {
+			$surveyquestionanswer=SurveyQuestionAnswer::model()->findAllByAttributes(array('id_survey_store'=>$surveystoreitem->id_survey_store));
+			foreach ($surveyquestionanswer as $keysuerveyquestionanswer=>$surveyquestionanswer) {
+				$answer=Answer::model()->findByPk($surveyquestionanswer->id_answer);
+				$skor+=$answer->skor;
+			}
+		}
+
+		$comment=Comment::model()->with('member')->findAllByAttributes(array('store_number'=>$model->store_number));
+		/*$page = (isset($_GET['page']) ? $_GET['page'] : 1);
+
+        $query = Yii::app()->db->createCommand() //this query contains all the data
+        ->select(array('*'))
+        ->from(array('comment t1', 'customer t2'))
+        ->where("t1.store_number = '".$model->store_number."' AND t2.id_customer = t1.id_customer")
+        ->limit(1, $page-1)
+        ->queryAll();
+        
+        $item_count = Yii::app()->db->createCommand()
+        ->select('count(*) as count')
+        ->from(array('comment t1', 'customer t2')) 
+        ->where("t1.store_number = '".$model->store_number."' AND t2.id_customer = t1.id_customer")
+        ->queryAll();
+
+		// the pagination itself
+        $pages = new CPagination($item_count);
+        $pages->setPageSize(1);*/
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'skor'=>$skor,
+			/*'query'=>$query,
+            'item_count'=>$item_count,
+            'page_size'=>1,
+            'pages'=>$pages,*/
+            'comment'=>$comment,
 		));
 	}
 
