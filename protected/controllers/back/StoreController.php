@@ -54,16 +54,9 @@ class StoreController extends Controller
 			}
 		}
 
-		// $comment=Comment::model()->with('member')->findAllByAttributes(array('store_number'=>$model->store_number));
-
 		$this->render('view',array(
 			'model'=>$model,
 			'skor'=>$skor,
-			/*'query'=>$query,
-            'item_count'=>$item_count,
-            'page_size'=>1,
-            'pages'=>$pages,*/
-            // 'comment'=>$comment,
 		));
 	}
 

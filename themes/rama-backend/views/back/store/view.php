@@ -47,7 +47,9 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12"><?php 
+	<div class="col-md-12">
+	<h4 class="page-head-line">Customer Comment</h4>
+	<?php 
 		$this->widget('bootstrap.widgets.BsGridView', array(
 			'id'=>'store-grid',
 			'dataProvider'=>$model->comment($model->store_number),
