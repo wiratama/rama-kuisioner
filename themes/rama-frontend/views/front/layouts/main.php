@@ -56,6 +56,21 @@
             </div>
         </div>
     </footer>
+        <script type="text/javascript">
+        function setLang (id_lang) {
+            $.ajax({
+                url: '<?php echo Yii::app()->createAbsoluteUrl("site/setlang");?>',
+                type: 'post',
+                data: 'lang=' + id_lang,
+                dataType: 'json',
+                success: function(response) {
+                    if (response==0000) {
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+        </script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="<?php echo Yii::app()->theme->baseUrl; ?>/js/main.js"></script>
     </body>

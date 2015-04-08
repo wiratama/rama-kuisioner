@@ -1,11 +1,24 @@
 <?php
+/* @var $this LanguageController */
+/* @var $model Language */
+
+$this->breadcrumbs=array(
+	'Languages'=>array('index'),
+	'Manage',
+);
+
+$this->menu=array(
+	array('label'=>'List Language', 'url'=>array('index')),
+	array('label'=>'Create Language', 'url'=>array('create')),
+);
+
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
 	$('.search-form').toggle();
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#question-grid').yiiGridView('update', {
+	$('#language-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -14,35 +27,25 @@ $('.search-form form').submit(function(){
 ?>
 <div class="row">
 	<div class="col-md-3 col-sm-3 col-xs-6">
-	<a href="<?php echo Yii::app()->createUrl('question/create');?>">
-		<div class="dashboard-div-wrapper bk-clr-one">
-			<i class="fa fa-plus dashboard-div-icon"></i>
-			<h5>Create </h5>
-		</div>
-	</a>
+		<a href="<?php echo Yii::app()->createUrl('language/create');?>">
+			<div class="dashboard-div-wrapper bk-clr-one">
+				<i class="fa fa-plus dashboard-div-icon"></i>
+				<h5>Create </h5>
+			</div>
+		</a>
 	</div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <h4 class="page-head-line">Manage Questions</h4>
+        <h4 class="page-head-line">Manage Languages</h4>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-		<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn btn-success')); ?>
-		<div class="search-form" style="display:none">
-		<?php $this->renderPartial('_search',array(
-			'model'=>$model,
-		)); ?>
-		</div><!-- search-form -->
-	</div>
 </div>
 <div class="row">
     <div class="col-md-12">
 		<?php 
 		// $this->widget('zii.widgets.grid.CGridView', array(
 		$this->widget('bootstrap.widgets.BsGridView', array(
-			'id'=>'question-grid',
+			'id'=>'language-grid',
 			'dataProvider'=>$model->search(),
 			'filter'=>$model,
 			'type' => BsHtml::GRID_TYPE_STRIPED,
@@ -54,9 +57,14 @@ $('.search-form form').submit(function(){
 		        'header'=>'',
 			),
 			'columns'=>array(
-				// 'id_question',
-				'question',
-				'type',
+				'id_language',
+				'name',
+				'code',
+				array(
+					'name'=>'image',
+		          	'type' => 'raw',
+		          	'value' => 'CHtml::image(Yii::app()->baseUrl . "/images/language/" . $data->image,"image", array("width"=>"30"))',
+		       	),
 				array(
 					'header' => 'Actions',
 					'class' => 'CButtonColumn',

@@ -2,7 +2,11 @@
     <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
     <div class="content-holder">
     <!-- language -->
-    <div class="mylang"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/img-lang.png">English</div>
+    <div class="mylang">
+    <?php foreach ($language as $keylang=>$lang) { ?>
+        <img onclick="javascript:setLang(<?php echo $lang->id_language; ?>)" src="<?php echo  Yii::app()->baseUrl; ?>/images/language/<?php echo $lang->image;?>" width="26" class="language"> <?php echo $lang->name; ?>
+    <?php } ?>
+    </div>
     <!-- content -->
     <div class="row">
         <div class="col-md-12">
@@ -65,7 +69,7 @@
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8">
                 <div class="form-group">
-                    <?php echo $form->textField($model,'struk_number',array('size'=>60,'maxlength'=>255,'class'=>'form-control','required'=>'required')); ?>
+                    <?php echo $form->textField($model,'struk_number',array('size'=>60,'maxlength'=>5,'class'=>'form-control','required'=>'required')); ?>
                     <?php echo $form->error($model,'struk_number'); ?>
                 </div>
             </div>

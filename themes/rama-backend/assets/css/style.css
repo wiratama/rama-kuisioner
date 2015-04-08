@@ -320,4 +320,7 @@ header a, header a:hover {
 header a:hover {
     font-weight: bold;
 }
+label.lang-label {
+    color: #F0677C;
+}
 /*end arya update*/

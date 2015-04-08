@@ -12,10 +12,15 @@
 	<div class="row">		
 		<div class="col-md-4">
 			<?php echo $form->errorSummary($model); ?>
-
-			<?php echo $form->labelEx($model,'question'); ?>
-			<?php echo $form->textArea($model,'question',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'question'); ?>
+			
+			<?php foreach ($language as $keylang=>$lang) { ?>
+				<label class="lang-label"><?php echo $lang->name; ?></label>
+				<br/>
+				<?php echo $form->labelEx($model3,'question'); ?>
+				<?php echo $form->textArea($model3,'question['.$lang->id_language.']',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
+				<?php echo $form->error($model3,'question['.$lang->id_language.']'); ?>
+				<hr>
+			<?php } ?>
 
 			<?php echo $form->labelEx($model,'type'); ?>
 			<?php //echo $form->textField($model,'type',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
@@ -69,29 +74,59 @@
 		</div>
 		<div class="col-md-8 multi-field-wrapper">
 			<div class="multi-field-content">
-				<div class="form-inline multi-field">
-					<div class="form-group">
-						<?php echo $form->labelEx($model2,'answer'); ?>
-						<?php echo $form->hiddenField($model2,'counter[]',array('class'=>'form-control')); ?>
-						<?php echo $form->textField($model2,'answer[]',array('class'=>'form-control')); ?>
-						<?php echo $form->error($model2,'answer[]'); ?>
+				<div class="multi-field">
+					<div class="col-md-11">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="row">
+									<?php foreach ($language as $keylang=>$lang) { ?>
+									<div class="form-inline">
+										<label class="lang-label"><?php echo $lang->name; ?></label>
+										<br>
+										<div class="form-group">
+											<?php echo $form->labelEx($model2,'answer'); ?>
+											<?php echo $form->hiddenField($model2,'counter['.$lang->id_language.'][]',array('class'=>'form-control')); ?>
+											<?php echo $form->textField($model2,'answer['.$lang->id_language.'][]',array('class'=>'form-control')); ?>
+											<?php echo $form->error($model2,'answer['.$lang->id_language.'][]'); ?>
+										</div>						
+										<br>
+									</div>
+									<?php } ?>
+								</div>			
+							</div>					
+							<div class="col-md-7">
+								<div class="row">
+									<div class="form-inline">
+										<div class="form-group">
+											<?php echo $form->labelEx($model2,'skor'); ?>
+											<?php echo $form->textField($model2,'skor[]',array('class'=>'form-control')); ?>
+											<?php echo $form->error($model2,'skor[]'); ?>
+										</div>
+										<div class="form-group">
+											<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
+											<?php //echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
+											<?php echo $form->dropDownList($model2, 'reasonable[]', array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
+											<?php echo $form->error($model2,'reasonable[]'); ?>
+										</div>
+									</div>
+								</div>
+							</div>					
+						</div>					
+					</div>					
+					<div class="col-md-1">	
+						<div class="row">	
+							<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
+							<br><br>
+						</div>
 					</div>
-					<div class="form-group">
-						<?php echo $form->labelEx($model2,'skor'); ?>
-						<?php echo $form->textField($model2,'skor[]',array('class'=>'form-control')); ?>
-						<?php echo $form->error($model2,'skor[]'); ?>
-					</div>
-					<div class="form-group">
-						<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo $form->labelEx($model2,'reasonable'); ?></a>
-						<?php //echo $form->checkBox($model2,'reasonable[]',array('value'=>'1', 'uncheckValue'=>'0')); ?>
-						<?php echo $form->dropDownList($model2, 'reasonable[]', array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
-						<?php echo $form->error($model2,'reasonable[]'); ?>
-					</div>
-					<button type="button" class="btn btn-sm btn-danger remove-field">delete</button>
 				</div>
-			</div>			
-			<hr>
-			<button type="button" class="btn btn-sm btn-info add-field">Add more answer</button>
+			</div>
+			<div class="col-md-12">
+				<div class="row">
+					<hr>
+					<button type="button" class="btn btn-sm btn-info add-field">Add more answer</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<hr>
@@ -131,7 +166,7 @@ $('.multi-field-wrapper').each(function() {
     
     $('.multi-field .remove-field', $wrapper).click(function() {
         if ($('.multi-field', $wrapper).length > 1)
-            $(this).parent('.multi-field').remove();
+            $(this).parent().parent().parent('.multi-field').remove();
     });
 });
 

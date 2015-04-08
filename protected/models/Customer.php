@@ -57,13 +57,13 @@ class Customer extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_customer' => 'Id Customer',
-			'name' => 'Name',
-			'address' => 'Address',
-			'contact' => 'Contact',
-			'nationality' => 'Nationality',
-			'email' => 'Email',
-			'validation_number' => 'Validation Number',
+			'id_customer' => Yii::t('Customer','Id Customer'),
+			'name' => Yii::t('Customer','Name'),
+			'address' => Yii::t('Customer','Address'),
+			'contact' => Yii::t('Customer','Contact'),
+			'nationality' => Yii::t('Customer','Nationality'),
+			'email' => Yii::t('Customer','Email'),
+			'validation_number' => Yii::t('Customer','Validation Number'),
 		);
 	}
 

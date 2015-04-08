@@ -27,10 +27,11 @@ class Question extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('type', 'length', 'max'=>255),
-			array('question', 'safe'),
+			// array('question', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_question, question, type', 'safe', 'on'=>'search'),
+			// array('id_question, question, type', 'safe', 'on'=>'search'),
+			array('id_question, type', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,7 +54,7 @@ class Question extends CActiveRecord
 	{
 		return array(
 			'id_question' => 'Id Question',
-			'question' => 'Question',
+			// 'question' => 'Question',
 			'type' => 'Type',
 		);
 	}
@@ -77,12 +78,12 @@ class Question extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_question',$this->id_question);
-		$criteria->compare('question',$this->question,true);
+		// $criteria->compare('question',$this->question,true);
 		$criteria->compare('type',$this->type,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'pagination' => array('pageSize' => 5),
+			'pagination' => array('pageSize' => 15),
 		));
 	}
 

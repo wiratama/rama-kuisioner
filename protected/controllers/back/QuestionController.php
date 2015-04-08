@@ -60,6 +60,8 @@ class QuestionController extends Controller
 	{
 		$model=new Question;
 		$model2=new Answer;
+		$model3=new QuestionDescription;
+		$language=Language::model()->findAll();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -72,29 +74,76 @@ class QuestionController extends Controller
 			$reason=array_count_values($_POST['Answer']['reasonable']);
 			
 			// jika reasonnya 1
-			if (1>=$reason[1]) {				
-				// save dulu untuk mendapatkan id_question
+			if (isset($reason[1])) {
+				if (1>=$reason[1]) {				
+					// save dulu untuk mendapatkan id_question
+					if($model->save()){
+						foreach ($language as $keylang => $lang) {
+							$qd=new QuestionDescription;
+							$qd->id_question=$model->id_question;
+							$qd->id_language=$lang->id_language;
+							$qd->question=$_POST['QuestionDescription']['question'][$lang->id_language];
+						}
+
+						$counter=count($_POST['Answer']['counter']);
+						for ($i = 0; $i < $counter; $i++)
+						{
+					    	$answer = new Answer;
+				        	$answer->id_question = $model->id_question;
+				        	$answer->skor = $_POST['Answer']['skor'][$i];
+				        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
+				         	$answer->save();
+
+					    	foreach ($language as $keylang => $lang) {
+					    		$ad=new AnswerDescription;				    	
+					        	$ad->id_language = $lang->id_language;
+					        	$ad->id_answer = $answer->id_answer;
+					        	$ad->answer = $_POST['Answer']['answer'][$lang->id_language][$i];
+					        	$ad->save();
+					        }
+					    }
+						$this->redirect(array('view','id'=>$model->id_question));
+					}
+				} else {
+					Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
+				}
+			} else {
 				if($model->save()){
+					foreach ($language as $keylang => $lang) {
+						$qd=new QuestionDescription;
+						$qd->id_question=$model->id_question;
+						$qd->id_language=$lang->id_language;
+						$qd->question=$_POST['QuestionDescription']['question'][$lang->id_language];
+						$qd->save();
+					}
+
 					$counter=count($_POST['Answer']['counter']);
 					for ($i = 0; $i < $counter; $i++)
 					{
 				    	$answer = new Answer;
-			        	$answer->answer = $_POST['Answer']['answer'][$i];
 			        	$answer->id_question = $model->id_question;
 			        	$answer->skor = $_POST['Answer']['skor'][$i];
 			        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 			         	$answer->save();
+
+				    	foreach ($language as $keylang => $lang) {
+				    		$ad=new AnswerDescription;				    	
+				        	$ad->id_language = $lang->id_language;
+				        	$ad->id_answer = $answer->id_answer;
+				        	$ad->answer = $_POST['Answer']['answer'][$lang->id_language][$i];
+				        	$ad->save();
+				        }
 				    }
 					$this->redirect(array('view','id'=>$model->id_question));
 				}
-			} else {
-				Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 			'model2'=>$model2,
+			'model3'=>$model3,
+			'language'=>$language,
 		));
 	}
 

@@ -10,7 +10,7 @@ return array(
 	'name'=>'Rama Restaurants Bali',
 	
 	// set default lang
-	'language' => 'id',
+	'language' => 'en',
 
 	// preloading 'log' component
 	'preload'=>array('log'),

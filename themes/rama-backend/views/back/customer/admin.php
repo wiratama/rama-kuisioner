@@ -25,6 +25,7 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
+<?php /*
 <div class="row">
 	<div class="col-md-3 col-sm-3 col-xs-6">
 	<a href="<?php echo Yii::app()->createUrl('customer/create');?>">
@@ -34,7 +35,7 @@ $('.search-form form').submit(function(){
 		</div>
 	</a>
 	</div>
-</div>
+</div> */ ?>
 <div class="row">
     <div class="col-md-12">
         <h4 class="page-head-line">Manage Customers</h4>

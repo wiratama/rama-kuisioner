@@ -27,12 +27,13 @@ $('.search-form form').submit(function(){
 ?>
 <div class="row">
 	<div class="col-md-3 col-sm-3 col-xs-6">
-	<a href="<?php echo Yii::app()->createUrl('store/create');?>">
-		<div class="dashboard-div-wrapper bk-clr-one">
-			<i class="fa fa-plus dashboard-div-icon"></i>
-			<h5>Create </h5>
-		</div>
-	</a>
+		<a href="<?php echo Yii::app()->createUrl('store/create');?>">
+			<div class="dashboard-div-wrapper bk-clr-one">
+				<i class="fa fa-plus dashboard-div-icon"></i>
+				<h5>Create </h5>
+			</div>
+		</a>
+	</div>
 </div>
 <div class="row">
     <div class="col-md-12">

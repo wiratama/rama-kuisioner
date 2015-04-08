@@ -2,7 +2,11 @@
     <div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
         <div class="content-holder">
         <!-- language -->
-        <div class="mylang"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/img-lang.png">English</div>
+        <div class="mylang">
+        <?php foreach ($language as $keylang=>$lang) { ?>
+            <img onclick="javascript:setLang(<?php echo $lang->id_language; ?>)" src="<?php echo  Yii::app()->baseUrl; ?>/images/language/<?php echo $lang->image;?>" width="26" class="language"> <?php echo $lang->name; ?>
+        <?php } ?>
+        </div>
         <!-- content -->
         <div class="row">
             <div class="col-md-12">
@@ -63,7 +67,7 @@
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8">
                     <div class="form-group">
-                        <?php echo $form->textField($model,'contact',array('size'=>50,'maxlength'=>50,'class'=>'form-control','required'=>'required')); ?>
+                        <?php echo $form->textField($model,'contact',array('size'=>50,'maxlength'=>50,'class'=>'form-control','required'=>'required','id'=>'contact')); ?>
                         <?php echo $form->error($model,'contact'); ?>
                     </div>
                 </div>
@@ -104,3 +108,22 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#contact").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+             // Allow: Ctrl+A
+            (e.keyCode == 65 && e.ctrlKey === true) || 
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+});
+</script>

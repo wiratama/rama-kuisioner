@@ -22,7 +22,12 @@ class SiteController extends Controller
 	{
 		
 		// Yii::app()->session->destroy();
+		if (isset(Yii::app()->session['lang'])) {
+			Yii::app()->language=Yii::app()->session['lang'];
+		}
 		$model=new SurveyStore;
+		$language=Language::model()->findAll();
+		
 		if(isset($_POST['SurveyStore']))
 		{
 			$model->attributes=$_POST['SurveyStore'];
@@ -47,70 +52,80 @@ class SiteController extends Controller
 
 		$this->render('index',array(
 			'model'=>$model,
+			'language'=>$language,
 		));
 	}
 
 	public function actionPersonaldata()
 	{
 		$model=new Customer;
+		$language=Language::model()->findAll();
+		if (isset(Yii::app()->session['lang'])) {
+			Yii::app()->language=Yii::app()->session['lang'];
+		}
 
 		if(isset($_POST['Customer']))
 		{
 			$model->attributes=$_POST['Customer'];
-			$model->validate();
 			
-			$customer=Customer::model()->findByAttributes(array('email'=>$model->email));
-			if ($customer!=null) {
-				$surveyquestionanswerdata=SurveyQuestionAnswer::model()->with(array('survey_store'=>array("condition"=>"survey_store.store_number='".Yii::app()->session[Yii::app()->session['init']]['store']['store_number']."'")))->findAllByAttributes(
-					array(
-						'id_customer'=>$customer->id_customer
+			if ($model->validate()) {			
+				$customer=Customer::model()->findByAttributes(array('email'=>$model->email));				
+				if ($customer!=null) {
+					$surveyquestionanswerdata=SurveyQuestionAnswer::model()->with(array('survey_store'=>array("condition"=>"survey_store.store_number='".Yii::app()->session[Yii::app()->session['init']]['store']['store_number']."'")))->findAllByAttributes(
+						array(
+							'id_customer'=>$customer->id_customer
+							)
+					);
+					$surveyquestionanswer=count($surveyquestionanswerdata);
+				} else {
+					$surveyquestionanswer=0;
+				}
+
+				//  check apakah sudah pernah melakukan survey atau belum
+				if(0 >= $surveyquestionanswer) {
+				// push data ke session
+					Yii::app()->session[Yii::app()->session['init']]=array(
+						'store'=>array(
+							'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
+							'date_survey'=>Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'],
+							'struk_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'],
+						),
+						'personaldata'=>array(
+							'name'=>$model->name,
+							'address'=>$model->address,
+							'contact'=>$model->contact,
+							'nationality'=>$model->nationality,
+							'email'=>$model->email,
+						),
+						'survey'=>array(),
+						// 'comment'=>array(),
+					);
+				} else {
+					Yii::app()->user->setFlash("frontend-form","Oops ! You've filled out a questionnaire for this store");
+					$this->refresh();
+				}
+				// redirect ke page berikutnya
+				Yii::app()->request->redirect(
+					Yii::app()->createAbsoluteUrl('site/questioner',
+						array(
+							'page'=>1,
 						)
-				);
-				$surveyquestionanswer=count($surveyquestionanswerdata);
-			} else {
-				$surveyquestionanswer=0;
-			}
-
-			//  check apakah sudah pernah melakukan survey atau belum
-			if(0 >= $surveyquestionanswer) {
-			// push data ke session
-				Yii::app()->session[Yii::app()->session['init']]=array(
-					'store'=>array(
-						'store_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['store_number'],
-						'date_survey'=>Yii::app()->session[Yii::app()->session['init']]['store']['date_survey'],
-						'struk_number'=>Yii::app()->session[Yii::app()->session['init']]['store']['struk_number'],
-					),
-					'personaldata'=>array(
-						'name'=>$model->name,
-						'address'=>$model->address,
-						'contact'=>$model->contact,
-						'nationality'=>$model->nationality,
-						'email'=>$model->email,
-					),
-					'survey'=>array(),
-					// 'comment'=>array(),
-				);
-			} else {
-				Yii::app()->user->setFlash("frontend-form","Oops ! You've filled out a questionnaire for this store");
-				$this->refresh();
-			}
-
-			// redirect ke page berikutnya
-			Yii::app()->request->redirect(
-				Yii::app()->createAbsoluteUrl('site/questioner',
-					array(
-						'page'=>1,
-					)
-			));
+				));
+			}			
 		}
 
 		$this->render('personaldata',array(
 			'model'=>$model,
+			'language'=>$language,
 		));
 	}
 
 	public function actionQuestioner()
 	{
+		$language=Language::model()->findAll();
+		if (isset(Yii::app()->session['lang'])) {
+			Yii::app()->language=Yii::app()->session['lang'];
+		}
 		// get page param dari url
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
 		
@@ -137,7 +152,7 @@ class SiteController extends Controller
 		}
 		
 		// progress percentage
-		$progress=(($page+2)/($maxPage+3))*100;
+		$progress=round((($page+2)/($maxPage+3))*100);
 
 		if (isset($_POST['questioner']))
 		{
@@ -364,6 +379,7 @@ class SiteController extends Controller
 			'model'=>$model,
 			'progress'=>$progress,
 			'comment'=>$comment,
+			'language'=>$language,
 		));
 	}
 
@@ -477,5 +493,20 @@ class SiteController extends Controller
 	        array_splice($range,max(0,$next-$margin),$margin*2+1);
 	    }
 	    return $return;
+	}
+
+	public function actionSetlang() {
+		$id_lang=(int)$_POST['lang'];
+		$language=Language::model()->findByPk($id_lang);
+		if($language===null) {
+			$response='6666';
+		} else {
+			Yii::app()->session['lang']=$language->code;
+			$response='0000';
+		}
+		
+		header('Content-type: application/json');
+		echo CJSON::encode($response);
+		Yii::app()->end();
 	}
 }
