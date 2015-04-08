@@ -36,7 +36,17 @@
 				<tbody>
 					<tr>
 						<td><b><?php echo $model->getAttributeLabel('question'); ?></b></td>
-						<td colspan="2"><?php echo $model->question; ?></td>
+						<td colspan="2">
+							<table class="table-nested">
+								<?php foreach ($question as $keyq=>$qitem) { ?>
+								<tr>
+									<td><label><?php echo $qitem["name"]; ?></label></td>
+									<td><?php echo $qitem["question"]; ?></td>
+								</tr>
+								<?php } ?>
+							</table>
+							<?php //echo $model->question; ?>
+						</td>
 					</tr>
 					<tr>
 						<td><b><?php echo $model->getAttributeLabel('type'); ?></b></td>
@@ -49,7 +59,16 @@
 					</tr>
 					<?php foreach($model2 as $key=>$answer) { ?>
 					<tr>
-						<td><?php echo $answer->answer; ?></td>
+						<td>
+							<table class="table-nested">
+								<?php foreach ($ans as $keya=>$aitem) { ?>
+								<tr>
+									<td><?php var_dump($aitem); ?></td>
+								</tr>
+								<?php } ?>
+							</table>
+							<?php //echo $answer->answer; ?>
+						</td>
 						<td><?php echo $answer->skor; ?></td>
 						<td><?php if ($answer->reasonable==1) {echo "Yes";} else {echo "No";} ?></td>
 					</tr>

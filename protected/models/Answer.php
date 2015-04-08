@@ -46,6 +46,7 @@ class Answer extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'answer_desc'=>array(self::HAS_MANY, 'AnswerDescription', 'id_answer'),
 		);
 	}
 

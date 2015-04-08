@@ -45,10 +45,44 @@ class QuestionController extends Controller
 	public function actionView($id)
 	{
 		$model=$this->loadModel($id);
-		$model2=$this->loadAnswer($id);
+		$model2=Answer::model()->with('answer_desc')->findAllByAttributes(array('id_question'=>$id));
+		$language=Language::model()->findAll();
+		$question=array();
+		$answer=array();
+
+		/*foreach ($model2 as $keyanswer => $answerdata) {
+			foreach ($language as $keylang => $lang) {
+				$a=AnswerDescription::model()->findAllByAttributes(array('id_answer'=>$answerdata->id_answer,'id_language'=>$lang->id_language));
+				foreach ($a as $keya => $avalue) {
+					$answeritem=array(
+						'id_language'=>$lang->id_language,
+						'name'=>$lang->name,
+						'answer'=>$avalue->answer,
+					);
+					$answer[]=$answeritem;
+				}
+			}
+		}*/
+
+		foreach ($language as $keylang => $lang) {
+			$q=QuestionDescription::model()->findAllByAttributes(array('id_question'=>$id,'id_language'=>$lang->id_language));			
+			foreach ($q as $keyq => $qvalue) {
+				$questionitem=array(
+					'id_language'=>$lang->id_language,
+					'name'=>$lang->name,
+					'question'=>$qvalue->question,
+				);
+				$question[]=$questionitem;
+			}
+		}
+		var_dump($model2);
+		die();
+		
 		$this->render('view',array(
 			'model'=>$model,
 			'model2'=>$model2,
+			'question'=>$question,
+			// 'ans'=>$answer,
 		));
 	}
 
