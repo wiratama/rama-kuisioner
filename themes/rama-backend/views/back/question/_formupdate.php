@@ -89,7 +89,7 @@
 										<br>
 										<div class="form-group">	
 											<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
-											<?php echo CHtml::hiddenField('Answer[id_answer_description][]',$ansdesc->id_answer_description,array('class'=>'form-control')); ?>
+											<?php //echo CHtml::hiddenField('Answer[id_answer_description][]',$ansdesc->id_answer_description,array('class'=>'form-control')); ?>
 											<?php echo CHtml::textField('Answer[answer]['.$ansdesc->id_answer_description.']',$ansdesc->answer,array('class'=>'form-control')); ?>
 										</div>
 									</div>

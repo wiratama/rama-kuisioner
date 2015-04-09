@@ -207,11 +207,8 @@ class QuestionController extends Controller
 			$counter = count($_POST['Answer']['counter']);
 			// var_dump($counter);
 			// var_dump($_POST['Answer']['id_answer_description']);
-			var_dump($_POST['Answer']);
-			// var_dump($_POST['Question']);
-			// var_dump($_POST['Question']);
-			// var_dump($_POST['QuestionDescription']);
-			die();
+			// var_dump($_POST['Answer']['answer']);
+			// die();
 
 			// count reason
 			$reason=array_count_values($_POST['Answer']['reasonable']);
@@ -253,11 +250,6 @@ class QuestionController extends Controller
 				        	$answer->skor = $_POST['Answer']['skor'][$i];
 				        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 				         	$answer->save();
-				         	
-				         	foreach ($language as $keylang => $lang) {
-				        		$answerdesc = AnswerDescription::model()->findByPk($_POST['Answer']['id_answer_description'][$i]);
-				        		$answerdesc->answer = $_POST['Answer']['answer'][$i];
-				        	}
 				        } else {
 				        	$answer = new Answer;
 				        	$answer->answer = $_POST['Answer']['answer'][$i];
@@ -267,6 +259,11 @@ class QuestionController extends Controller
 				         	$answer->save();
 				        }
 				    }
+
+				    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
+		        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
+		        		$answerdesc->answer=$ans;
+		        	}
 				    $this->redirect(array('view','id'=>$model->id_question));
 				}
 			}
@@ -364,8 +361,8 @@ class QuestionController extends Controller
 	{
 		$id_answer=(int)$_POST['id_answer'];
 		$model=Answer::model()->findByPk($id_answer);
-		$model2=AnswerDescription::model()->findAllByAttributes(array('id_question'=>$id));
-		if($model->delete() and $model2->delete()) {
+		$model2=AnswerDescription::model()->deleteAllByAttributes(array('id_answer'=>$id_answer));
+		if($model->delete() and $model2) {
 			$delete['response']='0000';
 		} else {
 			$delete['response']='0011';
