@@ -205,9 +205,6 @@ class QuestionController extends Controller
 			$model->attributes=$_POST['Question'];
 			// counter row answer
 			$counter = count($_POST['Answer']['counter']);
-			// var_dump($counter);
-			// var_dump($_POST['Answer']['id_answer_description']);
-			// var_dump($_POST['Answer']['answer']);
 			// die();
 
 			// count reason
@@ -217,11 +214,16 @@ class QuestionController extends Controller
 			if (isset($reason[1])) {
 				if (1>=$reason[1]) {
 					if($model->save()) {
+						foreach($_POST['QuestionDescription'] as $qdkey=>$qdpostitem) {
+							$qd = QuestionDescription::model()->findByPk($qdpostitem['id_question_description']);
+							$qd->question=$qdpostitem['question'];
+							$qd->save();
+						}
+
 					    for ($i = 0; $i < $counter; $i++)
 					    {
 					    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
 						    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
-					        	$answer->answer = $_POST['Answer']['answer'][$i];
 					        	$answer->id_question = $model->id_question;
 					        	$answer->skor = $_POST['Answer']['skor'][$i];
 					        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
@@ -235,13 +237,25 @@ class QuestionController extends Controller
 					         	$answer->save();
 					        }
 					    }
+
+					    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
+			        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
+			        		$answerdesc->answer=$ans;
+			        		$answerdesc->save();
+			        	}
 					    $this->redirect(array('view','id'=>$model->id_question));
 					}
 				} else {
 					Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
 				}
 			} else {
-				if($model->save()) {
+				if($model->save()) {					
+					foreach($_POST['QuestionDescription'] as $qdkey=>$qdpostitem) {
+						$qd = QuestionDescription::model()->findByPk($qdpostitem['id_question_description']);
+						$qd->question=$qdpostitem['question'];
+						$qd->save();
+					}
+
 				    for ($i = 0; $i < $counter; $i++)
 				    {
 				    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
@@ -263,6 +277,7 @@ class QuestionController extends Controller
 				    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
 		        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
 		        		$answerdesc->answer=$ans;
+		        		$answerdesc->save();
 		        	}
 				    $this->redirect(array('view','id'=>$model->id_question));
 				}

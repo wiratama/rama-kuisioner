@@ -17,8 +17,8 @@
 				<label class="lang-label"><?php echo $questionitem['language']['name']; ?></label>
 				<br/>
 				<?php echo $form->labelEx($questionitem,'question'); ?>
-				<?php echo $form->hiddenField($questionitem,'['.$questionitem['id_language'].']id_question_description',array('class'=>'form-control','value'=>$questionitem->id_question_description)); ?>
-				<?php echo $form->textArea($questionitem,'['.$questionitem['id_language'].']question',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
+				<?php echo $form->hiddenField($questionitem,'['.$questionitem->id_question_description.']id_question_description',array('class'=>'form-control','value'=>$questionitem->id_question_description)); ?>
+				<?php echo $form->textArea($questionitem,'['.$questionitem->id_question_description.']question',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
 				<?php echo $form->error($questionitem,'question'); ?>
 			<?php } ?>
 
@@ -78,7 +78,7 @@
 				if(isset($model2)) {
 					foreach($model2 as $key=>$answer) { 
 				?>
-				<div class="form-inline multi-field">
+				<div class="multi-field">
 					<div class="col-md-11">
 						<div class="row">
 							<div class="col-md-5">
@@ -90,7 +90,7 @@
 										<div class="form-group">	
 											<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
 											<?php //echo CHtml::hiddenField('Answer[id_answer_description][]',$ansdesc->id_answer_description,array('class'=>'form-control')); ?>
-											<?php echo CHtml::textField('Answer[answer]['.$ansdesc->id_answer_description.']',$ansdesc->answer,array('class'=>'form-control')); ?>
+											<?php echo CHtml::textField('Answer[answer]['.$ansdesc->id_answer_description.']',$ansdesc->answer,array('class'=>'form-control answeritem')); ?>
 										</div>
 									</div>
 									<?php } ?>
@@ -117,7 +117,7 @@
 					</div>
 					<div class="col-md-1">
 						<div class="row">
-							<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
+							<button class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -142,7 +142,7 @@
 										<div class="form-group">	
 											<?php echo CHtml::label(Answer::model()->getAttributeLabel('answer'),''); ?>
 											<?php echo CHtml::hiddenField('Answer[counter][]','',array('class'=>'form-control')); ?>
-											<?php echo CHtml::textField('Answer[answer]['.$lang->id_language.'][]','',array('class'=>'form-control')); ?>
+											<?php echo CHtml::textField('Answer[answer]['.$lang->id_language.'][]','',array('class'=>'form-control answer')); ?>
 										</div>
 									</div>
 									<?php } ?>
@@ -219,7 +219,13 @@ $('.multi-field-wrapper').each(function() {
     
     $(".add-field", $(this)).click(function(e) {
     	// $('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text,input:hidden').val('').focus();
-    	$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text,input:hidden').val('').focus();
+    	// $('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text.answeritem').attr('name', 'new-name').val('').removeAttr('value').find('input:text,input:hidden').val('').removeAttr('value').focus();
+    	var clone=$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content'));
+
+    	clone.find('input:text.answeritem').attr('name', 'Answer[answer][]').val('').removeAttr('value');
+    	clone.find('input:text,input:hidden').val('').removeAttr('value');
+    	clone.find('button').removeAttr('data-answerid');
+    	clone.focus();
     });
     
     $('.multi-field .remove-field', $wrapper).click(function() {
