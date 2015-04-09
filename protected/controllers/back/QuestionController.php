@@ -50,20 +50,6 @@ class QuestionController extends Controller
 		$question=array();
 		$answer=array();
 
-		/*foreach ($model2 as $keyanswer => $answerdata) {
-			foreach ($language as $keylang => $lang) {
-				$a=AnswerDescription::model()->findAllByAttributes(array('id_answer'=>$answerdata->id_answer,'id_language'=>$lang->id_language));
-				foreach ($a as $keya => $avalue) {
-					$answeritem=array(
-						'id_language'=>$lang->id_language,
-						'name'=>$lang->name,
-						'answer'=>$avalue->answer,
-					);
-					$answer[]=$answeritem;
-				}
-			}
-		}*/
-
 		foreach ($language as $keylang => $lang) {
 			$q=QuestionDescription::model()->findAllByAttributes(array('id_question'=>$id,'id_language'=>$lang->id_language));			
 			foreach ($q as $keyq => $qvalue) {
@@ -75,14 +61,32 @@ class QuestionController extends Controller
 				$question[]=$questionitem;
 			}
 		}
-		var_dump($model2);
-		die();
+
+		foreach($model2 as $key2=>$value2) {
+			$answerdata=array();
+			foreach ($value2->answer_desc as $keydsc => $valuedsc) {
+				$lang=Language::model()->findByPk($valuedsc->id_language);
+				$answeritem=array(
+					'id_answer_description'=>$valuedsc->id_answer_description,
+					'id_language'=>$valuedsc->id_language,
+					'language'=>$lang->name,
+					'answer'=>$valuedsc->answer,
+				);
+				$answerdata[]=$answeritem;
+			}
+			$answer[]=array(
+				'id_answer'=>$value2->id_answer,
+				'reasonable'=>$value2->reasonable,
+				'skor'=>$value2->skor,
+				'answerdata'=>$answerdata,
+			);
+		}
 		
 		$this->render('view',array(
 			'model'=>$model,
 			'model2'=>$model2,
 			'question'=>$question,
-			// 'ans'=>$answer,
+			'answers'=>$answer,
 		));
 	}
 
@@ -103,9 +107,12 @@ class QuestionController extends Controller
 		if(isset($_POST['Question']) and isset($_POST['Answer']))
 		{
 			$model->attributes=$_POST['Question'];
+			$model->question=$_POST['QuestionDescription']['question'][1];
 
 			// count reason
 			$reason=array_count_values($_POST['Answer']['reasonable']);
+
+			$counter=count($_POST['Answer']['counter']);
 			
 			// jika reasonnya 1
 			if (isset($reason[1])) {
@@ -119,7 +126,6 @@ class QuestionController extends Controller
 							$qd->question=$_POST['QuestionDescription']['question'][$lang->id_language];
 						}
 
-						$counter=count($_POST['Answer']['counter']);
 						for ($i = 0; $i < $counter; $i++)
 						{
 					    	$answer = new Answer;
@@ -151,7 +157,6 @@ class QuestionController extends Controller
 						$qd->save();
 					}
 
-					$counter=count($_POST['Answer']['counter']);
 					for ($i = 0; $i < $counter; $i++)
 					{
 				    	$answer = new Answer;
@@ -188,8 +193,9 @@ class QuestionController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
-		$model2=$this->loadAnswer($id);
+		$model=Question::model()->with('question_desc','question_desc.language')->findByPk($id);
+		$model2=Answer::model()->with('answer_desc','answer_desc.language')->findAllByAttributes(array('id_question'=>$id));
+		$language=Language::model()->findAll();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -199,6 +205,13 @@ class QuestionController extends Controller
 			$model->attributes=$_POST['Question'];
 			// counter row answer
 			$counter = count($_POST['Answer']['counter']);
+			// var_dump($counter);
+			// var_dump($_POST['Answer']['id_answer_description']);
+			var_dump($_POST['Answer']);
+			// var_dump($_POST['Question']);
+			// var_dump($_POST['Question']);
+			// var_dump($_POST['QuestionDescription']);
+			die();
 
 			// count reason
 			$reason=array_count_values($_POST['Answer']['reasonable']);
@@ -236,11 +249,15 @@ class QuestionController extends Controller
 				    {
 				    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
 					    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
-				        	$answer->answer = $_POST['Answer']['answer'][$i];
 				        	$answer->id_question = $model->id_question;
 				        	$answer->skor = $_POST['Answer']['skor'][$i];
 				        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 				         	$answer->save();
+				         	
+				         	foreach ($language as $keylang => $lang) {
+				        		$answerdesc = AnswerDescription::model()->findByPk($_POST['Answer']['id_answer_description'][$i]);
+				        		$answerdesc->answer = $_POST['Answer']['answer'][$i];
+				        	}
 				        } else {
 				        	$answer = new Answer;
 				        	$answer->answer = $_POST['Answer']['answer'][$i];
@@ -258,6 +275,7 @@ class QuestionController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 			'model2'=>$model2,
+			'language'=>$language,
 		));
 	}
 
@@ -269,6 +287,7 @@ class QuestionController extends Controller
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
+		$this->deleteAllQuestionDescription($id);
 		$this->deleteAllAnswer($id);
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
@@ -327,7 +346,15 @@ class QuestionController extends Controller
 
 	public function deleteAllAnswer($id)
 	{
-		$model=Answer::model()->deleteAllByAttributes(array('id_question'=>$id));
+		$model=Answer::model()->with('answer_desc')->deleteAllByAttributes(array('id_question'=>$id));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	public function deleteAllQuestionDescription($id)
+	{
+		$model=QuestionDescription::model()->deleteAllByAttributes(array('id_question'=>$id));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -337,7 +364,8 @@ class QuestionController extends Controller
 	{
 		$id_answer=(int)$_POST['id_answer'];
 		$model=Answer::model()->findByPk($id_answer);
-		if($model->delete()) {
+		$model2=AnswerDescription::model()->findAllByAttributes(array('id_question'=>$id));
+		if($model->delete() and $model2->delete()) {
 			$delete['response']='0000';
 		} else {
 			$delete['response']='0011';

@@ -15,6 +15,6 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-		<?php $this->renderPartial('_formupdate', array('model'=>$model,'model2'=>$model2)); ?>
+		<?php $this->renderPartial('_formupdate', array('model'=>$model,'model2'=>$model2,'language'=>$language)); ?>
 	</div>
 </div>

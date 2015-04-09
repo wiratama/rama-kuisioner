@@ -77,15 +77,14 @@
 				<div class="multi-field">
 					<div class="col-md-11">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-5">
 								<div class="row">
 									<?php foreach ($language as $keylang=>$lang) { ?>
 									<div class="form-inline">
 										<label class="lang-label"><?php echo $lang->name; ?></label>
 										<br>
 										<div class="form-group">
-											<?php echo $form->labelEx($model2,'answer'); ?>
-											<?php echo $form->hiddenField($model2,'counter['.$lang->id_language.'][]',array('class'=>'form-control')); ?>
+											<?php echo $form->labelEx($model2,'answer'); ?>											
 											<?php echo $form->textField($model2,'answer['.$lang->id_language.'][]',array('class'=>'form-control')); ?>
 											<?php echo $form->error($model2,'answer['.$lang->id_language.'][]'); ?>
 										</div>						
@@ -99,6 +98,7 @@
 									<div class="form-inline">
 										<div class="form-group">
 											<?php echo $form->labelEx($model2,'skor'); ?>
+											<?php echo $form->hiddenField($model2,'counter[]',array('class'=>'form-control')); ?>
 											<?php echo $form->textField($model2,'skor[]',array('class'=>'form-control')); ?>
 											<?php echo $form->error($model2,'skor[]'); ?>
 										</div>
@@ -119,11 +119,15 @@
 							<br><br>
 						</div>
 					</div>
-				</div>
+					<div class="col-md-12">
+						<div class="row">
+							<hr>
+						</div>
+					</div>
+				</div>				
 			</div>
 			<div class="col-md-12">
 				<div class="row">
-					<hr>
 					<button type="button" class="btn btn-sm btn-info add-field">Add more answer</button>
 				</div>
 			</div>

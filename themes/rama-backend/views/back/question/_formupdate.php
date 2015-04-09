@@ -12,10 +12,15 @@
 	<div class="row">		
 		<div class="col-md-4">
 			<?php echo $form->errorSummary($model); ?>
-
-			<?php echo $form->labelEx($model,'question'); ?>
-			<?php echo $form->textArea($model,'question',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
-			<?php echo $form->error($model,'question'); ?>
+			
+			<?php foreach ($model['question_desc'] as $key => $questionitem) { ?>
+				<label class="lang-label"><?php echo $questionitem['language']['name']; ?></label>
+				<br/>
+				<?php echo $form->labelEx($questionitem,'question'); ?>
+				<?php echo $form->hiddenField($questionitem,'['.$questionitem['id_language'].']id_question_description',array('class'=>'form-control','value'=>$questionitem->id_question_description)); ?>
+				<?php echo $form->textArea($questionitem,'['.$questionitem['id_language'].']question',array('rows'=>6, 'cols'=>50,'class'=>'form-control')); ?>
+				<?php echo $form->error($questionitem,'question'); ?>
+			<?php } ?>
 
 			<?php echo $form->labelEx($model,'type'); ?>
 			<?php //echo $form->textField($model,'type',array('size'=>60,'maxlength'=>255,'class'=>'form-control')); ?>
@@ -69,24 +74,107 @@
 		</div>
 		<div class="col-md-8 multi-field-wrapper">
 			<div class="multi-field-content">
-				<?php foreach($model2 as $key=>$answer) { ?>
+				<?php 
+				if(isset($model2)) {
+					foreach($model2 as $key=>$answer) { 
+				?>
 				<div class="form-inline multi-field">
-					<div class="form-group">	
-						<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
-						<?php echo CHtml::hiddenField('Answer[counter][]',$answer->counter,array('class'=>'form-control')); ?>
-						<?php echo CHtml::hiddenField('Answer[id_answer][]',$answer->id_answer,array('class'=>'form-control')); ?>
-						<?php echo CHtml::textField('Answer[answer][]',$answer->answer,array('class'=>'form-control')); ?>
+					<div class="col-md-11">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="row">
+									<?php foreach ($answer['answer_desc'] as $keydsc=>$ansdesc) { ?>
+									<div class="form-inline">
+										<label class="lang-label"><?php echo $ansdesc['language']['name']; ?></label>
+										<br>
+										<div class="form-group">	
+											<?php echo CHtml::label($answer->getAttributeLabel('answer'),''); ?>
+											<?php echo CHtml::hiddenField('Answer[id_answer_description][]',$ansdesc->id_answer_description,array('class'=>'form-control')); ?>
+											<?php echo CHtml::textField('Answer[answer]['.$ansdesc->id_answer_description.']',$ansdesc->answer,array('class'=>'form-control')); ?>
+										</div>
+									</div>
+									<?php } ?>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="row">
+									<div class="form-inline">
+										<div class="form-group">
+											<?php echo CHtml::label($answer->getAttributeLabel('skor'),''); ?>
+											<?php echo CHtml::hiddenField('Answer[counter][]',$answer->counter,array('class'=>'form-control')); ?>
+											<?php echo CHtml::hiddenField('Answer[id_answer][]',$answer->id_answer,array('class'=>'form-control')); ?>
+											<?php echo CHtml::textField('Answer[skor][]',$answer->skor,array('class'=>'form-control')); ?>
+										</div>
+										<div class="form-group">
+											<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo CHtml::label($answer->getAttributeLabel('reasonable'),''); ?></a>
+											<?php //echo CHtml::checkBox('Answer[reasonable][]',$answer->reasonable,array('uncheckValue'=>0)); ?>
+											<?php echo CHtml::dropDownList('Answer[reasonable][]', $answer->reasonable, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="form-group">
-						<?php echo CHtml::label($answer->getAttributeLabel('skor'),''); ?>
-						<?php echo CHtml::textField('Answer[skor][]',$answer->skor,array('class'=>'form-control')); ?>
+					<div class="col-md-1">
+						<div class="row">
+							<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
+						</div>
 					</div>
-					<div class="form-group">
-						<?php echo CHtml::label($answer->getAttributeLabel('reasonable'),''); ?>
-						<?php //echo CHtml::checkBox('Answer[reasonable][]',$answer->reasonable,array('uncheckValue'=>0)); ?>
-						<?php echo CHtml::dropDownList('Answer[reasonable][]', $answer->reasonable, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
+					<div class="col-md-12">
+						<div class="row">
+							<hr>
+						</div>
 					</div>
-					<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
+				</div>
+				<?php 
+					}
+				} else {
+				?>
+				<div class="form-inline multi-field">
+					<div class="col-md-11">
+						<div class="row">
+							<div class="col-md-5">
+								<div class="row">
+									<?php foreach ($language as $keylang=>$lang) { ?>
+									<div class="form-inline">
+										<label class="lang-label"><?php echo $lang->name; ?></label>
+										<br>
+										<div class="form-group">	
+											<?php echo CHtml::label(Answer::model()->getAttributeLabel('answer'),''); ?>
+											<?php echo CHtml::hiddenField('Answer[counter][]','',array('class'=>'form-control')); ?>
+											<?php echo CHtml::textField('Answer[answer]['.$lang->id_language.'][]','',array('class'=>'form-control')); ?>
+										</div>
+									</div>
+									<?php } ?>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="row">
+									<div class="form-inline">
+										<div class="form-group">
+											<?php echo CHtml::label(Answer::model()->getAttributeLabel('skor'),''); ?>
+											<?php echo CHtml::textField('Answer[skor][]','',array('class'=>'form-control')); ?>
+										</div>
+										<div class="form-group">
+											<a href="#" data-toggle="modal" data-target="#reasonable"><?php echo CHtml::label(Answer::model()->getAttributeLabel('reasonable'),''); ?></a>
+											<?php //echo CHtml::checkBox('Answer[reasonable][]',$answer->reasonable,array('uncheckValue'=>0)); ?>
+											<?php echo CHtml::dropDownList('Answer[reasonable][]',$model2, array('0' => 'No', '1' => 'Yes'), array('class'=>'form-control reason')); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1">
+						<div class="row">
+							<button type="button" class="btn btn-sm btn-danger remove-field" >delete</button>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="row">
+							<hr>
+						</div>
+					</div>
 				</div>
 				<?php } ?>
 			</div>			
@@ -136,22 +224,27 @@ $('.multi-field-wrapper').each(function() {
     
     $('.multi-field .remove-field', $wrapper).click(function() {
     	if ($('.multi-field', $wrapper).length > 1) {
-            var $del=$(this).parent('.multi-field');
+    		var $del=$(this).parent().parent().parent('.multi-field');
     	}
-    	if (confirm("Are you sure you want to delete this item?")) {
-        	$.ajax({
-				url: "<?php echo Yii::app()->createAbsoluteUrl('question/deleteanswer');?>",
-				type: 'post',
-				data: 'id_answer=' + $(this).attr("data-answerid"),
-				dataType: 'json',
-				success: function(json) {
-					if (json['response']=='0000') {
-						$($del).remove();
-					} else if (json['response']=='0011') {
-						alert('delete error !');
+    	// console.log($(this).attr("data-answerid"));
+    	if($(this).attr("data-answerid")!=undefined) {
+	    	if (confirm("Are you sure you want to delete this item?")) {
+	        	$.ajax({
+					url: "<?php echo Yii::app()->createAbsoluteUrl('question/deleteanswer');?>",
+					type: 'post',
+					data: 'id_answer=' + $(this).attr("data-answerid"),
+					dataType: 'json',
+					success: function(json) {
+						if (json['response']=='0000') {
+							$($del).remove();
+						} else if (json['response']=='0011') {
+							alert('delete error !');
+						}
 					}
-				}
-			});
+				});
+			}
+		} else {
+			$($del).remove();
 		}
     });
 });
