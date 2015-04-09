@@ -117,7 +117,7 @@
 					</div>
 					<div class="col-md-1">
 						<div class="row">
-							<button class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
+							<button type="button" class="btn btn-sm btn-danger remove-field" data-answerid="<?php echo $answer->id_answer; ?>">delete</button>
 						</div>
 					</div>
 					<div class="col-md-12">
@@ -210,7 +210,7 @@ $( document ).ready(function() {
     $('#info-radio').hide();
     $.each($('select.reason option:selected'), function(index, value) { 
 	    // console.log($('select.reason option:selected').text());
-	    console.log($(value).text());
+	    // console.log($(value).text());
 	});
 });
 
@@ -222,7 +222,7 @@ $('.multi-field-wrapper').each(function() {
     	// $('.multi-field:first-child').clone(true).appendTo($('.multi-field-content')).find('input:text.answeritem').attr('name', 'new-name').val('').removeAttr('value').find('input:text,input:hidden').val('').removeAttr('value').focus();
     	var clone=$('.multi-field:first-child').clone(true).appendTo($('.multi-field-content'));
 
-    	clone.find('input:text.answeritem').attr('name', 'Answer[answer][]').val('').removeAttr('value');
+    	clone.find('input:text.answeritem').attr('name', 'Answer[answerdesc][]').val('').removeAttr('value');
     	clone.find('input:text,input:hidden').val('').removeAttr('value');
     	clone.find('button').removeAttr('data-answerid');
     	clone.focus();
@@ -232,7 +232,6 @@ $('.multi-field-wrapper').each(function() {
     	if ($('.multi-field', $wrapper).length > 1) {
     		var $del=$(this).parent().parent().parent('.multi-field');
     	}
-    	// console.log($(this).attr("data-answerid"));
     	if($(this).attr("data-answerid")!=undefined) {
 	    	if (confirm("Are you sure you want to delete this item?")) {
 	        	$.ajax({

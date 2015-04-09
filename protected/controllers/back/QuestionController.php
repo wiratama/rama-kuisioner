@@ -196,6 +196,10 @@ class QuestionController extends Controller
 		$model=Question::model()->with('question_desc','question_desc.language')->findByPk($id);
 		$model2=Answer::model()->with('answer_desc','answer_desc.language')->findAllByAttributes(array('id_question'=>$id));
 		$language=Language::model()->findAll();
+		$countlang=count($language);
+		$idlang = Language::model()->find(array("order" => "id_language ASC"));
+		$kyadd=(int)$idlang['id_language'];
+		$idans=array();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -204,8 +208,7 @@ class QuestionController extends Controller
 		{
 			$model->attributes=$_POST['Question'];
 			// counter row answer
-			$counter = count($_POST['Answer']['counter']);
-			// die();
+			$counter = count($_POST['Answer']['counter']);			
 
 			// count reason
 			$reason=array_count_values($_POST['Answer']['reasonable']);
@@ -220,8 +223,9 @@ class QuestionController extends Controller
 							$qd->save();
 						}
 
-					    for ($i = 0; $i < $counter; $i++)
-					    {
+					    for ($i = 0; $i < $counter; $i++) {
+						// $i=0;
+						// foreach ($_POST['Answer']['answer'] as $keyanswr=>$answrdata) {
 					    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
 						    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
 					        	$answer->id_question = $model->id_question;
@@ -230,13 +234,27 @@ class QuestionController extends Controller
 					         	$answer->save();
 					        } else {
 					        	$answer = new Answer;
-					        	$answer->answer = $_POST['Answer']['answer'][$i];
+					        	// $answer->answer = $_POST['Answer']['answer'][$i];
 					        	$answer->id_question = $model->id_question;
 					        	$answer->skor = $_POST['Answer']['skor'][$i];
 					        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 					         	$answer->save();
+					         	$idans[]=$answer->id_answer;
 					        }
+					        // $i++;
 					    }
+
+					    if (isset($_POST['Answer']['answerdesc'])) {
+						    foreach(array_chunk($_POST['Answer']['answerdesc'], $countlang) as $keychunk=>$valuechunk) {
+								foreach($valuechunk as $ky=>$vl) {
+									$newansdesc = new AnswerDescription;
+									$newansdesc->id_answer=$idans[$keychunk];
+									$newansdesc->id_language=$ky+$kyadd;
+									$newansdesc->answer=$vl;
+									$newansdesc->save();
+								}
+							}
+						}
 
 					    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
 			        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
@@ -249,7 +267,7 @@ class QuestionController extends Controller
 					Yii::app()->user->setFlash('question-form','Only one answer can contain a reason.');
 				}
 			} else {
-				if($model->save()) {					
+				if($model->save()) {
 					foreach($_POST['QuestionDescription'] as $qdkey=>$qdpostitem) {
 						$qd = QuestionDescription::model()->findByPk($qdpostitem['id_question_description']);
 						$qd->question=$qdpostitem['question'];
@@ -259,26 +277,42 @@ class QuestionController extends Controller
 				    for ($i = 0; $i < $counter; $i++)
 				    {
 				    	if (!empty($_POST['Answer']['id_answer'][$i])) {				    		
-					    	$answer = Answer::model()->findByPk($_POST['Answer']['id_answer'][$i]);
-				        	$answer->id_question = $model->id_question;
+					    	$answer = Answer::model()->findByPk((int)$_POST['Answer']['id_answer'][$i]);
+					    	$answer->id_question = $model->id_question;
 				        	$answer->skor = $_POST['Answer']['skor'][$i];
 				        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 				         	$answer->save();
 				        } else {
 				        	$answer = new Answer;
-				        	$answer->answer = $_POST['Answer']['answer'][$i];
+				        	// $answer->answer = $_POST['Answer']['answer'][$i];
 				        	$answer->id_question = $model->id_question;
 				        	$answer->skor = $_POST['Answer']['skor'][$i];
 				        	$answer->reasonable = $_POST['Answer']['reasonable'][$i];
 				         	$answer->save();
+				         	$idans[]=$answer->id_answer;
 				        }
 				    }
 
-				    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
-		        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
-		        		$answerdesc->answer=$ans;
-		        		$answerdesc->save();
+				    if (isset($_POST['Answer']['answerdesc'])) {
+					    foreach(array_chunk($_POST['Answer']['answerdesc'], $countlang) as $keychunk=>$valuechunk) {
+							foreach($valuechunk as $ky=>$vl) {
+								$newansdesc = new AnswerDescription;
+								$newansdesc->id_answer=$idans[$keychunk];
+								$newansdesc->id_language=$ky+$kyadd;
+								$newansdesc->answer=$vl;
+								$newansdesc->save();
+							}
+						}
+					}
+
+				    if (isset($_POST['Answer']['answer'])) {
+					    foreach ($_POST['Answer']['answer'] as $keyans => $ans) {
+			        		$answerdesc = AnswerDescription::model()->findByPk($keyans);
+			        		$answerdesc->answer=$ans;
+			        		$answerdesc->save();
+			        	}
 		        	}
+
 				    $this->redirect(array('view','id'=>$model->id_question));
 				}
 			}
