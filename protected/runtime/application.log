@@ -9042,3 +9042,32 @@ Stack trace:
 REQUEST_URI=/rama-kuisioner/index.php/questioner/2
 HTTP_REFERER=http://localhost/rama-kuisioner/index.php/questioner/2
 ---
+2015/04/10 06:30:15 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "questioner".' in C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController('questioner')
+#1 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CApplication->run()
+#3 [internal function]: WebApplicationEndBehavior->runEnd('front')
+#4 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array(Array, Array)
+#5 C:\xampp\htdocs\rama-kuisioner\index.php(10): CComponent->__call('runEnd', Array)
+#6 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd('front')
+#7 {main}
+REQUEST_URI=/rama-kuisioner/index.php/questioner/
+---
+2015/04/10 06:30:57 [error] [php] array_push() expects parameter 1 to be array, null given (C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php:211)
+Stack trace:
+#0 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(286): SiteController->runAction()
+#2 C:\xampp\htdocs\rama-kuisioner\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#3 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(282): SiteController->run()
+#4 C:\xampp\htdocs\rama-kuisioner\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\rama-kuisioner\framework\base\CApplication.php(184): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php(18): CWebApplication->run()
+#7 unknown(0): WebApplicationEndBehavior->runEnd()
+#8 C:\xampp\htdocs\rama-kuisioner\framework\base\CComponent.php(261): call_user_func_array()
+#9 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->__call()
+#10 C:\xampp\htdocs\rama-kuisioner\index.php(10): CWebApplication->runEnd()
+REQUEST_URI=/rama-kuisioner/index.php/questioner/1
+in C:\xampp\htdocs\rama-kuisioner\protected\controllers\front\SiteController.php (211)
+in C:\xampp\htdocs\rama-kuisioner\protected\components\WebApplicationEndBehavior.php (18)
+in C:\xampp\htdocs\rama-kuisioner\index.php (10)

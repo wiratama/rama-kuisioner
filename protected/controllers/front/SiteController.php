@@ -24,6 +24,9 @@ class SiteController extends Controller
 		// Yii::app()->session->destroy();
 		if (isset(Yii::app()->session['lang'])) {
 			Yii::app()->language=Yii::app()->session['lang'];
+		} else {
+			Yii::app()->language='en';
+			Yii::app()->session['lang']='en';
 		}
 		$model=new SurveyStore;
 		$language=Language::model()->findAll();
