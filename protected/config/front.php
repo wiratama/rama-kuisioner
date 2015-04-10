@@ -10,6 +10,7 @@ return CMap::mergeArray(
                 'rules' => array(
                     'home'=>'site/index',
                     'personaldata'=>'site/personaldata',
+                    'codevalidasi'=>'site/codevalidasi',
                     // 'questioner'=>'site/questioner',
                     'questioner/<page:([A-Za-z0-9-]+)>'=>'site/questioner',
                     /*'<controller:\w+>/<id:\d+>' => '<controller>/view',
