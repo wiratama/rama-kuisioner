@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2015 at 12:53 PM
+-- Generation Time: Apr 10, 2015 at 06:27 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -56,55 +56,49 @@ CREATE TABLE IF NOT EXISTS `answer` (
   `answer` text,
   `skor` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_answer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=50 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=92 ;
 
 --
 -- Dumping data for table `answer`
 --
 
 INSERT INTO `answer` (`id_answer`, `id_question`, `reasonable`, `answer`, `skor`) VALUES
-(1, 1, 0, 'Magazine', NULL),
-(2, 1, 0, 'Agent', NULL),
-(10, 3, 0, 'Family', NULL),
-(11, 3, 0, 'Friends', NULL),
-(12, 3, 1, 'Couple', NULL),
-(13, 3, 0, 'Alone', NULL),
-(14, 4, 0, 'Food', NULL),
-(15, 4, 0, 'Service', NULL),
-(16, 4, 1, 'Atmosphere', NULL),
-(17, 4, 0, 'Entertainment', NULL),
-(18, 5, 0, 'First time', NULL),
-(19, 5, 0, 'Second time', NULL),
-(20, 5, 0, 'More than Two Times', NULL),
-(21, 6, 0, 'Asian', NULL),
-(22, 6, 0, 'Balinese', NULL),
-(23, 6, 0, 'Western', NULL),
-(24, 6, 1, 'Others,', NULL),
-(25, 7, 0, 'Below averages', NULL),
-(26, 7, 0, 'Reasonable', NULL),
-(27, 7, 0, 'Unacceptable', NULL),
-(28, 8, 0, 'Below averages', NULL),
-(29, 8, 0, 'Reasonable', NULL),
-(30, 8, 0, 'Unacceptable', NULL),
-(31, 9, 0, '20 minutes', NULL),
-(32, 9, 0, '25 minutes', NULL),
-(33, 9, 0, '30 minutes', NULL),
-(34, 9, 0, 'Does Not Matter', NULL),
-(35, 10, 0, 'Traditional music', NULL),
-(36, 10, 0, 'Modern music', NULL),
-(37, 10, 1, 'Others,', NULL),
-(38, 11, 0, 'Very likely', NULL),
-(39, 11, 0, 'Likely', NULL),
-(40, 11, 1, 'Unlikely,', NULL),
-(41, 12, 0, 'POOR', NULL),
-(42, 12, 0, 'AVERANGE', NULL),
-(43, 12, 1, 'GOOD', NULL),
-(44, 12, 0, 'VERY GOOD', NULL),
-(45, 13, 0, 'POOR', NULL),
-(46, 13, 0, 'AVERANGE', NULL),
-(47, 13, 0, 'GOOD', NULL),
-(48, 13, 0, 'VERY GOOD', NULL),
-(49, 13, 0, 'EXCELENT', NULL);
+(50, 14, 0, NULL, NULL),
+(51, 14, 0, NULL, NULL),
+(52, 14, 0, NULL, NULL),
+(53, 14, 0, NULL, NULL),
+(54, 14, 0, NULL, NULL),
+(55, 15, 0, NULL, NULL),
+(56, 15, 0, NULL, NULL),
+(57, 15, 0, NULL, NULL),
+(58, 15, 0, NULL, NULL),
+(59, 16, 0, NULL, NULL),
+(60, 16, 0, NULL, NULL),
+(61, 16, 0, NULL, NULL),
+(62, 16, 0, NULL, NULL),
+(63, 17, 0, NULL, NULL),
+(64, 17, 0, NULL, NULL),
+(65, 17, 0, NULL, NULL),
+(66, 18, 0, NULL, NULL),
+(67, 18, 0, NULL, NULL),
+(68, 18, 0, NULL, NULL),
+(69, 18, 0, NULL, NULL),
+(70, 19, 0, NULL, NULL),
+(71, 19, 0, NULL, NULL),
+(72, 19, 0, NULL, NULL),
+(73, 20, 0, NULL, NULL),
+(74, 20, 0, NULL, NULL),
+(75, 20, 0, NULL, NULL),
+(76, 21, 0, NULL, NULL),
+(77, 21, 0, NULL, NULL),
+(78, 21, 0, NULL, NULL),
+(79, 21, 0, NULL, NULL),
+(83, 23, 0, NULL, NULL),
+(84, 23, 0, NULL, NULL),
+(85, 23, 1, NULL, NULL),
+(89, 25, 0, NULL, NULL),
+(90, 25, 0, NULL, NULL),
+(91, 25, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,7 +112,97 @@ CREATE TABLE IF NOT EXISTS `answer_description` (
   `id_answer` int(11) DEFAULT NULL,
   `answer` text,
   PRIMARY KEY (`id_answer_description`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=85 ;
+
+--
+-- Dumping data for table `answer_description`
+--
+
+INSERT INTO `answer_description` (`id_answer_description`, `id_language`, `id_answer`, `answer`) VALUES
+(1, 1, 50, 'Magazine'),
+(2, 2, 50, 'Majalah'),
+(3, 1, 51, 'Agent'),
+(4, 2, 51, 'Agen'),
+(5, 1, 52, 'Friend'),
+(6, 2, 52, 'Teman'),
+(7, 1, 53, 'Internet'),
+(8, 2, 53, 'Internet'),
+(9, 1, 54, 'Passed by'),
+(10, 2, 54, 'Passed by'),
+(11, 1, 55, 'Family'),
+(12, 2, 55, 'Keluarga'),
+(13, 1, 56, 'Friends'),
+(14, 2, 56, 'Teman'),
+(15, 1, 57, 'Couple'),
+(16, 2, 57, 'Pasangan'),
+(17, 1, 58, 'Alone'),
+(18, 2, 58, 'Sendiri'),
+(19, 1, 59, 'Food'),
+(20, 2, 59, 'Makanan'),
+(21, 1, 60, 'Service'),
+(22, 2, 60, 'Pelayanan'),
+(23, 1, 61, 'Atmosphere'),
+(24, 2, 61, 'Atmosphere'),
+(25, 1, 62, 'Entertainment'),
+(26, 2, 62, 'Hiburan'),
+(27, 1, 63, 'First Time'),
+(28, 2, 63, 'Pertama kali'),
+(29, 1, 64, 'Second Times'),
+(30, 2, 64, 'Kedua kali'),
+(31, 1, 65, 'More than Two Times'),
+(32, 2, 65, 'Lebih dari dua kali'),
+(33, 1, 66, 'Asian'),
+(34, 2, 66, 'Asia'),
+(35, 1, 67, 'Balinese'),
+(36, 2, 67, 'Bali'),
+(37, 1, 68, 'Western'),
+(38, 2, 68, 'Barat'),
+(39, 1, 69, 'Others'),
+(40, 2, 69, ' Lainnya'),
+(41, 1, 70, 'Below Averages'),
+(42, 2, 70, 'Di bawah rata-rata'),
+(43, 1, 71, 'Reasonable'),
+(44, 2, 71, 'Masuk akal'),
+(45, 1, 72, 'Unacceptable'),
+(46, 2, 72, 'Tidak dapat diterima'),
+(47, 1, 73, 'Below Averages'),
+(48, 2, 73, ' Di bawah rata-rata'),
+(49, 1, 74, 'Reasonable'),
+(50, 2, 74, 'Masuk akal'),
+(51, 1, 75, 'Unacceptable'),
+(52, 2, 75, 'Tidak dapat diterima'),
+(53, 1, 76, '20 minutes'),
+(54, 2, 76, '20 menit'),
+(55, 1, 77, '25 minutes'),
+(56, 2, 77, '25 menit'),
+(57, 1, 78, '30 minutes'),
+(58, 2, 78, '30 menit'),
+(59, 1, 79, 'Does Not Matter'),
+(60, 2, 79, 'Tidak masalah'),
+(61, 1, 80, 'Traditional music'),
+(62, 2, 80, 'Musik tradisional'),
+(63, 1, 81, 'Modern music'),
+(64, 2, 81, 'Musik Modern'),
+(65, 1, 82, 'Others '),
+(66, 2, 82, 'Lainnya	'),
+(67, 1, 83, 'Traditional music'),
+(68, 2, 83, 'Musik tradisional'),
+(69, 1, 84, 'Modern music'),
+(70, 2, 84, 'Musik Modern'),
+(71, 1, 85, 'Others '),
+(72, 2, 85, 'Lainnya'),
+(73, 1, 86, 'Very likely'),
+(74, 2, 86, 'Sangat mungkin'),
+(75, 1, 87, 'Likely'),
+(76, 2, 87, 'Mungkin'),
+(77, 1, 88, 'Unlikely,'),
+(78, 2, 88, 'Tidak mungkin,'),
+(79, 1, 89, ' Very likely'),
+(80, 2, 89, 'Sangat mungkin'),
+(81, 1, 90, 'Likely'),
+(82, 2, 90, 'Mungkin'),
+(83, 1, 91, 'Unlikely,'),
+(84, 2, 91, 'Tidak mungkin,');
 
 -- --------------------------------------------------------
 
@@ -163,7 +247,15 @@ CREATE TABLE IF NOT EXISTS `language` (
   `code` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
   PRIMARY KEY (`id_language`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id_language`, `name`, `code`, `image`) VALUES
+(1, 'English', 'en', 'imglangpng-1428389795.png'),
+(2, 'Indonesia', 'ina', '100png-1428467577.png');
 
 -- --------------------------------------------------------
 
@@ -176,25 +268,23 @@ CREATE TABLE IF NOT EXISTS `question` (
   `question` text,
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_question`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `question`
 --
 
 INSERT INTO `question` (`id_question`, `question`, `type`) VALUES
-(1, 'How did you know about us?', 'radio'),
-(3, 'Who were you here with?', 'radio'),
-(4, 'What do you like most about us??', 'radio'),
-(5, 'How many times have you been to our Restaurant?', 'radio'),
-(6, 'What is your favorite Food?', 'radio'),
-(7, 'Please rate our Food Prices?', 'radio'),
-(8, 'Please rate our Beverage Prices?', 'radio'),
-(9, 'What is your expected food delivery time (from ordering time)', 'radio'),
-(10, 'What kind of entertainment would you prefer in our Restaurant?', 'radio'),
-(11, 'What is your likelihood to return?', 'radio'),
-(12, 'Food Taste', 'checkbox'),
-(13, 'Presentation', 'checkbox');
+(14, 'How did you know about us?', 'checkbox'),
+(15, 'Who were you here with?', 'checkbox'),
+(16, 'What do you like most about us??', 'checkbox'),
+(17, 'How many times have you been to our Restaurant?', 'checkbox'),
+(18, 'What is your favorite Food?', 'checkbox'),
+(19, 'Please rate our Food Prices?', 'checkbox'),
+(20, 'Please rate our Beverage Prices?', 'checkbox'),
+(21, 'What is your expected food delivery time (from ordering time)', 'checkbox'),
+(23, 'What kind of entertainment would you prefer in our Restaurant?', 'checkbox'),
+(25, 'What is your likelihood to return?', 'checkbox');
 
 -- --------------------------------------------------------
 
@@ -208,7 +298,33 @@ CREATE TABLE IF NOT EXISTS `question_description` (
   `id_language` int(11) DEFAULT NULL,
   `question` text,
   PRIMARY KEY (`id_question_description`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+--
+-- Dumping data for table `question_description`
+--
+
+INSERT INTO `question_description` (`id_question_description`, `id_question`, `id_language`, `question`) VALUES
+(1, 14, 1, 'How did you know about us?'),
+(2, 14, 2, 'Bagaimana Anda tahu tentang kami?'),
+(3, 15, 1, 'Who were you here with?'),
+(4, 15, 2, 'Datang dengan siapa?'),
+(5, 16, 1, 'What do you like most about us??'),
+(6, 16, 2, 'Apa yang paling Anda sukai tentang kami ??'),
+(7, 17, 1, 'How many times have you been to our Restaurant?'),
+(8, 17, 2, 'Berapa kali Anda pernah ke Restaurant kami?'),
+(9, 18, 1, 'What is your favorite Food?'),
+(10, 18, 2, 'Apa makanan favorit anda?'),
+(11, 19, 1, 'Please rate our Food Prices?'),
+(12, 19, 2, 'Silakan menilai harga makanan kami?'),
+(13, 20, 1, 'Please rate our Beverage Prices?'),
+(14, 20, 2, 'Silakan menilai harga minuman kami?'),
+(15, 21, 1, 'What is your expected food delivery time (from ordering time)'),
+(16, 21, 2, 'Berapa waktu pengiriman makanan yang Anda harapkan (dari waktu pemesanan)'),
+(17, 23, 1, 'What kind of entertainment would you prefer in our Restaurant?'),
+(18, 23, 2, 'Apa jenis hiburan yang Anda lebih suka di Restaurant kami?'),
+(19, 25, 1, 'What is your likelihood to return?'),
+(20, 25, 2, 'Apa kemungkinan Anda untuk kembali?');
 
 -- --------------------------------------------------------
 
