@@ -123,6 +123,8 @@ class SiteController extends Controller
 	public function actionQuestioner()
 	{
 		$language=Language::model()->findAll();
+		$setlanguage=Language::model()->findByAttributes(array('code'=>Yii::app()->session['lang']));
+		
 		if (isset(Yii::app()->session['lang'])) {
 			Yii::app()->language=Yii::app()->session['lang'];
 		}
@@ -134,13 +136,22 @@ class SiteController extends Controller
 		$offset = ($page-1)*$limit;
         
         // load questioner per page
-        $model=Question::model()->with('answer')->findAll(array(
-		    'limit' => $limit,
+        $model=Question::model()->with(
+        	array(
+	        	'question_desc'=>array('condition'=>'question_desc.id_language = '.$setlanguage['id_language'],),
+	        	// 'answer',
+	        	'answer.answer_desc'=>array('condition'=>'answer_desc.id_language = '.$setlanguage['id_language'],),
+	        	))->findAll(array(
+	        'limit' => $limit,
 		    'offset' => $offset,
 		));
 
         // count data quistioner
-		$rowData=Question::model()->with('answer')->findAll();
+		$rowData=Question::model()->with(array(
+	        	'question_desc'=>array('condition'=>'question_desc.id_language = '.$setlanguage['id_language'],),
+	        	// 'answer',
+	        	'answer.answer_desc'=>array('condition'=>'answer_desc.id_language = '.$setlanguage['id_language'],),
+	        	))->findAll();
 
         // data max page
 		$maxPage=ceil(count($rowData)/5);
