@@ -10,14 +10,14 @@
         <!-- content -->
         <div class="row">
             <div class="col-md-12">
-                <h2>Dear Valued Guest,</h2>
-                We need your assistant in our effort to extend the finest service at our Restaurant.  We would appreciate it very much if you could take a few minutes to fill the following questionnaires. 
+                <h2><?php echo Yii::t('Personaldata','heading_title');?></h2>
+                <?php echo Yii::t('Personaldata','welcome_text');?>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 ">
-                <div class="box-info"> Your comments would be <br> 
-                    highly appreciated 
+                <div class="box-info"> 
+                    <?php echo Yii::t('Personaldata','label_text');?>
                 </div>
             </div>
         </div>

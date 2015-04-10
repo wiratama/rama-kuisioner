@@ -10,8 +10,8 @@
     <!-- content -->
     <div class="row">
         <div class="col-md-12">
-            <h2>Guest Experience Survey</h2>
-            Welcome to Rama Restaurants Bali Guest Experience Survey. Thank you for taking the time to fill out our questioner. This will help us to ensure better service for the future. 
+            <h2><?php echo Yii::t('Home','heading_title');?></h2>
+            <?php echo Yii::t('Home','welcome_text');?>
             <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/img-front.jpg" class="img-responsive img-holder">
         </div>
     </div>

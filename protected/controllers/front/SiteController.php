@@ -399,6 +399,12 @@ class SiteController extends Controller
 
 	public function actionCodevalidasi($value='')
 	{
+		$language=Language::model()->findAll();
+		$setlanguage=Language::model()->findByAttributes(array('code'=>Yii::app()->session['lang']));
+		
+		if (isset(Yii::app()->session['lang'])) {
+			Yii::app()->language=Yii::app()->session['lang'];
+		}
 		// progress percentage
 		$progress=100;
 		$codval=Yii::app()->session['codevalidasi'];
@@ -406,6 +412,7 @@ class SiteController extends Controller
 		$this->render('kodevalidasi',array(
 			'progress'=>$progress,
 			'codevalidasi'=>$codval,
+			'language'=>$language,
 		));
 	}
 

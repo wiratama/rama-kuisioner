@@ -191,3 +191,7 @@ label.standart-label {
 	color: red !important;
 	font-size: 0.9em !important;
 }
+
+img.language {
+	cursor: pointer;
+}
