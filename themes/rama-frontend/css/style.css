@@ -192,6 +192,19 @@ label.standart-label {
 	font-size: 0.9em !important;
 }
 
-img.language {
+.language {
 	cursor: pointer;
+}
+
+ul.lang li {
+  display: inline;
+  list-style: none;
+}
+
+ul.lang li.language a{
+	color: #fff;
+}
+
+ul.lang li.language a:hover{
+	text-decoration: none;
 }

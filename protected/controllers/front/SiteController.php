@@ -408,7 +408,10 @@ class SiteController extends Controller
 		// progress percentage
 		$progress=100;
 		$codval=Yii::app()->session['codevalidasi'];
-		Yii::app()->session->destroy();
+		unset(Yii::app()->session[Yii::app()->session['init']]);
+		unset(Yii::app()->session['codevalidasi']);
+		unset(Yii::app()->session['init']);
+		
 		$this->render('kodevalidasi',array(
 			'progress'=>$progress,
 			'codevalidasi'=>$codval,

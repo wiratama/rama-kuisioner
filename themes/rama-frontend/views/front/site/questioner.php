@@ -1,9 +1,16 @@
 <div class="row">
 	<div class="col-sm-8 col-md-6 col-md-offset-3 col-sm-offset-2">
 		<div class="mylang">
-			<?php foreach ($language as $keylang=>$lang) { ?>
-				<img onclick="javascript:setLang(<?php echo $lang->id_language; ?>)" src="<?php echo  Yii::app()->baseUrl; ?>/images/language/<?php echo $lang->image;?>" width="26" class="language"> <?php echo $lang->name; ?>
-			<?php } ?>
+			<ul class="lang">
+				<?php foreach ($language as $keylang=>$lang) { ?>
+				<li class="language">
+					<a href="javascript:void(0)" onclick="setLang(<?php echo $lang->id_language; ?>);">
+						<img src="<?php echo  Yii::app()->baseUrl; ?>/images/language/<?php echo $lang->image;?>" width="26">
+						<?php echo $lang->name; ?>
+					</a>
+				</li>
+				<?php } ?>
+			</ul>
 		</div>
 		<div class="quest-holder">
 			<?php if (isset($_GET['page'])) { ?>
