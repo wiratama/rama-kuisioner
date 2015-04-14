@@ -159,7 +159,7 @@ footer {
 
 /* responsive query */
 @media only screen and (min-width : 0px) and (max-width : 349px) {
-.desc-chose { max-width: 30%;}  
+.desc-chose { /* max-width: 30%; */}  
 }
 @media only screen and (min-width : 350px) and (max-width : 550px) {
 

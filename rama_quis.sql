@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2015 at 07:49 AM
+-- Generation Time: Apr 14, 2015 at 05:30 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -325,6 +325,21 @@ INSERT INTO `question_description` (`id_question_description`, `id_question`, `i
 (18, 23, 2, 'Apa jenis hiburan yang Anda lebih suka di Restaurant kami?'),
 (19, 25, 1, 'What is your likelihood to return?'),
 (20, 25, 2, 'Apa kemungkinan Anda untuk kembali?');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(64) NOT NULL DEFAULT 'system',
+  `key` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_key` (`category`,`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

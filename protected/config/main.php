@@ -54,16 +54,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
-		),
-		'backendUser'=>array(             
-			// Webuser for the admin area (admin)
-			'class'=>'application.components.EWebUser',
-			// 'loginUrl'=>array('backend/security/login'),
-			// 'stateKeyPrefix'=>'_backend',
-		),
-		'bootstrap' => array(
-	        'class' => 'bootstrap.components.BsApi'
-	    ),
+		),		
 
 		// uncomment the following to enable URLs in path-format
 		/*
@@ -100,6 +91,30 @@ return array(
 				
 			),
 		),
+
+		// added components
+		'backendUser'=>array(             
+			// Webuser for the admin area (admin)
+			'class'=>'application.components.EWebUser',
+			// 'loginUrl'=>array('backend/security/login'),
+			// 'stateKeyPrefix'=>'_backend',
+		),
+		'bootstrap' => array(
+	        'class' => 'bootstrap.components.BsApi'
+	    ),
+		'cache'=>array(
+            'class'=>'system.caching.CFileCache',
+        ),
+		'settings'=>array(
+	        'class'             => 'application.components.CmsSettings',
+	        'cacheComponentId'  => 'cache',
+	        'cacheId'           => 'global_website_settings',
+	        'cacheTime'         => 84000,
+	        'tableName'     => 'settings',
+	        'dbComponentId'     => 'db',
+	        'createTable'       => true,
+	        'dbEngine'      => 'InnoDB',
+        ),
 
 	),
 

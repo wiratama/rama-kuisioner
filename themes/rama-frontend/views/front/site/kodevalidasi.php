@@ -17,13 +17,13 @@
     <!-- content -->
     <div class="row">
         <div class="col-md-12">
-            <h2><?php echo Yii::t('Codevaliasi','heading_title');?></h2>
-            <?php echo Yii::t('Codevaliasi','welcome_text');?>
+            <h2><?php echo $heding_title;?></h2>
+            <?php echo $welcome_text;?>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 ">
-            <div class="box-info"> <?php echo Yii::t('Codevaliasi','label_code');?> : <?php echo $codevalidasi; ?>
+            <div class="box-info"> <?php echo $code_label_text;?> : <?php echo $codevalidasi; ?>
             </div>
         </div>
     </div>

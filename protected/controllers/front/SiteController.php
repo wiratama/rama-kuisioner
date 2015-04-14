@@ -28,6 +28,15 @@ class SiteController extends Controller
 			Yii::app()->language='en';
 			Yii::app()->session['lang']='en';
 		}
+
+		if (Yii::app()->language=='en') {
+			$heding_title=Yii::app()->settings->get('home', 'headingTitleEnglish');
+			$welcome_text=Yii::app()->settings->get('home', 'welcomeTextEnglish');
+		} else {
+			$heding_title=Yii::app()->settings->get('home', 'headingTitleIndonesia');
+			$welcome_text=Yii::app()->settings->get('home', 'welcomeTextIndonesia');
+		}
+
 		$model=new SurveyStore;
 		$language=Language::model()->findAll();
 		
@@ -56,6 +65,8 @@ class SiteController extends Controller
 		$this->render('index',array(
 			'model'=>$model,
 			'language'=>$language,
+			'heding_title'=>$heding_title,
+			'welcome_text'=>$welcome_text,
 		));
 	}
 
@@ -65,6 +76,16 @@ class SiteController extends Controller
 		$language=Language::model()->findAll();
 		if (isset(Yii::app()->session['lang'])) {
 			Yii::app()->language=Yii::app()->session['lang'];
+		}
+
+		if (Yii::app()->language=='en') {
+			$heding_title=Yii::app()->settings->get('customer', 'headingTitleEnglish');
+			$welcome_text=Yii::app()->settings->get('customer', 'welcomeTextEnglish');
+			$label_text=Yii::app()->settings->get('customer', 'labelTextEnglish');
+		} else {
+			$heding_title=Yii::app()->settings->get('customer', 'headingTitleIndonesia');
+			$welcome_text=Yii::app()->settings->get('customer', 'welcomeTextIndonesia');
+			$label_text=Yii::app()->settings->get('customer', 'labelTextIndonesia');
 		}
 
 		if(isset($_POST['Customer']))
@@ -120,6 +141,9 @@ class SiteController extends Controller
 		$this->render('personaldata',array(
 			'model'=>$model,
 			'language'=>$language,
+			'heding_title'=>$heding_title,
+			'welcome_text'=>$welcome_text,
+			'label_text'=>$label_text,
 		));
 	}
 
@@ -131,6 +155,7 @@ class SiteController extends Controller
 		if (isset(Yii::app()->session['lang'])) {
 			Yii::app()->language=Yii::app()->session['lang'];
 		}
+
 		// get page param dari url
 		$page = (isset($_GET['page']) ? $_GET['page'] : 1);
 		
@@ -284,13 +309,13 @@ class SiteController extends Controller
 
 						$mail = new YiiMailer();
 						$mail->IsSMTP();
-						$mail->Host = Yii::app()->params['host'];
-						$mail->Port = Yii::app()->params['port'];
+						$mail->Host = Yii::app()->settings->get('mail', 'server');
+						$mail->Port = Yii::app()->settings->get('mail', 'port');
 						$mail->SMTPAuth = true;
-						$mail->Username = Yii::app()->params['apiUser'];
-						$mail->Password = Yii::app()->params['apiKey'];
+						$mail->Username = Yii::app()->settings->get('mail', 'user');
+						$mail->Password = Yii::app()->settings->get('mail', 'password');
 						$mail->IsHTML(true);
-						$mail->setFrom(Yii::app()->params['noReply']);
+						$mail->setFrom(Yii::app()->settings->get('mail', 'fromNoReply'));
 						$mail->setSubject(Yii::app()->name.' Validation Code');
 						$mail->setTo($member->email);
 						$mail->setView('kodevalidasimail');
@@ -359,13 +384,13 @@ class SiteController extends Controller
 
 					$mail = new YiiMailer();
 					$mail->IsSMTP();
-					$mail->Host = Yii::app()->params['host'];
-					$mail->Port = Yii::app()->params['port'];
+					$mail->Host = Yii::app()->settings->get('mail', 'server');
+					$mail->Port = Yii::app()->settings->get('mail', 'port');
 					$mail->SMTPAuth = true;
-					$mail->Username = Yii::app()->params['apiUser'];
-					$mail->Password = Yii::app()->params['apiKey'];
+					$mail->Username = Yii::app()->settings->get('mail', 'user');
+					$mail->Password = Yii::app()->settings->get('mail', 'password');
 					$mail->IsHTML(true);
-					$mail->setFrom(Yii::app()->params['noReply']);
+					$mail->setFrom(Yii::app()->settings->get('mail', 'fromNoReply'));
 					$mail->setSubject(Yii::app()->name.' Validation Code');
 					$mail->setTo($member->email);
 					$mail->setView('kodevalidasimail');
@@ -405,6 +430,17 @@ class SiteController extends Controller
 		if (isset(Yii::app()->session['lang'])) {
 			Yii::app()->language=Yii::app()->session['lang'];
 		}
+
+		if (Yii::app()->language=='en') {
+			$heding_title=Yii::app()->settings->get('validation', 'headingTitleEnglish');
+			$welcome_text=Yii::app()->settings->get('validation', 'welcomeTextEnglish');
+			$code_label_text=Yii::app()->settings->get('validation', 'codeLabelTextEnglish');
+		} else {
+			$heding_title=Yii::app()->settings->get('validation', 'headingTitleIndonesia');
+			$welcome_text=Yii::app()->settings->get('validation', 'welcomeTextIndonesia');
+			$code_label_text=Yii::app()->settings->get('validation', 'codeLabelTextIndonesia');
+		}
+
 		// progress percentage
 		$progress=100;
 		$codval=Yii::app()->session['codevalidasi'];
@@ -416,6 +452,9 @@ class SiteController extends Controller
 			'progress'=>$progress,
 			'codevalidasi'=>$codval,
 			'language'=>$language,
+			'heding_title'=>$heding_title,
+			'welcome_text'=>$welcome_text,
+			'code_label_text'=>$code_label_text,
 		));
 	}
 

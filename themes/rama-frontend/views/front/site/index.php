@@ -17,8 +17,8 @@
     <!-- content -->
     <div class="row">
         <div class="col-md-12">
-            <h2><?php echo Yii::t('Home','heading_title');?></h2>
-            <?php echo Yii::t('Home','welcome_text');?>
+            <h2><?php echo $heding_title;?></h2>
+            <?php echo $welcome_text;?>
             <img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/img-front.jpg" class="img-responsive img-holder">
         </div>
     </div>

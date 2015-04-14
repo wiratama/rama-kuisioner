@@ -17,8 +17,8 @@
         <!-- content -->
         <div class="row">
             <div class="col-md-12">
-                <h2><?php echo Yii::t('Personaldata','heading_title');?></h2>
-                <?php echo Yii::t('Personaldata','welcome_text');?>
+                <h2><?php echo $heding_title;?></h2>
+                <?php echo $welcome_text;?>
             </div>
         </div>
         <div class="row">
