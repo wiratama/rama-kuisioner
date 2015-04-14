@@ -110,12 +110,11 @@ return array(
 	        'cacheComponentId'  => 'cache',
 	        'cacheId'           => 'global_website_settings',
 	        'cacheTime'         => 84000,
-	        'tableName'     => 'settings',
+	        'tableName'     	=> 'settings',
 	        'dbComponentId'     => 'db',
 	        'createTable'       => true,
-	        'dbEngine'      => 'InnoDB',
+	        'dbEngine'      	=> 'InnoDB',
         ),
-
 	),
 
 	// application-level parameters that can be accessed
