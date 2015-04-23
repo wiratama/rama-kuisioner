@@ -29,17 +29,71 @@
 		<h4 class="page-head-line">View Customer #<?php echo $model->id_customer; ?></h4>
 	</div>
 </div>
-<?php 
-// $this->widget('zii.widgets.CDetailView', array(
-$this->widget('bootstrap.widgets.BsDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		// 'id_customer',
-		'name',
-		'address',
-		'contact',
-		'nationality',
-		'email',
-		'validation_number',
-	),
-)); ?>
+<div class="row">
+	<div class="col-md-9">
+		<?php 
+		// $this->widget('zii.widgets.CDetailView', array(
+		$this->widget('bootstrap.widgets.BsDetailView', array(
+			'data'=>$model,
+			'attributes'=>array(
+				// 'id_customer',
+				'name',
+				'address',
+				'contact',
+				'nationality',
+				'email',
+				'validation_number',
+			),
+		)); 
+		// var_dump($sqa);
+		?>
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<table class="table table-striped table-condensed">
+			<tbody>
+				<tr>
+					<th><label class='lang-label'>Store Number</label></th>
+					<td colspan="4"><?php echo $sqa['store_number']; ?></td>
+				</tr>
+				<tr>
+					<th><label class='lang-label'>Comment</label></th>
+					<td colspan="4"><?php echo $sqa['comment']; ?></td>
+				</tr>
+				<?php
+				$id_ques=0;
+				echo "<tr>";
+					echo "<td><label class='lang-label'>Question</label></td>";
+					echo "<td><label class='lang-label'>Answer</label></td>";
+				echo "</tr>";
+				foreach($sqa['survey'] as $sdkey=>$surveydata) {
+					echo "<tr>";
+					foreach($surveydata as $skey=>$survey) {
+						if($survey['id_language_question']==1) {
+							if($id_ques!=$survey['id_question']) {
+								echo "<td><label>".$survey['question']."</label></td>";
+								if (isset($survey['reason'])){
+									echo "<td><label class='label-answer'> - ".$survey['answer'].", ".$survey['reason']."</label></td>";
+								} else {
+									echo "<td><label class='label-answer'> - ".$survey['answer']."</label></td>";
+								}
+							} else {
+								echo "<td></td>";
+								if (isset($survey['reason'])){
+									echo "<td><label class='label-answer'> - ".$survey['answer'].", ".$survey['reason']."</label></td>";
+								} else {
+									echo "<td><label class='label-answer'> - ".$survey['answer']."</label></td>";
+								}
+							}
+						}
+						$id_ques=$survey['id_question'];
+					}
+					echo "</tr>";
+				}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -47,6 +47,9 @@ class SurveyQuestionAnswer extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'survey_store'=>array(self::BELONGS_TO, 'SurveyStore', 'id_survey_store'),
+			'customer'=>array(self::BELONGS_TO, 'Customer', 'id_customer'),
+			'question'=>array(self::BELONGS_TO, 'Question', 'id_question'),
+			'answer'=>array(self::BELONGS_TO, 'Answer', 'id_answer'),
 		);
 	}
 

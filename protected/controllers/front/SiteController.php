@@ -302,7 +302,8 @@ class SiteController extends Controller
 						}
 
 						$member=Customer::model()->findByPk($id_customer);
-						$valCode=implode("",$this->getNumbers(1,99,5,1));
+						$randCode=implode("",$this->getNumbers(1,99,5,1));
+						$valCode=$randCode.'-'.Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
 						$member->validation_number=$valCode;
 						Yii::app()->session['codevalidasi']=$valCode;
 						$member->save();
@@ -377,7 +378,8 @@ class SiteController extends Controller
 					}
 
 					$member=Customer::model()->findByPk($id_customer);
-					$valCode=implode("",$this->getNumbers(1,99,5,1));
+					$randCode=implode("",$this->getNumbers(1,99,5,1));
+					$valCode=$randCode.'-'.Yii::app()->session[Yii::app()->session['init']]['store']['store_number'];
 					$member->validation_number=$valCode;
 					Yii::app()->session['codevalidasi']=$valCode;
 					$member->save();

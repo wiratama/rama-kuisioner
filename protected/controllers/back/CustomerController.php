@@ -43,8 +43,55 @@ class CustomerController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model=$this->loadModel($id);
+		$surveyquestionanswerdata=SurveyQuestionAnswer::model()->with(
+			array(
+				'customer.comment',
+				'survey_store.store'=>array('distinct' => true),
+				'question.question_desc'=>array('distinct' => true),
+				'answer.answer_desc'=>array('distinct' => true),
+			))->findAllByAttributes(array('id_customer'=>(int)$id),array('distinct' => true));
+		
+		$qadata=array();
+		$id_qd=null;
+		foreach($surveyquestionanswerdata as $qaky=>$surveyqa) {
+			foreach($surveyqa['customer']['comment'] as $cky=>$comment) {
+				$comment=$comment['comment'];
+			}
+			
+			$qdata=array();
+			foreach($surveyqa['question']['question_desc'] as $qky=>$q) {
+				foreach($surveyqa['answer']['answer_desc'] as $aky=>$a) {
+					if ($q["id_language"]==$a['id_language']) {
+						$answer=$a->answer;
+					}
+				}
+
+				$lang=Language::model()->findByPk((int)$q['id_language']);
+
+				$qdata[$q["id_language"]]=array(
+					'id_language_question'		=>$q["id_language"],
+					'language'					=>$lang['name'],
+					'id_question'				=>$q['id_question'],
+					'id_question_description'	=>$q['id_question_description'],
+					'question'					=>$q['question'],
+					'answer'					=>$answer,
+					'reason'					=>$surveyqa['reason'],
+				);
+			}
+
+			$qadata[]=$qdata;
+
+			$sqa=array(
+				'store_number'=>$surveyqa->survey_store->store_number,
+				'comment'=>$comment,
+				'survey'=>$qadata,
+			);
+		}
+
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
+			'sqa'=>$sqa,
 		));
 	}
 
