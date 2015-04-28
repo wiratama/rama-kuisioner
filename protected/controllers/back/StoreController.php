@@ -54,9 +54,57 @@ class StoreController extends Controller
 			}
 		}
 
+		$sqa=SurveyQuestionAnswer::model()->surveyCounterData($id);
+		$id_question=null;
+		$sqadata=array();
+		$surveyitem=array();
+		$survey=array();
+		var_dump($sqa);
+		
+		// format struktur array
+		foreach ($sqa as $sqakey=>$sqaitem) {
+			if ($id_question==null) {
+				$id_question=$sqaitem['id_question'];
+			} else if ($id_question!=$sqaitem['id_question']) {
+				$id_question=$sqaitem['id_question'];
+			}
+			$sqadata[$id_question][]=array(
+				'id_answer'=>$sqaitem['id_answer'],
+				'count_answer'=>$sqaitem["count_answer"],
+			);
+		}
+
+		// get data
+		foreach ($sqadata as $datakey => $data) {
+			$answerdata=array();
+			$question=Question::model()->findByPk($datakey);
+			
+			foreach ($data as $dkey=>$ditem) {
+				$answer=Answer::model()->with(array(
+					'answer_desc'=>array('condition'=>'answer_desc.id_language = 1')
+				))->findByPk($ditem['id_answer']);
+
+
+				foreach($answer['answer_desc'] as $dsckey=>$descitem) {
+					$answerdata[]=array(
+						'answer'=>$descitem['answer'],
+						'count_answer'=>$ditem['count_answer'],
+					);
+				}				
+			}
+
+			$surveyitem[]=array(
+				'question'=>$question['question'],
+				'answerdata'=>$answerdata,
+			);		
+		}
+		// var_dump($surveyitem);
+		// die();
+
 		$this->render('view',array(
 			'model'=>$model,
 			'skor'=>$skor,
+			'surveyitem'=>$surveyitem,
 		));
 	}
 

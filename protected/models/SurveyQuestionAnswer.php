@@ -98,6 +98,43 @@ class SurveyQuestionAnswer extends CActiveRecord
 		));
 	}
 
+	// helper
+	public function surveyCounterData($store_number=null)
+	{
+		if(isset($store_number)) {
+			$sql = "SELECT sqa.id_question, sqa.id_answer, sqa.reason, count(sqa.id_answer) AS count_answer 
+			FROM survey_question_answer sqa, survey_store ss
+			WHERE sqa.id_survey_store=ss.id_survey_store
+			AND ss.store_number='".$store_number."'
+			GROUP BY sqa.id_answer
+			ORDER BY sqa.id_question asc";
+			$command = Yii::app()->db->createCommand($sql);
+			$sqa = $command->queryAll();
+			return $sqa;
+		} else {
+			return false;
+		}
+	}
+
+	public function surveyReasonData($store_number=null)
+	{
+		if(isset($store_number)) {
+			$sql = "SELECT sqa.id_question, sqa.id_answer, reason, count(sqa.reason) AS reason
+			FROM survey_question_answer sqa, survey_store ss
+			WHERE sqa.id_survey_store=ss.id_survey_store
+			AND ss.store_number='".$store_number."'
+			AND sqa.reason is not null
+			GROUP BY sqa.reason
+			ORDER BY sqa.id_question asc"
+			$command = Yii::app()->db->createCommand($sql);
+			$sqa = $command->queryAll();
+			return $sqa;
+		} else {
+			return false;
+		}
+	}
+	// helper
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

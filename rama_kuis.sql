@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2015 at 05:39 AM
+-- Generation Time: Apr 28, 2015 at 11:09 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -216,15 +216,19 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `store_number` varchar(255) DEFAULT NULL,
   `comment` text,
   PRIMARY KEY (`id_comment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `comment`
 --
 
 INSERT INTO `comment` (`id_comment`, `id_customer`, `store_number`, `comment`) VALUES
-(2, 4, 'rama-123-xx', 'nice'),
-(3, 5, 'rama-123-xx', 'nice bro');
+(4, 6, 'rama-123-xx', 'nice place, good food, keep smile'),
+(5, 4, 'rama-123-xx', 'nice service, good people'),
+(6, 6, 'rama-345-xx', 'nice place, nice services'),
+(7, 7, 'rama-123-xx', 'nice place, nice services'),
+(8, 8, 'rama-123-xx', 'nice music, nice food, good people'),
+(9, 9, 'rama-123-xx', 'wasting time to wait my order');
 
 -- --------------------------------------------------------
 
@@ -241,15 +245,18 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `email` varchar(50) DEFAULT NULL,
   `validation_number` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id_customer`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id_customer`, `name`, `address`, `contact`, `nationality`, `email`, `validation_number`) VALUES
-(4, 'nana alamaya', 'PCA biaung A25`', '1122334455', 'indonesia', 'nana@alamaya.com', '8615377581'),
-(5, 'alamaya', 'PCA biaung A25`', '1122334455', 'indonesia', 'arya@alamaya.com', '424935291');
+(4, 'nana alamaya', 'PCA biaung A25`', '1122334455', 'indonesia', 'nana@alamaya.com', '653040159-rama-123-xx'),
+(6, 'arya', 'PCA 25 biaung', '1122334455', 'Indonesia', 'arya@alamaya.com', '8620181364-rama-345-xx'),
+(7, 'kipli', 'PCA 25 biaung', '1122334455', 'Indonesia', 'kipli@alamaya.com', '380655421-rama-123-xx'),
+(8, 'kipli', 'PCA 25 biaung', '1122334455', 'Indonesia', 'support@alamaya.com', '7849805158-rama-123-xx'),
+(9, 'farkhan', 'PCA 25 biaung', '1122334455', 'Indonesia', 'fajar@alamaya.com', '4132154964-rama-123-xx');
 
 -- --------------------------------------------------------
 
@@ -345,6 +352,49 @@ INSERT INTO `question_description` (`id_question_description`, `id_question`, `i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(64) NOT NULL DEFAULT 'system',
+  `key` varchar(255) NOT NULL,
+  `value` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_key` (`category`,`key`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `category`, `key`, `value`) VALUES
+(1, 'mail', 'contactEmail', 's:21:"webmaster@example.com";'),
+(2, 'mail', 'fromNoReply', 's:21:"noreply@ramaquest.com";'),
+(3, 'mail', 'server', 's:20:"smtp.mandrillapp.com";'),
+(4, 'mail', 'port', 's:3:"587";'),
+(5, 'mail', 'user', 's:19:"support@alamaya.com";'),
+(6, 'mail', 'password', 's:22:"xWwIPfRMNIdrj6qiTk5GCQ";'),
+(7, 'home', 'headingTitleEnglish', 's:23:"Guest Experience Survey";'),
+(8, 'home', 'welcomeTextEnglish', 's:174:"Welcome to Rama Restaurants Bali Guest Experience Survey. Thank you for taking the time to fill out our questioner. This will help us to ensure better service for the future.";'),
+(9, 'home', 'headingTitleIndonesia', 's:25:"Survey Kepuasan Pelanggan";'),
+(10, 'home', 'welcomeTextIndonesia', 's:215:"Selamat Datang di Survey Kepuasan Pelanggan Rama Restoran Bali. Terima kasih telah meluangkan waktu untuk mengisi kuesioner kami. Hal ini akan membantu kami untuk memastikan layanan yang lebih baik untuk masa depan.";'),
+(11, 'customer', 'headingTitleEnglish', 's:18:"Dear Valued Guest,";'),
+(12, 'customer', 'welcomeTextEnglish', 's:187:"We need your assistant in our effort to extend the finest service at our Restaurant. We would appreciate it very much if you could take a few minutes to fill the following questionnaires.";'),
+(13, 'customer', 'labelTextEnglish', 's:41:"Your comments would be highly appreciated";'),
+(14, 'customer', 'headingTitleIndonesia', 's:22:"Kepada Tamu Terhormat,";'),
+(15, 'customer', 'welcomeTextIndonesia', 's:171:"Kami membutuhkan bantuan anda untuk meningkatkan kualitas di restorant kami. Kami akan sangat senang jika anda meluangkan sedikit waktu untuk mengisi kuesioner dibawah ini";'),
+(16, 'customer', 'labelTextIndonesia', 's:30:"Saran Anda sangat kami hargai.";'),
+(17, 'validation', 'headingTitleEnglish', 's:9:"THANK YOU";'),
+(18, 'validation', 'welcomeTextEnglish', 's:235:"Thank you so much for participating in filling our Guest Comment Online Survey. You will receive Food and Beverage voucher to enjoy at our Restaurants. To claim the vouchers please submit to our cashier the email that we will send you.";'),
+(19, 'validation', 'codeLabelTextEnglish', 's:15:"Validation Code";'),
+(20, 'validation', 'headingTitleIndonesia', 's:12:"Terima kasih";'),
+(21, 'validation', 'welcomeTextIndonesia', 's:203:"Terima kasih banyak telah mengisi survey online kami. Anda akan mendapatkan voucher makanan dan minuman di restorant kami. Untuk mengambil voucher silahkan sertakan email kode validasi yang kami kirimkan";'),
+(22, 'validation', 'codeLabelTextIndonesia', 's:13:"Kode Validasi";');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `store`
 --
 
@@ -376,43 +426,97 @@ CREATE TABLE IF NOT EXISTS `survey_question_answer` (
   `id_answer` text NOT NULL,
   `reason` text,
   PRIMARY KEY (`id_survey`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=180 ;
 
 --
 -- Dumping data for table `survey_question_answer`
 --
 
 INSERT INTO `survey_question_answer` (`id_survey`, `id_survey_store`, `id_customer`, `id_question`, `id_answer`, `reason`) VALUES
-(66, 5, 4, 1, '2', NULL),
-(67, 5, 4, 3, '12', 'not alone'),
-(68, 5, 4, 4, '16', 'relax'),
-(69, 5, 4, 5, '19', NULL),
-(70, 5, 4, 6, '24', 'japan'),
-(71, 5, 4, 7, '26', NULL),
-(72, 5, 4, 8, '29', NULL),
-(73, 5, 4, 9, '31', NULL),
-(74, 5, 4, 10, '37', 'reggae'),
-(75, 5, 4, 11, '39', NULL),
-(76, 5, 4, 12, '42', NULL),
-(77, 5, 4, 12, '43', 'goodd'),
-(78, 5, 4, 13, '46', NULL),
-(79, 5, 4, 13, '47', NULL),
-(80, 5, 4, 13, '48', NULL),
-(81, 6, 5, 1, '2', NULL),
-(82, 6, 5, 3, '12', 'not alone'),
-(83, 6, 5, 4, '16', 'relax'),
-(84, 6, 5, 5, '19', NULL),
-(85, 6, 5, 6, '24', 'japan'),
-(86, 6, 5, 7, '26', NULL),
-(87, 6, 5, 8, '29', NULL),
-(88, 6, 5, 9, '31', NULL),
-(89, 6, 5, 10, '37', 'reggae'),
-(90, 6, 5, 11, '39', NULL),
-(91, 6, 5, 12, '42', NULL),
-(92, 6, 5, 12, '43', 'goodd'),
-(93, 6, 5, 13, '46', NULL),
-(94, 6, 5, 13, '47', NULL),
-(95, 6, 5, 13, '48', NULL);
+(96, 7, 6, 17, '66', NULL),
+(97, 7, 6, 17, '67', NULL),
+(98, 7, 6, 18, '89', NULL),
+(99, 7, 6, 18, '90', NULL),
+(100, 7, 6, 19, '92', NULL),
+(101, 7, 6, 19, '93', NULL),
+(102, 7, 6, 20, '97', NULL),
+(103, 7, 6, 21, '100', NULL),
+(104, 7, 6, 21, '101', NULL),
+(105, 7, 6, 22, '104', NULL),
+(106, 7, 6, 23, '107', NULL),
+(107, 7, 6, 24, '109', NULL),
+(108, 7, 6, 27, '120', NULL),
+(109, 7, 6, 27, '121', 'reggae'),
+(110, 7, 6, 28, '123', NULL),
+(111, 8, 4, 17, '67', NULL),
+(112, 8, 4, 17, '86', NULL),
+(113, 8, 4, 18, '89', NULL),
+(114, 8, 4, 19, '93', NULL),
+(115, 8, 4, 20, '97', NULL),
+(116, 8, 4, 21, '102', 'Itali'),
+(117, 8, 4, 22, '104', NULL),
+(118, 8, 4, 23, '107', NULL),
+(119, 8, 4, 24, '109', NULL),
+(120, 8, 4, 27, '120', NULL),
+(121, 8, 4, 28, '123', NULL),
+(122, 9, 6, 17, '66', NULL),
+(123, 9, 6, 17, '87', NULL),
+(124, 9, 6, 18, '88', NULL),
+(125, 9, 6, 18, '90', NULL),
+(126, 9, 6, 19, '92', NULL),
+(127, 9, 6, 19, '93', NULL),
+(128, 9, 6, 19, '94', NULL),
+(129, 9, 6, 20, '97', NULL),
+(130, 9, 6, 21, '102', 'japan'),
+(131, 9, 6, 22, '104', NULL),
+(132, 9, 6, 23, '107', NULL),
+(133, 9, 6, 24, '109', NULL),
+(134, 9, 6, 27, '121', 'blues'),
+(135, 9, 6, 28, '123', NULL),
+(136, 10, 7, 17, '66', NULL),
+(137, 10, 7, 17, '86', NULL),
+(138, 10, 7, 18, '88', NULL),
+(139, 10, 7, 18, '89', NULL),
+(140, 10, 7, 18, '90', NULL),
+(141, 10, 7, 19, '92', NULL),
+(142, 10, 7, 19, '93', NULL),
+(143, 10, 7, 19, '94', NULL),
+(144, 10, 7, 20, '97', NULL),
+(145, 10, 7, 21, '102', 'japan'),
+(146, 10, 7, 22, '104', NULL),
+(147, 10, 7, 23, '107', NULL),
+(148, 10, 7, 24, '109', NULL),
+(149, 10, 7, 27, '121', 'blues'),
+(150, 10, 7, 28, '123', NULL),
+(151, 11, 8, 17, '66', NULL),
+(152, 11, 8, 17, '67', NULL),
+(153, 11, 8, 17, '86', NULL),
+(154, 11, 8, 18, '88', NULL),
+(155, 11, 8, 18, '89', NULL),
+(156, 11, 8, 18, '90', NULL),
+(157, 11, 8, 19, '92', NULL),
+(158, 11, 8, 19, '93', NULL),
+(159, 11, 8, 19, '95', NULL),
+(160, 11, 8, 20, '97', NULL),
+(161, 11, 8, 21, '102', 'brazilian'),
+(162, 11, 8, 22, '104', NULL),
+(163, 11, 8, 23, '107', NULL),
+(164, 11, 8, 24, '109', NULL),
+(165, 11, 8, 27, '121', 'accoustic'),
+(166, 11, 8, 28, '123', NULL),
+(167, 12, 9, 17, '65', NULL),
+(168, 12, 9, 17, '87', NULL),
+(169, 12, 9, 18, '91', NULL),
+(170, 12, 9, 19, '94', NULL),
+(171, 12, 9, 19, '95', NULL),
+(172, 12, 9, 20, '97', NULL),
+(173, 12, 9, 21, '102', 'Itali'),
+(174, 12, 9, 22, '104', NULL),
+(175, 12, 9, 23, '107', NULL),
+(176, 12, 9, 24, '109', NULL),
+(177, 12, 9, 27, '119', NULL),
+(178, 12, 9, 27, '121', 'blues'),
+(179, 12, 9, 28, '124', 'to long to wait my order');
 
 -- --------------------------------------------------------
 
@@ -426,15 +530,19 @@ CREATE TABLE IF NOT EXISTS `survey_store` (
   `date_survey` date NOT NULL,
   `struk_number` varchar(255) NOT NULL,
   PRIMARY KEY (`id_survey_store`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `survey_store`
 --
 
 INSERT INTO `survey_store` (`id_survey_store`, `store_number`, `date_survey`, `struk_number`) VALUES
-(5, 'rama-123-xx', '2015-04-06', 'amxx'),
-(6, 'rama-123-xx', '2015-04-30', 'amxx');
+(7, 'rama-123-xx', '2015-04-10', 'amx'),
+(8, 'rama-123-xx', '2015-04-23', 'amx'),
+(9, 'rama-345-xx', '2015-04-28', 'amx'),
+(10, 'rama-123-xx', '2015-04-28', 'amx'),
+(11, 'rama-123-xx', '2015-04-28', 'amx'),
+(12, 'rama-123-xx', '2015-04-28', 'amx');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

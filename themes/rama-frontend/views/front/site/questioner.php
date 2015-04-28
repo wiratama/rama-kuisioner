@@ -62,9 +62,9 @@
 				<?php
 						} else if ($question['type']=='checkbox') {
 							if ($questionkey%2==0) {
-								echo '<div class="col-md-12 bg-on">';
+								echo '<div class="col-md-12 quest-bgon">';
 							} else {
-								echo '<div class="col-md-12 bg-off">';
+								echo '<div class="col-md-12 quest-bgoff">';
 							}
 				?>
 								<div class="row">
@@ -221,15 +221,28 @@ foreach ($model as $questionkey => $question) {
 					var n = $( "input.<?php echo 'checkbox-question-'.$question->id_question;?>:checked" ).length;
 					if (n<1) {
 						$( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).attr('required', 'required');
+						/*if($( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).next().next().length==1){
+							$( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).next().next().attr('required', 'required');
+						}*/
 						// $('input[name=submit]').attr('disabled', 'disabled');
 					} else if (n>=1) {
-						console.log(n);
+						// console.log(n);
 						$( "input.<?php echo 'checkbox-question-'.$question->id_question;?>" ).removeAttr('required');
 						// $('input[name=submit]').attr('disabled', false);
 					}
 				};
 				countChecked(); 
 				$( "input[type=checkbox].<?php echo 'checkbox-question-'.$question->id_question;?>" ).on( "click", countChecked );
+
+				var getElement = function() {
+					// console.log($( "input:checked" ).next().next());
+					if($( "input:checked" ).next().next().length==1){
+						$( "input:checked" ).next().next().attr('required', 'required');
+					} else if($(this).next().next().length==1 && $(this).is( ":checked" )==false){
+						$(this).next().next().removeAttr('required');
+					}
+				};
+				$( "input[type=checkbox]").on("click",getElement);
 				</script>
 <?php
 			}

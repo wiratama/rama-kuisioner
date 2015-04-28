@@ -25,12 +25,8 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-12">
-		<h4 class="page-head-line">View Store #<?php echo $model->store_number; ?></h4>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
+	<div class="col-md-6">
+		<h4 class="page-head-line">Store #<?php echo $model->store_number; ?></h4>
 		<?php 
 		// $this->widget('zii.widgets.CDetailView', array(
 		$this->widget('bootstrap.widgets.BsDetailView', array(
@@ -45,11 +41,9 @@
 			),
 		)); ?>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-	<h4 class="page-head-line">Customer Comment</h4>
-	<?php 
+	<div class="col-md-6">
+		<h4 class="page-head-line">Customer Comment</h4>
+		<?php 
 		$this->widget('bootstrap.widgets.BsGridView', array(
 			'id'=>'store-grid',
 			'dataProvider'=>$model->comment($model->store_number),
@@ -68,5 +62,45 @@
 				'member.name',			
 			),
 		)); ?>
+	</div>
+</div>
+<div class="row">
+	
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h4 class="page-head-line">Survey Result</h4>
+	</div>
+	<div class="col-md-8">
+		<table class="table table-striped table-condensed">
+			<tbody>
+				<tr>
+					<td><label class='lang-label'>Question</label></td>
+					<td><label class='lang-label'>Answer</label></td>
+					<td><label class='lang-label'>Result</label></td>
+				</tr>
+				<?php
+				foreach ($surveyitem as $surveykey=>$survey) {
+				echo "<tr>";
+					echo "<td>";
+						echo $survey['question'];
+					echo "</td>";
+					echo "<td>";
+						foreach ($survey['answerdata'] as $keyans=>$ans) {
+							echo $ans['answer'];
+							echo "<br/>";
+						}
+					echo "</td>";
+					echo "<td>";
+						foreach ($survey['answerdata'] as $keyans=>$ans) {
+							echo $ans['count_answer'];
+							echo "<br/>";
+						}
+					echo "</td>";
+				echo "</tr>";
+				}
+				?>
+			</tbody>
+		</table>
 	</div>
 </div>

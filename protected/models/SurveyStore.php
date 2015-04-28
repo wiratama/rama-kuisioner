@@ -44,6 +44,7 @@ class SurveyStore extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'store'=>array(self::BELONGS_TO, 'Store', 'store_number'),
+			'survey_data' => array(self::HAS_MANY, 'SurveyQuestionAnswer', 'id_survey_store	'),
 		);
 	}
 
