@@ -205,7 +205,7 @@ class SiteController extends Controller
 			foreach ($_POST['questioner'] as $keyquestioner => $questioner) {
 				if (isset($questioner['jenis_input']) and $questioner['jenis_input']=='radio') {
 					if (isset($questioner['reason'][$questioner['answer']])) {
-						$reason=$questioner['reason'][$questioner['answer']];
+						$reason=strtolower($questioner['reason'][$questioner['answer']]);
 					} else {
 						$reason=null;
 					}
@@ -219,7 +219,7 @@ class SiteController extends Controller
 					if(is_array($questioner)) {
 						foreach($questioner['answer'] as $keycheckanswer=>$itemcheckanswer) {
 							if(isset($questioner['reason'][$itemcheckanswer])) {
-								$reason=$questioner['reason'][$itemcheckanswer];
+								$reason=strtolower($questioner['reason'][$itemcheckanswer]);
 							} else {
 								$reason=null;
 							}

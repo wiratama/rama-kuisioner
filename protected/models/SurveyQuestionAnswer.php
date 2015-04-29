@@ -119,13 +119,22 @@ class SurveyQuestionAnswer extends CActiveRecord
 	public function surveyReasonData($store_number=null)
 	{
 		if(isset($store_number)) {
-			$sql = "SELECT sqa.id_question, sqa.id_answer, reason, count(sqa.reason) AS reason
+			$sql = "SELECT sqa.id_question, sqa.reason, count(sqa.reason) AS count_reason, qd.question
+			FROM survey_question_answer sqa, survey_store ss, question_description qd
+			WHERE sqa.id_survey_store=ss.id_survey_store			
+			AND sqa.id_question=qd.id_question
+			AND sqa.reason is not null
+			AND qd.id_language=1
+			AND ss.store_number='".$store_number."'
+			GROUP BY sqa.reason
+			ORDER BY sqa.id_question asc";
+			/*$sql = "SELECT sqa.id_question, sqa.id_answer, sqa.reason, count(sqa.reason) AS count_reason
 			FROM survey_question_answer sqa, survey_store ss
 			WHERE sqa.id_survey_store=ss.id_survey_store
-			AND ss.store_number='".$store_number."'
 			AND sqa.reason is not null
+			AND ss.store_number='".$store_number."'
 			GROUP BY sqa.reason
-			ORDER BY sqa.id_question asc"
+			ORDER BY sqa.id_question asc";*/
 			$command = Yii::app()->db->createCommand($sql);
 			$sqa = $command->queryAll();
 			return $sqa;

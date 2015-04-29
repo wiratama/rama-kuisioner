@@ -55,11 +55,62 @@ class StoreController extends Controller
 		}
 
 		$sqa=SurveyQuestionAnswer::model()->surveyCounterData($id);
+		$sqar=SurveyQuestionAnswer::model()->surveyReasonData($id);
+		
 		$id_question=null;
+		$sqar_id_question=null;
+		$sqar_question=null;
+		$reason=null;
+		$count_reason=null;
+
 		$sqadata=array();
 		$surveyitem=array();
-		$survey=array();
-		var_dump($sqa);
+		
+		$reasonitem=array();
+		$reasondata=array();
+		foreach ($sqar as $sqarkey=>$sqaritem) {
+			if ($sqar_id_question!=$sqaritem['id_question']) {
+				$sqar_id_question=$sqaritem['id_question'];
+				$sqar_question=$sqaritem['question'];
+
+				if (empty($reason)) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				} else if ($reason!=$sqaritem['reason']) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				}
+				$reasonitem=array(
+					'reason'=>$reason,
+					'count_reason'=>$count_reason,
+				);
+
+				$reasondata[$sqaritem['id_question']]=array(
+					'question'=>$sqaritem['question'],
+					'reasonitem'=>array(
+						$reasonitem,
+					),
+				);
+
+			} else {
+				$sqar_id_question=$sqaritem['id_question'];
+				$sqar_question=$sqaritem['question'];
+
+				if (empty($reason)) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				} else if ($reason!=$sqaritem['reason']) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				}
+				$reasonitem=array(
+					'reason'=>$reason,
+					'count_reason'=>$count_reason,
+				);
+
+				array_push($reasondata[$sqaritem['id_question']]['reasonitem'], $reasonitem);
+			}
+		}
 		
 		// format struktur array
 		foreach ($sqa as $sqakey=>$sqaitem) {
@@ -98,13 +149,12 @@ class StoreController extends Controller
 				'answerdata'=>$answerdata,
 			);		
 		}
-		// var_dump($surveyitem);
-		// die();
 
 		$this->render('view',array(
 			'model'=>$model,
 			'skor'=>$skor,
 			'surveyitem'=>$surveyitem,
+			'reasondata'=>$reasondata,
 		));
 	}
 
