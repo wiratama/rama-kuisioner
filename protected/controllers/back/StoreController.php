@@ -28,7 +28,7 @@ class StoreController extends Controller
 	{
 		return array(
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update','index','view','admin','delete'),
+				'actions'=>array('create','update','index','view','admin','delete','expexcel'),
 				'expression'=>'!Yii::app()->backendUser->isGuest',
 			),
 			array('deny',  // deny all users
@@ -258,6 +258,240 @@ class StoreController extends Controller
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
+	}
+
+	public function actionExpexcel()
+	{	
+		$store=(string)$_GET['store'];
+		$comment=Comment::model()->with('member')->findAllByAttributes(array('store_number'=>$store));
+		$datacomment=array();
+		foreach ($comment as $cmtkey => $cmt) {
+			$datacomment[]=array($cmt['comment'],$cmt['member']['name']);
+		}
+
+		$sqa=SurveyQuestionAnswer::model()->surveyCounterData($store);
+		$sqar=SurveyQuestionAnswer::model()->surveyReasonData($store);
+		
+		$id_question=null;
+		$sqar_id_question=null;
+		$sqar_question=null;
+		$reason=null;
+		$count_reason=null;
+
+		$sqadata=array();
+		$surveyitem=array();
+		
+		$reasonitem=array();
+		$reasondata=array();
+		foreach ($sqar as $sqarkey=>$sqaritem) {
+			if ($sqar_id_question!=$sqaritem['id_question']) {
+				$sqar_id_question=$sqaritem['id_question'];
+				$sqar_question=$sqaritem['question'];
+
+				if (empty($reason)) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				} else if ($reason!=$sqaritem['reason']) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				}
+				$reasonitem=array(
+					'reason'=>$reason,
+					'count_reason'=>$count_reason,
+				);
+
+				$reasondata[$sqaritem['id_question']]=array(
+					'question'=>$sqaritem['question'],
+					'reasonitem'=>array(
+						$reasonitem,
+					),
+				);
+
+			} else {
+				$sqar_id_question=$sqaritem['id_question'];
+				$sqar_question=$sqaritem['question'];
+
+				if (empty($reason)) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				} else if ($reason!=$sqaritem['reason']) {
+					$reason=$sqaritem['reason'];
+					$count_reason=$sqaritem['count_reason'];
+				}
+				$reasonitem=array(
+					'reason'=>$reason,
+					'count_reason'=>$count_reason,
+				);
+
+				array_push($reasondata[$sqaritem['id_question']]['reasonitem'], $reasonitem);
+			}
+		}
+		
+		// format struktur array
+		foreach ($sqa as $sqakey=>$sqaitem) {
+			if ($id_question==null) {
+				$id_question=$sqaitem['id_question'];
+			} else if ($id_question!=$sqaitem['id_question']) {
+				$id_question=$sqaitem['id_question'];
+			}
+			$sqadata[$id_question][]=array(
+				'id_answer'=>$sqaitem['id_answer'],
+				'count_answer'=>$sqaitem["count_answer"],
+			);
+		}
+
+		// get data
+		foreach ($sqadata as $datakey => $data) {
+			$answerdata=array();
+			$question=Question::model()->findByPk($datakey);
+			
+			foreach ($data as $dkey=>$ditem) {
+				$answer=Answer::model()->with(array(
+					'answer_desc'=>array('condition'=>'answer_desc.id_language = 1')
+				))->findByPk($ditem['id_answer']);
+
+
+				foreach($answer['answer_desc'] as $dsckey=>$descitem) {
+					$answerdata[]=array(
+						'answer'=>$descitem['answer'],
+						'count_answer'=>$ditem['count_answer'],
+					);
+				}				
+			}
+
+			$surveyitem[]=array(
+				'question'=>$question['question'],
+				'answerdata'=>$answerdata,
+			);		
+		}
+
+		$phpExcelPath = Yii::getPathOfAlias('ext.phpexcel');
+		spl_autoload_unregister(array('YiiBase','autoload'));
+		include($phpExcelPath . DIRECTORY_SEPARATOR . 'PHPExcel.php');
+
+		$objectToExport = new PHPExcel();
+		
+		// comment
+		$objectToExport->setActiveSheetIndex(0)->setCellValue('A1', 'Comment')->setCellValue('B1', 'Name');
+		$styleArray = array(
+			'font'  => array(
+				'bold'  => true,
+				// 'color' => array('rgb' => 'FF0000'),
+				'size'  => 12,
+				'name'  => 'Arial'
+			),
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'startcolor' => array(
+					'rgb' => '87D37C',
+				),
+			),
+		);
+		$objectToExport->getActiveSheet()->getStyle('A1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getColumnDimension('A')->setWidth(70);
+		$objectToExport->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getColumnDimension('B')->setWidth(30);
+		$objectToExport->getActiveSheet()->fromArray($datacomment, null, 'A2');	 
+		$objectToExport->getActiveSheet()->setTitle('Comment');
+		$objectToExport->createSheet();
+
+		// survey
+		$q=2; $a=2;	$r=2;
+		$objectToExport->setActiveSheetIndex(1);
+		$objectToExport->getActiveSheet()->getColumnDimension('A')->setWidth(60);
+		$objectToExport->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$objectToExport->getActiveSheet()->getColumnDimension('C')->setWidth(10);
+		$objectToExport->getActiveSheet()->setCellValue('A1', 'Question')->setCellValue('B1', 'Answer')->setCellValue('C1', 'Result');
+		$objectToExport->getActiveSheet()->getStyle('A1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getStyle('C1')->applyFromArray($styleArray);
+		
+		foreach ($surveyitem as $surveykey=>$survey) {
+			if($a > 2 && $r > 2) {
+				$a+=1;
+				$r+=1;
+			}
+
+			$objectToExport->getActiveSheet()->getStyle('A'.$q)->applyFromArray(array(
+					'font'  => array(
+						'bold'  => false,
+						'color' => array('rgb' => 'F0677C'),
+						'name'  => 'Arial'
+					),
+				)
+			);
+			$objectToExport->getActiveSheet()->setCellValue('A'.$q, $survey['question']);
+			
+			foreach ($survey['answerdata'] as $keyans=>$ans) {
+				$objectToExport->getActiveSheet()->setCellValue('B'.$a, $ans['answer']);
+				$a++;
+			}
+			
+			foreach ($survey['answerdata'] as $keyans=>$ans) {
+				$objectToExport->getActiveSheet()->setCellValue('C'.$r, $ans['count_answer']);
+				$r++;
+			}
+			$q=($a+1);
+		} 
+		
+		$objectToExport->getActiveSheet()->setTitle('Survey');
+		$objectToExport->createSheet();
+
+		// reason
+		$q=2; $a=2;	$r=2;
+		$objectToExport->setActiveSheetIndex(2);
+		$objectToExport->getActiveSheet()->getColumnDimension('A')->setWidth(60);
+		$objectToExport->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+		$objectToExport->getActiveSheet()->getColumnDimension('C')->setWidth(10);
+		$objectToExport->getActiveSheet()->setCellValue('A1', 'Question')->setCellValue('B1', 'Reason')->setCellValue('C1', 'Result');
+		$objectToExport->getActiveSheet()->getStyle('A1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
+		$objectToExport->getActiveSheet()->getStyle('C1')->applyFromArray($styleArray);
+		
+		foreach ($reasondata as $reasonkey=>$reason) {
+			if($a > 2 && $r > 2) {
+				$a+=1;
+				$r+=1;
+			}
+
+			$objectToExport->getActiveSheet()->getStyle('A'.$q)->applyFromArray(array(
+					'font'  => array(
+						'bold'  => false,
+						'color' => array('rgb' => 'F0677C'),
+						'name'  => 'Arial'
+					),
+				)
+			);
+			$objectToExport->getActiveSheet()->setCellValue('A'.$q, $reason['question']);
+			
+			foreach ($reason['reasonitem'] as $keyans=>$res) {
+				$objectToExport->getActiveSheet()->setCellValue('B'.$a, $res['reason']);
+				$a++;
+			}
+
+			foreach ($reason['reasonitem'] as $keyans=>$res) {
+				$objectToExport->getActiveSheet()->setCellValue('C'.$r, $res['count_reason']);
+				$r++;
+			}
+			$q=($a+1);
+		} 
+		
+		$objectToExport->getActiveSheet()->setTitle('Reason');
+		$objectToExport->createSheet();
+
+		$objectToExport->setActiveSheetIndex(0);
+		 
+		ob_end_clean();
+		ob_start();
+		
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="report-survey.xls"');
+		header('Cache-Control: max-age=0');
+		$objWriter = PHPExcel_IOFactory::createWriter($objectToExport, 'Excel5');
+		$objWriter->save('php://output');
+
+		// Once we have finished using the library, give back the power to Yii... 
+		spl_autoload_register(array('YiiBase','autoload'));
 	}
 
 	/**

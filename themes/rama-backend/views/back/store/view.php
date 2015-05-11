@@ -26,6 +26,11 @@
 </div>
 <div class="row">
 	<div class="col-md-6">
+		<?php echo CHtml::link('Export to excel',array('Store/Expexcel', 'store'=>$model->store_number),array('class'=>'btn btn-success','target'=>'_blank')); ?>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6">
 		<h4 class="page-head-line">Store #<?php echo $model->store_number; ?></h4>
 		<?php 
 		// $this->widget('zii.widgets.CDetailView', array(

@@ -17,6 +17,7 @@ return array(
 
 	'aliases' => array(
 		'bootstrap' => 'ext.yii-bootstrap3',
+		// 'excel' => 'application.ext.phpexcel',
 	),
 
 	// autoloading model and component classes
@@ -24,9 +25,10 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'bootstrap.behaviors.*',
-	    'bootstrap.helpers.*',
-	    'bootstrap.widgets.*',
-	    'ext.YiiMailer.YiiMailer',
+		'bootstrap.helpers.*',
+		'bootstrap.widgets.*',
+		'ext.YiiMailer.YiiMailer',
+		// 'application.ext.phpexcel.*',
 	),
 
 	'modules'=>array(
@@ -100,21 +102,24 @@ return array(
 			// 'stateKeyPrefix'=>'_backend',
 		),
 		'bootstrap' => array(
-	        'class' => 'bootstrap.components.BsApi'
-	    ),
+			'class' => 'bootstrap.components.BsApi'
+		),
 		'cache'=>array(
-            'class'=>'system.caching.CFileCache',
-        ),
+			'class'=>'system.caching.CFileCache',
+		),
 		'settings'=>array(
-	        'class'             => 'application.components.CmsSettings',
-	        'cacheComponentId'  => 'cache',
-	        'cacheId'           => 'global_website_settings',
-	        'cacheTime'         => 84000,
-	        'tableName'     	=> 'settings',
-	        'dbComponentId'     => 'db',
-	        'createTable'       => true,
-	        'dbEngine'      	=> 'InnoDB',
-        ),
+			'class'             => 'application.components.CmsSettings',
+			'cacheComponentId'  => 'cache',
+			'cacheId'           => 'global_website_settings',
+			'cacheTime'         => 84000,
+			'tableName'     	=> 'settings',
+			'dbComponentId'     => 'db',
+			'createTable'       => true,
+			'dbEngine'      	=> 'InnoDB',
+		),
+		/*'excel'=>array(
+			'class'=>'application.vendors.phpexcel.PHPExcel',
+		),*/
 	),
 
 	// application-level parameters that can be accessed
